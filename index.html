@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gender In Academia</title>
+    
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="static/css/dc.min.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="static/css/style.css" type="text/css" />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="static/js/d3.min.js"></script>
+    <script type="text/javascript" src="static/js/crossfilter.min.js"></script>
+    <script type="text/javascript" src="static/js/dc.min.js"></script>
+    <script type="text/javascript" src="static/js/queue.min.js"></script>
+    <script type="text/javascript" src="static/js/search.js"></script>
+    
+
+</head>
+
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">DnD Monster Comparitor</a>
+        </div>
+    </div>
+    </nav>
+
+    <main>
+      <section class="section">
+        <div class="container">
+          
+          <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                Search Monster:<input type="text" id="monsterName" /><br><br>
+                
+                <input type="submit" value="Submit" onclick="getSearch(searchData);"/><br>
+          </div>
+
+          <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <span class="section-paragraph">Challenge rating:</span>
+                    </div>
+
+            <div class="col-xs-12 col-sm-6 col-lg-6"></div>  
+          </div>
+        </div>
+    </section>
+
+
+      <section class="section">
+        <div class="container">
+          
+          <div class="row">
+            <div class="col-xs-12 col-sm-4 text-center">
+              <p class="section-paragraph">Ability Scores</p>
+              </div>
+              <div class="col-xs-12 col-sm-4 text-center">
+                <p class="section-paragraph">Traits</p>
+              </div>
+              <div class="col-xs-12 col-sm-4 text-center">
+                            <p class="section-paragraph">Other Features</p>           
+                        </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12 col-sm-4 text-center" id="gender-balance" class="custom-chart"></div>
+              <div class="col-xs-12 col-sm-4 text-center" id="average-salary" class="custom-chart"></div>
+              <div class="col-xs-12 col-sm-4 text-center" id="rank-distribution" class="custom-chart"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 text-center">
+                <p class="section-paragraph">Description</p>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 text-center" id="service-salary">
+                
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 text-center">
+              <p class="section-paragraph">Contact Us</p>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 text-center" id="phd-salary"></div>
+          </div>
+
+        </div>
+      </section>
+    </main>
+</body>
+</html>
