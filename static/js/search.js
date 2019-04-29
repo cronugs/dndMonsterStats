@@ -39,13 +39,12 @@ function searchMonsterData(url) {
         });
         
         if (result.length > 0) {
-            //console.log(result);
             //we have found a corresponding element
            monsterURL = result[0].url;
            
        }
     })
 
-    console.log(result);
+    
 
 }
