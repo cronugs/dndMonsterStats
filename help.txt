@@ -1,0 +1,11 @@
+Ok, I think you can do this using a for loop, so you're getting an array 
+of json objects, each with a name and url field, so you can iterate over 
+it using a for loop:
+for (i in monsterData)
+then within the for loop you can check if there's an entry matching the 
+search term:
+if(monsterData[i].name == searchTerm,
+and if there is set the result to monsterData[i]
+Then once that's done you can check if result exists (ie it's not none, 
+it will be if no entries match the search term) then you can set 
+monsterURL = result.url
