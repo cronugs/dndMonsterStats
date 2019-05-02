@@ -20,7 +20,7 @@ function getData(url, cb) {
 function searchMonsterData(url) {
     var search = document.getElementById("monsterName").value;
 
-    //Caoitalise each work in the seach term
+    //Caoitalise each word in the seach term
     function titleCase(str) {
         var splitStr = str.toLowerCase().split(' ');
         for (var i = 0; i < splitStr.length; i++) {
