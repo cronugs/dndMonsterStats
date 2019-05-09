@@ -1,44 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700|Exo:100,200,300,400,500,600,700');
+
 .navbar-default {
 	background-image: none;
 	margin-bottom: 0;
 }
 
-.section-heading, #discipline-selector {
-	display: inline-block;	
-	float: none;
-	margin: 0;
-}
-
 .section-heading {
 	margin-bottom: 50px;
-}
-
-#discipline-selector {
-	margin-left: 15px;
-}
-
-.number-box {
-	margin-right: 75px;
-}
-
-.number-box, .fa.fa-gender {
-    font-size: 30px;
-    font-weight: 500;
-}
-
-.fa-gender {
-	margin-right: 10px;
-}
-
-.custom-chart {
-	margin-bottom: 40px;
+	font-family: 'Roboto', sans-serif;
 }
 
 .section {
 	border-bottom: 1px solid #e6e6e6;
 	padding: 30px 0;
+	font-family: 'Roboto', sans-serif;
 }
 
 .section-paragraph {
 	line-height: 1.2;
+	font-family: 'Roboto', sans-serif;
+}
+
+.search-title {
+	margin: 30px;
+	display: inline-block;
+	font-family: 'Roboto', sans-serif;
 }

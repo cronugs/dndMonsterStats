@@ -13,16 +13,12 @@
     href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="static/css/style.css" type="text/css" />
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <!-- <script type="text/javascript" src="static/js/require.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
   <script type="text/javascript" src="static/js/d3.min.js"></script>
   <script type="text/javascript" src="static/js/crossfilter.min.js"></script>
   <script type="text/javascript" src="static/js/dc.min.js"></script>
   <script type="text/javascript" src="static/js/queue.min.js"></script>
   <script type="text/javascript" src="static/js/search.js"></script>
-  <!----------------------------------------------------------------------------------- need this for loading files -->
-
-
 
 </head>
 
@@ -41,12 +37,17 @@
       <div class="container">
 
         <div class="row">
-          <div class="col-xs-12 col-sm-12">
-            Search Monster:<input type="text" id="monsterName" /><br><br>
-
+          <div class="col-xs-12 col-sm-12 text-center">
+            <span class="search-title">Search Monster: </span>
+          </div>
+          <div class="col-xs-12 col-sm-12 text-center">
+            <input type="text" id="monsterName" />
             <input type="submit" value="Submit"
               onclick="searchMonsterData('http://www.dnd5eapi.co/api/monsters')" /><br>
           </div>
+          <div class="col-xs-12 col-sm-12 text-center">
+              <select id="selector" onchange="displaySelection(this)"></select>
+          </div>>
 
           <!--<div id="resultTable">stuff</div>-->
 
@@ -67,8 +68,6 @@
 
     <section class="section">
       <div class="container">
-
-       <!-- <input type="button" value="Generate a table." onclick="generate_table()"> -->
 
         <div class="row">
           <div class="col-xs-12 col-sm-4 text-center">

@@ -133,7 +133,8 @@ function displayMonster(resultArr, monsterURLList) {
             //when it has been pushed for each url
             if (counter === monsterURLList.length) {
                 //call build tables and pass it out newArray
-                buildTables(newArray);
+                //buildTables(newArray);
+                populateResults(newArray);
             }
         })
 
@@ -199,36 +200,63 @@ function displayMonster(resultArr, monsterURLList) {
 
 }
 
+function populateResults(combinedArray) {
+
+    /*var select = document.getElementById("example-select");
+     select.options[select.options.length] = new Option('Text 1', 'Value1');
+    */
+    //https://www.electrictoolbox.com/javascript-add-options-html-select/
+
+    var select = document.getElementById("selector");
+    for (index in combinedArray) {
+        select.options[select.options.length] = new Option(combinedArray[index].name, index);
+    }
+}
+
+function displaySelection(selector) {
+    //var select = document.getElementById("selector");
+    var selectedText = selector.options[selector.selectedIndex].innerHTML;
+    var selectedValue = selector.value;
+    alert("selected Text: " + selectedText + " Value: " + selectedValue);
+
+
+    //if (select.options.length > 0) {
+    //    window.alert("name: " + combinedArray[3].name + " challenge rating: " + combinedArray[3].challenge_rating);
+    //} else {
+     //   window.alert("Select box is empty");
+    //}
+}
+
 function buildTables(combinedArray) {
 
     function tableCreate() {
         //body reference 
         var body = document.getElementsByTagName("body")[0];
-      
+
         // create elements <table> and a <tbody>
         var tbl = document.createElement("table");
         var tblBody = document.createElement("tbody");
-      
+
         // cells creation
         for (var j = 0; j <= combinedArray.length; j++) {
-          // table row creation
-          var row = document.createElement("tr");
-      
-          for (var i = 0; i < 2; i++) {
-            // create element <td> and text node 
-            //Make text node the contents of <td> element
-            // put <td> at end of the table row
-            var cell = document.createElement("td");
-            var cellText = document.createTextNode("cell is row " + j + ", column " + i);
-      
-            cell.appendChild(cellText);
-            row.appendChild(cell);
-          }
-      
-          //row added to end of table body
-          tblBody.appendChild(row);
+            // table row creation
+            var row = document.createElement("tr");
+
+            for (var i = 0; i < 2; i++) {
+                // create element <td> and text node 
+                //Make text node the contents of <td> element
+                // put <td> at end of the table row
+                var cell = document.createElement("td");
+                var cellText = document.createTextNode("cell is row " + j + ", column " + i);
+
+                cell.appendChild(cellText);
+                row.appendChild(cell);
+            }
+
+            //row added to end of table body
+            tblBody.appendChild(row);
         }
-      
+
         // append the <tbody> inside the <table>
         tbl.appendChild(tblBody);
         // put <table> in the <body>
