@@ -135,69 +135,9 @@ function displayMonster(resultArr, monsterURLList) {
                 //call build tables and pass it out newArray
                 //buildTables(newArray);
                 populateResults(newArray);
-            }
+            }   dataList = newArray;
         })
-
-
     }
-    /*
-    //declare a variable to contain our targeted html element   
-    var resultTable = document.getElementById("resultTable");
-    //declare a variable for a table headers and pass in the getTableHeaders function with data[0] as an argument
-    var tableHeaders = getTableHeaders(resultArr[0]);
-
-    resultArr.forEach(function (item) {
-        var dataRow = [];
-
-        Object.keys(item).forEach(function (key) {
-            var rowData = item[key].toString();
-            var truncatedData = rowData.substring(0, 50);
-            dataRow.push(`<td>${truncatedData}</td>`);
-        });
-        tableRows.push(`<tr>${dataRow}</tr>`);
-    });
-
-    resultTable.innerHTML = `<table>${tableHeaders}${tableRows}</table>`.replace(/,/g, "");
-    */
-    /*
-    function generate_table() {
-        // get the reference for the body
-        var body = document.getElementsByTagName("resultTable")[0];
-
-        // creates a <table> element and a <tbody> element
-        var tbl = document.createElement("table");
-        var tblBody = document.createElement("tbody");
-
-        // creating all cells
-        for (var i = 0; i < 2; i++) {
-            // creates a table row
-            var row = document.createElement("tr");
-
-            for (var j = 0; j < 2; j++) {
-                // Create a <td> element and a text node, make the text
-                // node the contents of the <td>, and put the <td> at
-                // the end of the table row
-                var cell = document.createElement("td");
-                var cellText = document.createTextNode("cell in row " + i + ", column " + j);
-                cell.appendChild(cellText);
-                row.appendChild(cell);
-            }
-
-            // add the row to the end of the table body
-            tblBody.appendChild(row);
-        }
-
-        // put the <tbody> in the <table>
-        tbl.appendChild(tblBody);
-        // appends <table> into <body>
-        body.appendChild(tbl);
-        // sets the border attribute of tbl to 2;
-        tbl.setAttribute("border", "2");
-    }
-    */
-    //generate_table();
-
-
 }
 
 function populateResults(combinedArray) {
@@ -213,15 +153,51 @@ function populateResults(combinedArray) {
     }
 }
 
+var dataList = [];
+
+
 function displaySelection(selector) {
     //var select = document.getElementById("selector");
     var selectedText = selector.options[selector.selectedIndex].innerHTML;
     var selectedValue = selector.value;
     alert("selected Text: " + selectedText + " Value: " + selectedValue);
+    console.log(dataList);
+
+    var monster;
+
+    function logSomeData() {
+
+        //console.log(selectedText);
+        //console.log(selectedValue);
+        //console.log(dataList[selectedValue].name);
+
+        monster = dataList[selectedValue];
+
+        console.log("Namn: " + monster.name);
+        console.log("challenge rating: " + monster.challenge_rating);
+        console.log("Size: " + monster.size);
+        console.log("Hit points: " + monster.hit_points);
+        console.log("\n");
+        console.log("Ability Scores");
+        console.log("Strength: " + monster.strength);
+        console.log("Dexterity: " + monster.dexterity);
+        console.log("Intelligence: " + monster.intelligence);
+        console.log("Wisdom: " + monster.wisdom);
+        console.log("Charisma: " + monster.charisma);
+
+        console.log("\n");
+        console.log("Other details");
+        console.log("Special ability: " + monster.special_ability);
+        
+        
+        
+    } 
+
+    logSomeData();
 
 
     //if (select.options.length > 0) {
-    //    window.alert("name: " + combinedArray[3].name + " challenge rating: " + combinedArray[3].challenge_rating);
+    //    window.alert("name: " + monster.name + " challenge rating: " + monster.challenge_rating);
     //} else {
      //   window.alert("Select box is empty");
     //}
@@ -269,19 +245,19 @@ function buildTables(combinedArray) {
 
 
     //just playing around with the data
-    console.log("name: " + combinedArray[3].name);
-    console.log("challenge rating: " + combinedArray[3].challenge_rating);
-    console.log("Size: " + combinedArray[3].size);
-    console.log("Hit points: " + combinedArray[3].hit_points);
+    console.log("name: " + monster.name);
+    console.log("challenge rating: " + monster.challenge_rating);
+    console.log("Size: " + monster.size);
+    console.log("Hit points: " + monster.hit_points);
     console.log("\n");
     console.log("Ability Scores");
-    console.log("Strength: " + combinedArray[3].strength);
-    console.log("Dexterity: " + combinedArray[3].dexterity);
-    console.log("Intelligence: " + combinedArray[3].intelligence);
-    console.log("Wisdom: " + combinedArray[3].wisdom);
-    console.log("Charisma: " + combinedArray[3].charisma);
+    console.log("Strength: " + monster.strength);
+    console.log("Dexterity: " + monster.dexterity);
+    console.log("Intelligence: " + monster.intelligence);
+    console.log("Wisdom: " + monster.wisdom);
+    console.log("Charisma: " + monster.charisma);
 
     console.log("\n");
     console.log("Other details");
-    console.log("Special ability: " + combinedArray[3].special_ability);
+    console.log("Special ability: " + monster.special_ability);
 }
