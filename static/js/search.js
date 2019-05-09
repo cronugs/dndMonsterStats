@@ -160,8 +160,8 @@ function displaySelection(selector) {
     //var select = document.getElementById("selector");
     var selectedText = selector.options[selector.selectedIndex].innerHTML;
     var selectedValue = selector.value;
-    alert("selected Text: " + selectedText + " Value: " + selectedValue);
-    console.log(dataList);
+    //alert("selected Text: " + selectedText + " Value: " + selectedValue);
+    //console.log(dataList);
 
     var monster;
 
@@ -174,9 +174,13 @@ function displaySelection(selector) {
         monster = dataList[selectedValue];
 
         console.log("Namn: " + monster.name);
-        console.log("challenge rating: " + monster.challenge_rating);
+        console.log("Challenge rating: " + monster.challenge_rating);
+        console.log("Alignment: " + monster.alignment);
         console.log("Size: " + monster.size);
+        console.log("Type: " + monster.type);
+        console.log("Subtype: " + monster.subtype);
         console.log("Hit points: " + monster.hit_points);
+        
         console.log("\n");
         console.log("Ability Scores");
         console.log("Strength: " + monster.strength);
@@ -188,6 +192,8 @@ function displaySelection(selector) {
         console.log("\n");
         console.log("Other details");
         console.log("Special ability: " + monster.special_ability);
+        console.log("Damage resistances: " + monster.damage_resistances);
+        console.log("Damage Immunities: " + monster.damage_immunities);
         
         
         
