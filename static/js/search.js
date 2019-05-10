@@ -17,6 +17,13 @@ function getData(url, cb) {
     xhr.send();
 }
 
+$(document).ready(function(){
+    $('#monsterName').keypress(function(e){
+      if(e.keyCode==13)
+      $('#search-button').click();
+    });
+});
+
 function searchMonsterData(url) {
     url = 'http://www.dnd5eapi.co/api/monsters';
     var search = document.getElementById("monsterName").value;
