@@ -17,14 +17,15 @@ function getData(url, cb) {
     xhr.send();
 }
 
-$(document).ready(function(){
-    $('#monsterName').keypress(function(e){
-      if(e.keyCode==13)
-      $('#search-button').click();
+$(document).ready(function () {
+    $('#monsterName').keypress(function (e) {
+        if (e.keyCode == 13)
+            $('#search-button').click();
     });
 });
 
 function searchMonsterData(url) {
+    clearPage();
     url = 'http://www.dnd5eapi.co/api/monsters';
     var search = document.getElementById("monsterName").value;
 
@@ -145,7 +146,7 @@ function displayMonster(resultArr, monsterURLList) {
             }
             dataList = newArray;
         })
-    }    
+    }
 
 }
 
@@ -155,12 +156,13 @@ function populateResults(combinedArray) {
      select.options[select.options.length] = new Option('Text 1', 'Value1');
     */
     //https://www.electrictoolbox.com/javascript-add-options-html-select/
-    
+
     var select = document.getElementById("selector");
     selector.style.display = "block";
     for (index in combinedArray) {
         select.options[select.options.length] = new Option(combinedArray[index].name, index);
     }
+    
 }
 
 var dataList = [];
@@ -183,28 +185,6 @@ function displaySelection(selector) {
 
         monster = dataList[selectedValue];
 
-        console.log("Namn: " + monster.name);
-        console.log("Challenge rating: " + monster.challenge_rating);
-        console.log("Alignment: " + monster.alignment);
-        console.log("Size: " + monster.size);
-        console.log("Type: " + monster.type);
-        console.log("Subtype: " + monster.subtype);
-        console.log("Hit points: " + monster.hit_points);
-
-        console.log("\n");
-        console.log("Ability Scores");
-        console.log("Strength: " + monster.strength);
-        console.log("Dexterity: " + monster.dexterity);
-        console.log("Intelligence: " + monster.intelligence);
-        console.log("Wisdom: " + monster.wisdom);
-        console.log("Charisma: " + monster.charisma);
-
-        console.log("\n");
-        console.log("Other details");
-        console.log("Special ability: " + monster.special_ability);
-        console.log("Damage resistances: " + monster.damage_resistances);
-        console.log("Damage Immunities: " + monster.damage_immunities);
-        
         /////////////////////////////////////////////////////////
         //add some stuff to the page
         /////////////////////////////////////////////////////////
@@ -228,45 +208,4 @@ function displaySelection(selector) {
     }
 
     logSomeData();
-}
-
-function buildTables(combinedArray) {
-
-    function tableCreate() {
-        //body reference 
-        var body = document.getElementsByTagName("body")[0];
-
-        // create elements <table> and a <tbody>
-        var tbl = document.createElement("table");
-        var tblBody = document.createElement("tbody");
-
-        // cells creation
-        for (var j = 0; j <= combinedArray.length; j++) {
-            // table row creation
-            var row = document.createElement("tr");
-
-            for (var i = 0; i < 2; i++) {
-                // create element <td> and text node 
-                //Make text node the contents of <td> element
-                // put <td> at end of the table row
-                var cell = document.createElement("td");
-                var cellText = document.createTextNode("cell is row " + j + ", column " + i);
-
-                cell.appendChild(cellText);
-                row.appendChild(cell);
-            }
-
-            //row added to end of table body
-            tblBody.appendChild(row);
-        }
-
-        // append the <tbody> inside the <table>
-        tbl.appendChild(tblBody);
-        // put <table> in the <body>
-        body.appendChild(tbl);
-        // tbl border attribute to 
-        tbl.setAttribute("border", "2");
-    }
-
-    tableCreate();
 }
