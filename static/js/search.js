@@ -201,7 +201,7 @@ function displaySelection(selector) {
         /////////////////////////////////////////////////////////
         //add some stuff to the page
         /////////////////////////////////////////////////////////
-        $("#monster-name").append(`<h5>${monster.name}</h5>`);
+        $("#monster-name").append(`${monster.name}`);
         $("#general-stats").append(`Challenge rating: ${monster.challenge_rating}<br />`);
         $("#general-stats").append(`Alignment: ${monster.alignment}<br />`);
         $("#general-stats").append(`Size: ${monster.size}<br />`);
