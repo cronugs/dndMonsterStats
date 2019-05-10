@@ -13,7 +13,7 @@
     href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="static/css/style.css" type="text/css" />
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="static/js/d3.min.js"></script>
   <script type="text/javascript" src="static/js/crossfilter.min.js"></script>
   <script type="text/javascript" src="static/js/dc.min.js"></script>
@@ -24,10 +24,13 @@
 
 
 <body>
+
+  <div id="bg"></div>
+
   <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">DnD Monster Comparitor</a>
+        <a class="navbar-brand" href="#">Monster Quick Cards</a>
       </div>
     </div>
   </nav>
@@ -37,31 +40,19 @@
       <div class="container">
 
         <div class="row">
-          <div class="col-xs-12 col-sm-12 text-center">
-            <span class="search-title">Search Monster: </span>
+          <div class="col-xs-12 col-sm-12">
+            <span class="search-title">
+              <h4>Search Monster: </h4>
+            </span>
           </div>
-          <div class="col-xs-12 col-sm-12 text-center">
+          <div class="col-xs-12 col-sm-12">
             <input type="text" id="monsterName" />
-            <input type="submit" value="Submit"
+            <input type="submit" id="search-button" value="Search"
               onclick="searchMonsterData('http://www.dnd5eapi.co/api/monsters')" /><br>
           </div>
-          <div class="col-xs-12 col-sm-12 text-center">
-              <select id="selector" onchange="displaySelection(this)"></select>
-          </div>>
-
-          <!--<div id="resultTable">stuff</div>-->
-
-          <div class="row">
-            <div class="col-xs-12 col-sm-12">
-              <span class="section-paragraph" id="resultTable">Result:</span>
-            </div>
+          <div class="col-xs-12 col-sm-12">
+            <select id="selector" onchange="displaySelection(this)"></select>
           </div>
-
-          <!-- <div class="row">
-            <div class="col-xs-12 col-sm-12">
-              <span class="section-paragraph" id="challenge-rating">Challenge Rating:</span>
-            </div>
-          </div> -->
         </div>
     </section>
 
@@ -70,21 +61,20 @@
       <div class="container">
 
         <div class="row">
-          <div class="col-xs-12 col-sm-4 text-center">
-            <p class="section-paragraph" id="ability-scores">Ability Scores</p>
+          <div class="col-xs-12 col-sm-12 text-center" id="monster-name"></div>
+          <div class="feature-block" id="general-stats"></div>
+          <div class="col-xs-12 col-sm-4">
+            <span class="ability-headings">Ability Scores</span>
+            <div class="feature-block" id="ability-scores"></div>
           </div>
-          <div class="col-xs-12 col-sm-4 text-center" id="anothertable">
-            <p class="section-paragraph">Traits</p>
+          <div class="col-xs-12 col-sm-4">
+            <span class="ability-headings">Traits</span>
+            <div class="feature-block" id="traits"></div>
           </div>
-          <div class="col-xs-12 col-sm-4 text-center">
-            <p class="section-paragraph">Other Features</p>
+          <div class="col-xs-12 col-sm-4">
+            <span class="ability-headings">Other features</span>
+            <div class="feature-block" id="features"></div>
           </div>
-        </div>
-
-        <div class="row">
-          <div class="col-xs-12 col-sm-4 text-center" id="gender-balance" class="custom-chart"></div>
-          <div class="col-xs-12 col-sm-4 text-center" id="average-salary" class="custom-chart"></div>
-          <div class="col-xs-12 col-sm-4 text-center" id="rank-distribution" class="custom-chart"></div>
         </div>
       </div>
     </section>

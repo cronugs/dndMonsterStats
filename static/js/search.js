@@ -135,9 +135,11 @@ function displayMonster(resultArr, monsterURLList) {
                 //call build tables and pass it out newArray
                 //buildTables(newArray);
                 populateResults(newArray);
-            }   dataList = newArray;
+            }
+            dataList = newArray;
         })
-    }
+    }    
+
 }
 
 function populateResults(combinedArray) {
@@ -146,8 +148,9 @@ function populateResults(combinedArray) {
      select.options[select.options.length] = new Option('Text 1', 'Value1');
     */
     //https://www.electrictoolbox.com/javascript-add-options-html-select/
-
+    
     var select = document.getElementById("selector");
+    selector.style.display = "block";
     for (index in combinedArray) {
         select.options[select.options.length] = new Option(combinedArray[index].name, index);
     }
@@ -180,7 +183,7 @@ function displaySelection(selector) {
         console.log("Type: " + monster.type);
         console.log("Subtype: " + monster.subtype);
         console.log("Hit points: " + monster.hit_points);
-        
+
         console.log("\n");
         console.log("Ability Scores");
         console.log("Strength: " + monster.strength);
@@ -195,18 +198,29 @@ function displaySelection(selector) {
         console.log("Damage resistances: " + monster.damage_resistances);
         console.log("Damage Immunities: " + monster.damage_immunities);
         
-        
-        
-    } 
+        /////////////////////////////////////////////////////////
+        //add some stuff to the page
+        /////////////////////////////////////////////////////////
+        $("#monster-name").append(`<h5>${monster.name}</h5>`);
+        $("#general-stats").append(`Challenge rating: ${monster.challenge_rating}<br />`);
+        $("#general-stats").append(`Alignment: ${monster.alignment}<br />`);
+        $("#general-stats").append(`Size: ${monster.size}<br />`);
+        $("#general-stats").append(`Type: ${monster.type}<br />`);
+        $("#general-stats").append(`Subtype: ${monster.subtype}<br />`);
+        $("#general-stats").append(`Hit points: ${monster.hit_points}<br />`);
+
+
+        $("#ability-scores").append(`Strength: ${monster.strength}<br />`);
+        $("#ability-scores").append(`Dexterity: ${monster.dexterity}<br />`);
+        $("#ability-scores").append(`Intelligence: ${monster.intelligence}<br />`);
+        $("#ability-scores").append(`Wisdom: ${monster.wisdom}<br />`);
+        $("#ability-scores").append(`Charisma: ${monster.charisma}<br />`);
+        $("#ability-scores").append(`Consitution: ${monster.constitution}<br />`);
+
+
+    }
 
     logSomeData();
-
-
-    //if (select.options.length > 0) {
-    //    window.alert("name: " + monster.name + " challenge rating: " + monster.challenge_rating);
-    //} else {
-     //   window.alert("Select box is empty");
-    //}
 }
 
 function buildTables(combinedArray) {
@@ -248,22 +262,4 @@ function buildTables(combinedArray) {
     }
 
     tableCreate();
-
-
-    //just playing around with the data
-    console.log("name: " + monster.name);
-    console.log("challenge rating: " + monster.challenge_rating);
-    console.log("Size: " + monster.size);
-    console.log("Hit points: " + monster.hit_points);
-    console.log("\n");
-    console.log("Ability Scores");
-    console.log("Strength: " + monster.strength);
-    console.log("Dexterity: " + monster.dexterity);
-    console.log("Intelligence: " + monster.intelligence);
-    console.log("Wisdom: " + monster.wisdom);
-    console.log("Charisma: " + monster.charisma);
-
-    console.log("\n");
-    console.log("Other details");
-    console.log("Special ability: " + monster.special_ability);
 }
