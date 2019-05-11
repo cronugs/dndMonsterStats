@@ -25,7 +25,7 @@ $(document).ready(function () {
 });
 
 function searchMonsterData(url) {
-    clearPage();
+    
     url = 'http://www.dnd5eapi.co/api/monsters';
     var search = document.getElementById("monsterName").value;
 
