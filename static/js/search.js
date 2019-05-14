@@ -1,4 +1,4 @@
-//This is called from the searchMonsterData function
+//This is called from the searchMonsterData function 
 function getData(url, cb) {
     var xhr = new XMLHttpRequest();
 
@@ -17,6 +17,7 @@ function getData(url, cb) {
     xhr.send();
 }
 
+// A quick snippet of text so pressing enter triggers the search box
 $(document).ready(function () {
     $('#monsterName').keypress(function (e) {
         if (e.keyCode == 13)
@@ -25,7 +26,7 @@ $(document).ready(function () {
 });
 
 function searchMonsterData(url) {
-    
+
     url = 'http://www.dnd5eapi.co/api/monsters';
     var search = document.getElementById("monsterName").value;
 
@@ -46,7 +47,7 @@ function searchMonsterData(url) {
     var monsterData;
     var result;
     var monsterURL;
-    var searchedMonster;
+
     var reg = new RegExp(searchTerm.split('').join('\\w*').replace(/\W/, ""), 'i');
 
 
@@ -79,14 +80,9 @@ function searchMonsterData(url) {
         //we call getData again, this time to return the data for an individual monster
         // *** this needs to change to take multiple urls and 
         getData(monsterURL, function (data) {
-            searchedMonster = data;
-
-            //return an array of key value pairs from searchedMonster
-            //var monsterArr = Object.entries(resultArr);
 
             //console.log(monsterArr);
             console.log(resultArr);
-            //console.log(searchedMonster);       
 
             //create an array containing the URLS from resultArr
             function listOfURLS(mons) {
@@ -125,7 +121,7 @@ function getTableHeaders(obj) {
 function displayMonster(resultArr, monsterURLList) {
 
     //declare a new variable containing an empty array for our table rows
-    var tableRows = [];
+    //var tableRows = [];
     var newArray = [];
     var counter = 0;
     //for each url in monsterURLList
@@ -145,27 +141,44 @@ function displayMonster(resultArr, monsterURLList) {
                 populateResults(newArray);
             }
             dataList = newArray;
+            
         })
     }
 
 }
 
+//combinedArray is the result of code to this point. It is an array of objects containing monster data for each of the 
+//monsters that matched our search term.
+//populate results takes 
 function populateResults(combinedArray) {
 
+    console.log(combinedArray);
     /*var select = document.getElementById("example-select");
      select.options[select.options.length] = new Option('Text 1', 'Value1');
     */
     //https://www.electrictoolbox.com/javascript-add-options-html-select/
 
     var select = document.getElementById("selector");
-    selector.style.display = "block";
+    select.style.display = "block";
+    //make sure the list is clear first
+    removeOptions(select);
+
+    //for each object in combinedArray create a new list item object with index.name and index as args
     for (index in combinedArray) {
+        console.log(select.options.length);
         select.options[select.options.length] = new Option(combinedArray[index].name, index);
     }
-    
 }
 
 var dataList = [];
+
+//here we have function to interate through out dropdown HTML element and remove the contents.
+function removeOptions(selectbox) {
+    var i;
+    for (i = selectbox.options.length - 1; i >= 0; i--) {
+        selectbox.remove(i);
+    }
+}
 
 
 function displaySelection(selector) {
@@ -208,4 +221,7 @@ function displaySelection(selector) {
     }
 
     logSomeData();
+    statSpiderGraph();
 }
+
+

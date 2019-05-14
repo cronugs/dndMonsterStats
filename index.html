@@ -18,7 +18,11 @@
   <script type="text/javascript" src="static/js/crossfilter.min.js"></script>
   <script type="text/javascript" src="static/js/dc.min.js"></script>
   <script type="text/javascript" src="static/js/queue.min.js"></script>
+  <script type="text/javascript" src="static/js/RGraph.common.core.js"></script>
+  <script type="text/javascript" src="static/js/RGraph.common.dynamic.js"></script>
+  <script type="text/javascript" src="static/js/RGraph.radar.js"></script>
   <script type="text/javascript" src="static/js/search.js"></script>
+  <script type="text/javascript" src="static/js/graph.js"></script>
 
 </head>
 
@@ -63,13 +67,16 @@
         <div class="row">
 
           <div class="col-xs-12 col-sm-4 text-center">
-          <span class="ability-headings" id="monster-name"></span>
-          <div class="feature-block" id="general-stats"></div>
+            <span class="ability-headings" id="monster-name"></span>
+            <div class="feature-block" id="general-stats"></div>
           </div>
 
           <div class="col-xs-12 col-sm-4 text-center">
             <span class="ability-headings">Ability Scores</span>
-            <div class="feature-block" id="ability-scores"></div>
+            <canvas id="cvs" width="500" height="400">
+              [No canvas support]
+            </canvas>
+
           </div>
 
           <div class="col-xs-12 col-sm-4 text-center">
@@ -91,6 +98,7 @@
         <div class="row">
           <div class="col-xs-12 col-sm-12 text-center">
             <p class="section-paragraph" id="special-abilities">Special Abilities</p>
+
           </div>
 
           <div class="col-xs-12 col-sm-12 text-center" id="service-salary">
