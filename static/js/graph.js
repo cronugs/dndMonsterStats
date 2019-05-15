@@ -1,4 +1,5 @@
 function statSpiderGraph() {
+    
     console.log(dataList[0].dexterity);
 
     var str = dataList[index].strength;
@@ -17,20 +18,18 @@ function statSpiderGraph() {
         data: [str, dex, con, int, wis, cha],
         options: {
             tooltips: [
-                'Strength', 'Dexterity', 'Constitution','Intelligence','Wisdom', 'Charisma',
-                'Strength', 'Dexterity', 'Constitution','Intelligence','Wisdom', 'Charisma'
+                'Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'
             ],
             backgroundCirclesPoly: true,
             backgroundCirclesSpacing: 30,
             colors: ['transparent'],
             axesColor: 'transparent',
             highlights: true,
-            colorsStroke: ['yellow', 'black'],
+            colorsStroke: ['yellow'],
             linewidth: 2,
-            labels: ['Strength', 'Dexterity', 'Constitution','Intelligence','Wisdom', 'Charisma'],
+            labels: ['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'],
             labelsAxes: 'e',
             labelsAxesColor: 'black',
-            labelsAxesBackgroundColor: '',
             textSize: 12,
             textColor: 'white',
             //clearto: 'white',

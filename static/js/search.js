@@ -25,7 +25,7 @@ $(document).ready(function () {
     });
 });
 
-function searchMonsterData(url) {
+function searchMonsterData(url) {   
 
     url = 'http://www.dnd5eapi.co/api/monsters';
     var search = document.getElementById("monsterName").value;
@@ -162,7 +162,7 @@ function populateResults(combinedArray) {
     select.style.display = "block";
     //make sure the list is clear first
     removeOptions(select);
-
+    
     //for each object in combinedArray create a new list item object with index.name and index as args
     for (index in combinedArray) {
         console.log(select.options.length);
@@ -174,6 +174,7 @@ var dataList = [];
 
 //here we have function to interate through out dropdown HTML element and remove the contents.
 function removeOptions(selectbox) {
+    
     var i;
     for (i = selectbox.options.length - 1; i >= 0; i--) {
         selectbox.remove(i);
