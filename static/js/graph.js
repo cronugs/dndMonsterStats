@@ -1,6 +1,6 @@
 function statSpiderGraph() {
     
-    console.log(dataList[0].dexterity);
+    //console.log(dataList[0].dexterity);
 
     var str = dataList[index].strength;
     var dex = dataList[index].dexterity;
@@ -37,5 +37,9 @@ function statSpiderGraph() {
             labelsAxesBoxedZero: false
         }
     }).grow();
+
+    function clearRadar() {
+        RGraph.Radar.clear();
+    }
 
 }

@@ -57,7 +57,7 @@
               onclick="searchMonsterData('http://www.dnd5eapi.co/api/monsters')" /><br>
           </div>
           <div class="col-xs-12 col-sm-12">
-            <select id="selector" onchange="displaySelection(this)"></select>
+            <select id="selector" onchange='displaySelection(this);' onfocus='this.selectedIndex = -1;'></select>
           </div>
         </div>
     </section>
