@@ -181,15 +181,14 @@ function removeOptions(selectbox) {
     }
 }
 
+var monster;
 
 function displaySelection(selector) {
     //var select = document.getElementById("selector");
     var selectedText = selector.options[selector.selectedIndex].innerHTML;
     var selectedValue = selector.value;
     //alert("selected Text: " + selectedText + " Value: " + selectedValue);
-    //console.log(dataList);
-
-    var monster;
+    //console.log(dataList);    
 
     function logSomeData() {
 

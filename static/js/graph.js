@@ -2,12 +2,12 @@ function statSpiderGraph() {
     
     //console.log(dataList[0].dexterity);
 
-    var str = dataList[index].strength;
-    var dex = dataList[index].dexterity;
-    var con = dataList[index].constitution;
-    var int = dataList[index].intelligence;
-    var wis = dataList[index].wisdom;
-    var cha = dataList[index].charisma;
+    var str = monster.strength;
+    var dex = monster.dexterity;
+    var con = monster.constitution;
+    var int = monster.intelligence;
+    var wis = monster.wisdom;
+    var cha = monster.charisma;
 
     var data = [str, dex, con, int, wis, cha];
 
