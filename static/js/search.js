@@ -25,7 +25,7 @@ $(document).ready(function () {
     });
 });
 
-function searchMonsterData(url) {   
+function searchMonsterData(url) {
 
     url = 'http://www.dnd5eapi.co/api/monsters';
     var search = document.getElementById("monsterName").value;
@@ -141,7 +141,7 @@ function displayMonster(resultArr, monsterURLList) {
                 populateResults(newArray);
             }
             dataList = newArray;
-            
+
         })
     }
 
@@ -162,7 +162,7 @@ function populateResults(combinedArray) {
     select.style.display = "block";
     //make sure the list is clear first
     removeOptions(select);
-    
+
     //for each object in combinedArray create a new list item object with index.name and index as args
     for (index in combinedArray) {
         console.log(select.options.length);
@@ -174,7 +174,7 @@ var dataList = [];
 
 //here we have function to interate through out dropdown HTML element and remove the contents.
 function removeOptions(selectbox) {
-    
+
     var i;
     for (i = selectbox.options.length - 1; i >= 0; i--) {
         selectbox.remove(i);
@@ -184,19 +184,65 @@ function removeOptions(selectbox) {
 var monster;
 
 function displaySelection(selector) {
-    //var select = document.getElementById("selector");
+
+    //clear card first and then dynamically create the elements needed.
+    $(".card").empty();
+
+    var newSpan = $('<span/>', {
+        'class': 'ability-headings',
+        id: 'monster-name'
+    });
+
+    var newDiv = $('<div/>', {
+        'class': 'feature-block',
+        id: 'general-stats'
+    });
+
+    var newCanvas = $('<canvas/>', {
+        'class': 'graphCanvas',
+        id: 'cvs'
+    }).prop({
+        width: 200,
+        height: 200
+    });
+
+    $('.card').append(newSpan);
+    $('.card').append(newDiv);
+    $('.card').append(newCanvas);
+
     var selectedText = selector.options[selector.selectedIndex].innerHTML;
     var selectedValue = selector.value;
-    //alert("selected Text: " + selectedText + " Value: " + selectedValue);
-    //console.log(dataList);    
 
     function logSomeData() {
 
-        //console.log(selectedText);
-        //console.log(selectedValue);
-        //console.log(dataList[selectedValue].name);
-
         monster = dataList[selectedValue];
+
+        /*$(".card").empty();
+        //$("#monster-name").empty();
+        //$("#general-stats").empty();
+
+        //$("#cvs").remove();
+
+        var newSpan = $('<span/>', {
+            'class': 'ability-headings',
+            id: 'monster-name'
+        });
+        $('.card').append(newSpan);
+
+        var newDiv = $('<div/>', {
+            'class': 'feature-block',
+            id: 'general-stats'
+        });
+        $('.card').append(newDiv);
+
+        var newCanvas = $('<canvas/>', {
+            'class': 'graphCanvas',
+            id: 'cvs'
+        }).prop({
+            width: 200,
+            height: 200
+        });
+        $('.card').append(newCanvas);*/
 
         /////////////////////////////////////////////////////////
         //add some stuff to the page
@@ -224,4 +270,35 @@ function displaySelection(selector) {
     statSpiderGraph();
 }
 
+function clearCard() {
+    
+    $("#monster-name").empty();
+    $("#general-stats").empty();
+    
 
+    
+    
+
+    //$("#cvs_rgraph_domtext_wrapper").empty();
+
+    /*var newSpan = $('<span/>', {
+        'class': 'ability-headings',
+        id: 'monster-name'
+    });
+    $('.card').append(newSpan);
+
+    var newDiv = $('<div/>', {
+        'class': 'feature-block',
+        id: 'general-stats'
+    });
+    $('.card').append(newDiv); */
+
+    /*var newCanvas = $('<canvas/>', {
+        'class': 'graphCanvas',
+        id: 'cvs'
+    }).prop({
+        width: 200,
+        height: 200
+    });
+    $('.card').append(newCanvas); */
+}

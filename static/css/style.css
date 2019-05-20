@@ -1,13 +1,13 @@
 @import "https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700|Exo:100,200,300,400,500,600,700";
+@import "https://fonts.googleapis.com/css?family=Arbutus+Slab&display=swap";
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Arbutus";
   background-color: #37393c;
   color: #efefef;
   margin: 0; }
-
-body, html {
-  height: 100%; }
-  body #bg, html #bg {
+  body html {
+    height: 100%; }
+  body #bg {
     clip-path: polygon(100% 0, 100% 82%, 45% 100%, 0 100%, 0 0);
     background-color: #980d0d;
     width: 100%;
@@ -33,7 +33,6 @@ body, html {
   margin-bottom: 50px; }
 
 .section {
-  border-bottom: 1px solid #e6e6e6;
   padding: 30px 0; }
 
 .section-paragraph {
@@ -46,11 +45,25 @@ body, html {
 #selector {
   display: none; }
 
+.cvs-anchor .card {
+  background-color: tan;
+  color: #272727;
+  width: 80%;
+  height: 480px;
+  margin: 15px;
+  border-radius: 15px;
+  display: inline-block; }
+  .cvs-anchor .card .feature-block {
+    padding: 15px; }
+  .cvs-anchor .card #cvs {
+    margin: auto; }
+
 .ability-headings {
   font-size: 18px;
   display: block;
   margin-top: 20px;
-  margin-bottom: 15px; }
+  margin-bottom: 15px;
+  text-align: center; }
 
 .feature-block {
   text-align: left; }

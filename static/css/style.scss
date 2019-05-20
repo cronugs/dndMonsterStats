@@ -1,27 +1,28 @@
 @import "https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700|Exo:100,200,300,400,500,600,700";
+@import "https://fonts.googleapis.com/css?family=Arbutus+Slab&display=swap";
 
-$font_roboto: 'Roboto', sans-serif;
+$font: (Roboto: 'Roboto',
+    Arbutus: 'Arbutus',
+);
 
-$colors: (
-    primary: #cc0000,
+$colors: (primary: #cc0000,
     primary-dark: #980d0d,
     accent: #f98e8e,
-    nav: #37393c
-);
+    nav: #37393c,
+    card: tan);
 
-$font-colors: (
-    primary: #efefef
-);
+$font-colors: (primary: #efefef,
+    dark: #272727);
 
 body {
-    font-family: $font_roboto;
+    font-family: map-get($font, Arbutus);
     background-color: map-get($colors, nav);
     color: map-get($font-colors, primary);
-    margin: 0;   
-}
+    margin: 0;
 
-body, html {
-    height: 100%;
+    html {
+        height: 100%;
+    }
 
     #bg {
         clip-path: polygon(100% 0, 100% 82%, 45% 100%, 0 100%, 0 0);
@@ -31,6 +32,7 @@ body, html {
         position: absolute;
         z-index: -1;
     }
+
 }
 
 #monsterName {
@@ -38,7 +40,7 @@ body, html {
 }
 
 .navbar {
-	background-image: none;
+    background-image: none;
     margin-bottom: 0;
     color: map-get($font-colors, primary);
 
@@ -48,32 +50,62 @@ body, html {
     }
 }
 
+
 .navbar-brand {
     margin-left: 0px;
-};
+}
+
+;
 
 .section-heading {
-	margin-bottom: 50px;
-    
+    margin-bottom: 50px;
+
 }
+
 .section {
-	border-bottom: 1px solid #e6e6e6;
-	padding: 30px 0;
-    
+    //border-bottom: 1px solid #e6e6e6;
+    padding: 30px 0;
+
 }
+
 .section-paragraph {
-	line-height: 1.2;
-    
+    line-height: 1.2;
+
 }
+
 .search-title {
     margin-bottom: 10px;
-	display: inline-block;
-    
+    display: inline-block;
+
 }
 
 #selector {
     display: none;
 }
+
+
+.cvs-anchor {
+    //display: inline-block;
+
+    .card {
+        background-color: map-get($colors, card);
+        color: map-get($font-colors, dark);
+        width: 80%;
+        height: 480px;
+        margin: 15px;
+        border-radius: 15px;
+        display: inline-block;
+
+        .feature-block {
+            padding: 15px;
+        }
+        
+        #cvs {
+            margin: auto;
+        }
+    }
+}
+
 
 .ability-headings {
     font-size: 18px;
@@ -92,4 +124,3 @@ body, html {
     top: 50px;
     left: 100px;
 }
-

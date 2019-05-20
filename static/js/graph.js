@@ -1,4 +1,6 @@
 function statSpiderGraph() {
+
+    //$("#cvs_rgraph_domtext_wrapper").remove();
     
     //console.log(dataList[0].dexterity);
 
@@ -18,7 +20,9 @@ function statSpiderGraph() {
         data: [str, dex, con, int, wis, cha],
         options: {
             tooltips: [
-                'Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'
+                'Strength ' + monster.strength, 'Dexterity ' + monster.dexterity,
+                 'Constitution ' + monster.constitution, 'Intelligence ' + monster.intelligence, 
+                 'Wisdom ' + monster.wisdom, 'Charisma ' + monster.charisma
             ],
             backgroundCirclesPoly: true,
             backgroundCirclesSpacing: 30,
@@ -28,18 +32,17 @@ function statSpiderGraph() {
             colorsStroke: ['yellow'],
             linewidth: 2,
             labels: ['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'],
-            labelsAxes: 'e',
+            //labelsAxes: 'e',
             labelsAxesColor: 'black',
-            textSize: 12,
+            textSize: 10,
             textColor: 'white',
             //clearto: 'white',
             labelsAxesBoxed: false,
-            labelsAxesBoxedZero: false
+            labelsAxesBoxedZero: true
         }
     }).grow();
 
-    function clearRadar() {
-        RGraph.Radar.clear();
-    }
+    
+    
 
 }
