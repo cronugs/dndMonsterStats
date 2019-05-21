@@ -101,6 +101,8 @@ body {
             display: inline-block;
             width: 50%;
             text-align: center;
+            font-family: map-get($font, Arbutus);
+            font-size: 16px;
             
         }
         
@@ -109,9 +111,18 @@ body {
             display: block;
         }
 
-        #more-stats1 {
+        #class-can-use {
             display: block;
             width: 100%;
+            font-family: map-get($font, Arbutus);
+            font-size: 16px;
+        }
+
+        #spell-description {
+            display: block;
+            width: 100%;
+            font-family: map-get($font, Arbutus);
+            font-size: 16px;
         }
 
         

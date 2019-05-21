@@ -315,18 +315,19 @@ function displaySelection(selector) {
 
         var statDiv3 = $('<div/>', {
             'class': 'feature-block',
-            id: 'more-stats1'
+            id: 'class-can-use'
         });
 
         var statDiv4 = $('<div/>', {
-            'class': 'feature-block',
-            id: 'more-stats2'
+            'class': 'description-block',
+            id: 'spell-description'
         });
 
         $('.card').append(titleSpan);
         $('.card').append(statDiv);
         $('.card').append(statDiv2);
         $('.card').append(statDiv3);
+        $('.card').append(statDiv4);
         
 
         var selectedText = selector.options[selector.selectedIndex].innerHTML;
@@ -350,9 +351,9 @@ function displaySelection(selector) {
             $("#more-stats").append(`Casting time: ${monster.casting_time}<br />`);
             $("#more-stats").append(`Concentration: ${monster.concentration} <br />`);
             $("#more-stats").append(`Ritual: ${monster.ritual}<br />`);
-            $("#more-stats").append(`Classes: ${monster.classes}<br />`);
+            $("#class-can-use").append(`Classes: ${monster.classes}<br />`);
 
-            $("#more-stats1").append(`Description: ${monster.desc[0]}<br /> ${monster.desc[1]}<br />`);
+            $("#spell-description").append(`Description: ${monster.desc[0]}<br /> ${monster.desc[1]}<br />`);
             
         }
 

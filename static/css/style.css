@@ -57,13 +57,22 @@ body {
     padding: 15px;
     display: inline-block;
     width: 50%;
-    text-align: center; }
+    text-align: center;
+    font-family: "Arbutus";
+    font-size: 16px; }
   .cvs-anchor .card #cvs {
     margin: auto;
     display: block; }
-  .cvs-anchor .card #more-stats1 {
+  .cvs-anchor .card #class-can-use {
     display: block;
-    width: 100%; }
+    width: 100%;
+    font-family: "Arbutus";
+    font-size: 16px; }
+  .cvs-anchor .card #spell-description {
+    display: block;
+    width: 100%;
+    font-family: "Arbutus";
+    font-size: 16px; }
 
 .ability-headings {
   font-size: 18px;
