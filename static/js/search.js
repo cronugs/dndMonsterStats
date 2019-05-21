@@ -357,8 +357,7 @@ function displaySelection(selector) {
             
         }
 
-        logSomeData();
-        
+        logSomeData();       
 
     }
 
