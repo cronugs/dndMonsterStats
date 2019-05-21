@@ -193,22 +193,40 @@ function displaySelection(selector) {
         id: 'monster-name'
     });
 
-    var newDiv = $('<div/>', {
+    var statDiv = $('<div/>', {
         'class': 'feature-block',
         id: 'general-stats'
+    });
+
+    var statDiv2 = $('<div/>', {
+        'class': 'feature-block',
+        id: 'more-stats'
     });
 
     var newCanvas = $('<canvas/>', {
         'class': 'graphCanvas',
         id: 'cvs'
     }).prop({
-        width: 200,
+        width: 300,
         height: 200
     });
 
+    var statDiv3 = $('<div/>', {
+        'class': 'feature-block',
+        id: 'more-stats1'
+    });
+
+    var statDiv4 = $('<div/>', {
+        'class': 'feature-block',
+        id: 'more-stats2'
+    });
+
     $('.card').append(newSpan);
-    $('.card').append(newDiv);
+    $('.card').append(statDiv);
+    $('.card').append(statDiv2);
     $('.card').append(newCanvas);
+    $('.card').append(statDiv3);
+    $('.card').append(statDiv4);
 
     var selectedText = selector.options[selector.selectedIndex].innerHTML;
     var selectedValue = selector.value;
@@ -217,51 +235,38 @@ function displaySelection(selector) {
 
         monster = dataList[selectedValue];
 
-        /*$(".card").empty();
-        //$("#monster-name").empty();
-        //$("#general-stats").empty();
-
-        //$("#cvs").remove();
-
-        var newSpan = $('<span/>', {
-            'class': 'ability-headings',
-            id: 'monster-name'
-        });
-        $('.card').append(newSpan);
-
-        var newDiv = $('<div/>', {
-            'class': 'feature-block',
-            id: 'general-stats'
-        });
-        $('.card').append(newDiv);
-
-        var newCanvas = $('<canvas/>', {
-            'class': 'graphCanvas',
-            id: 'cvs'
-        }).prop({
-            width: 200,
-            height: 200
-        });
-        $('.card').append(newCanvas);*/
-
         /////////////////////////////////////////////////////////
         //add some stuff to the page
         /////////////////////////////////////////////////////////
         $("#monster-name").append(`${monster.name}`);
-        $("#general-stats").append(`Challenge rating: ${monster.challenge_rating}<br />`);
         $("#general-stats").append(`Alignment: ${monster.alignment}<br />`);
-        $("#general-stats").append(`Size: ${monster.size}<br />`);
         $("#general-stats").append(`Type: ${monster.type}<br />`);
-        $("#general-stats").append(`Subtype: ${monster.subtype}<br />`);
-        $("#general-stats").append(`Hit points: ${monster.hit_points}<br />`);
+        $("#general-stats").append(`Size: ${monster.size}<br />`);
+
+        $("#more-stats").append(`Challenge rating: ${monster.challenge_rating}<br />`);
+        $("#more-stats").append(`Hit points: ${monster.hit_points} <br />`);
+        $("#more-stats").append(`Armor Class: ${monster.armor_class}<br />`);
+
+        $("#more-stats1").append(`Languages: ${monster.languages}<br />`);
+        $("#more-stats1").append(`Damage_Immunities: ${monster.damage_immunities} <br />`);
+        $("#more-stats1").append(`Senses: ${monster.senses}<br />`);
+
+        $("#more-stats2").append(`Speed: ${monster.speed}<br />`);
+        $("#more-stats2").append(`Wisdom save: ${monster.wisdom_save} <br />`);
+        $("#more-stats2").append(`Charisma Save: ${monster.charisma_save}<br />`);
+        
+        
+        
+        //$("#general-stats").append(`Subtype: ${monster.subtype}<br />`);
+        
 
 
-        $("#ability-scores").append(`Strength: ${monster.strength}<br />`);
-        $("#ability-scores").append(`Dexterity: ${monster.dexterity}<br />`);
-        $("#ability-scores").append(`Intelligence: ${monster.intelligence}<br />`);
-        $("#ability-scores").append(`Wisdom: ${monster.wisdom}<br />`);
-        $("#ability-scores").append(`Charisma: ${monster.charisma}<br />`);
-        $("#ability-scores").append(`Consitution: ${monster.constitution}<br />`);
+       // $("#ability-scores").append(`Strength: ${monster.strength}<br />`);
+       // $("#ability-scores").append(`Dexterity: ${monster.dexterity}<br />`);
+       // $("#ability-scores").append(`Intelligence: ${monster.intelligence}<br />`);
+       // $("#ability-scores").append(`Wisdom: ${monster.wisdom}<br />`);
+       // $("#ability-scores").append(`Charisma: ${monster.charisma}<br />`);
+       // $("#ability-scores").append(`Consitution: ${monster.constitution}<br />`);
 
 
     }
@@ -274,31 +279,5 @@ function clearCard() {
     
     $("#monster-name").empty();
     $("#general-stats").empty();
-    
-
-    
-    
-
-    //$("#cvs_rgraph_domtext_wrapper").empty();
-
-    /*var newSpan = $('<span/>', {
-        'class': 'ability-headings',
-        id: 'monster-name'
-    });
-    $('.card').append(newSpan);
-
-    var newDiv = $('<div/>', {
-        'class': 'feature-block',
-        id: 'general-stats'
-    });
-    $('.card').append(newDiv); */
-
-    /*var newCanvas = $('<canvas/>', {
-        'class': 'graphCanvas',
-        id: 'cvs'
-    }).prop({
-        width: 200,
-        height: 200
-    });
-    $('.card').append(newCanvas); */
+   
 }

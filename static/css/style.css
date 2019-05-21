@@ -54,9 +54,13 @@ body {
   border-radius: 15px;
   display: inline-block; }
   .cvs-anchor .card .feature-block {
-    padding: 15px; }
+    padding: 15px;
+    display: inline-block;
+    width: 50%;
+    text-align: center; }
   .cvs-anchor .card #cvs {
-    margin: auto; }
+    margin: auto;
+    display: block; }
 
 .ability-headings {
   font-size: 18px;
