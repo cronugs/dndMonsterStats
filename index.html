@@ -50,6 +50,10 @@
             <span class="search-title">
               <h4>Search Monster: </h4>
             </span>
+            <select id="category-dropdown" onchange='categorySelect()'>
+                <option value="monster">Monsters</option>
+                <option value="spell">Spells</option>
+            </select>
           </div>
           <div class="col-xs-12 col-sm-12">
             <input type="text" id="monsterName" name="search-box" />
@@ -57,7 +61,7 @@
               onclick="searchMonsterData('http://www.dnd5eapi.co/api/monsters')" /><br>
           </div>
           <div class="col-xs-12 col-sm-12">
-            <select id="selector" onchange='displaySelection(this);' onfocus='this.selectedIndex = -1;'></select>
+            <select id="selector" onchange='displaySelection(this)' onfocus='this.selectedIndex = -1;'></select>
           </div>
         </div>
     </section>

@@ -25,9 +25,27 @@ $(document).ready(function () {
     });
 });
 
-function searchMonsterData(url) {
+// this variable is used for the displaySelection() function to know which layout to render
+var searchType;
+url = 'http://www.dnd5eapi.co/api/monsters';
 
-    url = 'http://www.dnd5eapi.co/api/monsters';
+//set the searchType variable and set the url to point to monsters or spells with the select box
+function categorySelect() {
+    var category = document.getElementById("category-dropdown").value;
+    if (category == "spell") {
+        url = 'http://www.dnd5eapi.co/api/spells';
+        searchType = 'spells';
+
+        console.log(searchType);
+    } else {
+        url = 'http://www.dnd5eapi.co/api/monsters';
+        searchType = 'monsters';
+        console.log(searchType);
+    }
+}
+
+function searchMonsterData() {
+
     var search = document.getElementById("monsterName").value;
 
     //Capitalise each word in the seach term, so that it matches the data
@@ -47,9 +65,7 @@ function searchMonsterData(url) {
     var monsterData;
     var result;
     var monsterURL;
-
     var reg = new RegExp(searchTerm.split('').join('\\w*').replace(/\W/, ""), 'i');
-
 
     //call the get data function and give it the url 
     getData(url, function (data) {
@@ -144,7 +160,6 @@ function displayMonster(resultArr, monsterURLList) {
 
         })
     }
-
 }
 
 //combinedArray is the result of code to this point. It is an array of objects containing monster data for each of the 
@@ -185,99 +200,175 @@ var monster;
 
 function displaySelection(selector) {
 
-    //clear card first and then dynamically create the elements needed.
-    $(".card").empty();
+    function createMonsterLayout() {
 
-    var newSpan = $('<span/>', {
-        'class': 'ability-headings',
-        id: 'monster-name'
-    });
+        //clear card first and then dynamically create the elements needed.
+        $(".card").empty();
 
-    var statDiv = $('<div/>', {
-        'class': 'feature-block',
-        id: 'general-stats'
-    });
+        var newSpan = $('<span/>', {
+            'class': 'ability-headings',
+            id: 'monster-name'
+        });
 
-    var statDiv2 = $('<div/>', {
-        'class': 'feature-block',
-        id: 'more-stats'
-    });
+        var statDiv = $('<div/>', {
+            'class': 'feature-block',
+            id: 'general-stats'
+        });
 
-    var newCanvas = $('<canvas/>', {
-        'class': 'graphCanvas',
-        id: 'cvs'
-    }).prop({
-        width: 300,
-        height: 200
-    });
+        var statDiv2 = $('<div/>', {
+            'class': 'feature-block',
+            id: 'more-stats'
+        });
 
-    var statDiv3 = $('<div/>', {
-        'class': 'feature-block',
-        id: 'more-stats1'
-    });
+        var newCanvas = $('<canvas/>', {
+            'class': 'graphCanvas',
+            id: 'cvs'
+        }).prop({
+            width: 300,
+            height: 200
+        });
 
-    var statDiv4 = $('<div/>', {
-        'class': 'feature-block',
-        id: 'more-stats2'
-    });
+        var statDiv3 = $('<div/>', {
+            'class': 'feature-block',
+            id: 'more-stats1'
+        });
 
-    $('.card').append(newSpan);
-    $('.card').append(statDiv);
-    $('.card').append(statDiv2);
-    $('.card').append(newCanvas);
-    $('.card').append(statDiv3);
-    $('.card').append(statDiv4);
+        var statDiv4 = $('<div/>', {
+            'class': 'feature-block',
+            id: 'more-stats2'
+        });
 
-    var selectedText = selector.options[selector.selectedIndex].innerHTML;
-    var selectedValue = selector.value;
+        $('.card').append(newSpan);
+        $('.card').append(statDiv);
+        $('.card').append(statDiv2);
+        $('.card').append(newCanvas);
+        $('.card').append(statDiv3);
+        $('.card').append(statDiv4);
 
-    function logSomeData() {
+        var selectedText = selector.options[selector.selectedIndex].innerHTML;
+        var selectedValue = selector.value;
 
-        monster = dataList[selectedValue];
+        function logSomeData() {
 
-        /////////////////////////////////////////////////////////
-        //add some stuff to the page
-        /////////////////////////////////////////////////////////
-        $("#monster-name").append(`${monster.name}`);
-        $("#general-stats").append(`Alignment: ${monster.alignment}<br />`);
-        $("#general-stats").append(`Type: ${monster.type}<br />`);
-        $("#general-stats").append(`Size: ${monster.size}<br />`);
+            monster = dataList[selectedValue];
 
-        $("#more-stats").append(`Challenge rating: ${monster.challenge_rating}<br />`);
-        $("#more-stats").append(`Hit points: ${monster.hit_points} <br />`);
-        $("#more-stats").append(`Armor Class: ${monster.armor_class}<br />`);
+            /////////////////////////////////////////////////////////
+            //add some stuff to the page
+            /////////////////////////////////////////////////////////
+            $("#monster-name").append(`${monster.name}`);
+            $("#general-stats").append(`Alignment: ${monster.alignment}<br />`);
+            $("#general-stats").append(`Type: ${monster.type}<br />`);
+            $("#general-stats").append(`Size: ${monster.size}<br />`);
 
-        $("#more-stats1").append(`Languages: ${monster.languages}<br />`);
-        $("#more-stats1").append(`Damage_Immunities: ${monster.damage_immunities} <br />`);
-        $("#more-stats1").append(`Senses: ${monster.senses}<br />`);
+            $("#more-stats").append(`Challenge rating: ${monster.challenge_rating}<br />`);
+            $("#more-stats").append(`Hit points: ${monster.hit_points} <br />`);
+            $("#more-stats").append(`Armor Class: ${monster.armor_class}<br />`);
 
-        $("#more-stats2").append(`Speed: ${monster.speed}<br />`);
-        $("#more-stats2").append(`Wisdom save: ${monster.wisdom_save} <br />`);
-        $("#more-stats2").append(`Charisma Save: ${monster.charisma_save}<br />`);
-        
-        
-        
-        //$("#general-stats").append(`Subtype: ${monster.subtype}<br />`);
-        
+            $("#more-stats1").append(`Languages: ${monster.languages}<br />`);
+            $("#more-stats1").append(`Damage_Immunities: ${monster.damage_immunities} <br />`);
+            $("#more-stats1").append(`Senses: ${monster.senses}<br />`);
+
+            $("#more-stats2").append(`Speed: ${monster.speed}<br />`);
+            $("#more-stats2").append(`Wisdom save: ${monster.wisdom_save} <br />`);
+            $("#more-stats2").append(`Charisma Save: ${monster.charisma_save}<br />`);
 
 
-       // $("#ability-scores").append(`Strength: ${monster.strength}<br />`);
-       // $("#ability-scores").append(`Dexterity: ${monster.dexterity}<br />`);
-       // $("#ability-scores").append(`Intelligence: ${monster.intelligence}<br />`);
-       // $("#ability-scores").append(`Wisdom: ${monster.wisdom}<br />`);
-       // $("#ability-scores").append(`Charisma: ${monster.charisma}<br />`);
-       // $("#ability-scores").append(`Consitution: ${monster.constitution}<br />`);
 
+            //$("#general-stats").append(`Subtype: ${monster.subtype}<br />`);
+
+
+
+            // $("#ability-scores").append(`Strength: ${monster.strength}<br />`);
+            // $("#ability-scores").append(`Dexterity: ${monster.dexterity}<br />`);
+            // $("#ability-scores").append(`Intelligence: ${monster.intelligence}<br />`);
+            // $("#ability-scores").append(`Wisdom: ${monster.wisdom}<br />`);
+            // $("#ability-scores").append(`Charisma: ${monster.charisma}<br />`);
+            // $("#ability-scores").append(`Consitution: ${monster.constitution}<br />`);
+
+
+        }
+
+        logSomeData();
+        statSpiderGraph();
 
     }
 
-    logSomeData();
-    statSpiderGraph();
-}
+    function createSpellLayout() {
 
-function clearCard() {
-    
-    $("#monster-name").empty();
-    $("#general-stats").empty();
-   
+        //clear card first and then dynamically create the elements needed.
+        $(".card").empty();
+
+        var titleSpan = $('<span/>', {
+            'class': 'ability-headings',
+            id: 'spell-name'
+        });
+
+        var statDiv = $('<div/>', {
+            'class': 'feature-block',
+            id: 'general-stats'
+        });
+
+        var statDiv2 = $('<div/>', {
+            'class': 'feature-block',
+            id: 'more-stats'
+        });
+
+        var statDiv3 = $('<div/>', {
+            'class': 'feature-block',
+            id: 'more-stats1'
+        });
+
+        var statDiv4 = $('<div/>', {
+            'class': 'feature-block',
+            id: 'more-stats2'
+        });
+
+        $('.card').append(titleSpan);
+        $('.card').append(statDiv);
+        $('.card').append(statDiv2);
+        $('.card').append(statDiv3);
+        
+
+        var selectedText = selector.options[selector.selectedIndex].innerHTML;
+        var selectedValue = selector.value;
+
+        function logSomeData() {
+
+            monster = dataList[selectedValue];
+
+            /////////////////////////////////////////////////////////
+            //add some stuff to the page
+            /////////////////////////////////////////////////////////
+            $("#spell-name").append(`${monster.name}`);
+            $("#general-stats").append(`Level: ${monster.level}<br />`);
+            $("#general-stats").append(`Range: ${monster.range}<br />`);
+            $("#general-stats").append(`Duration: ${monster.duration}<br />`);
+            $("#general-stats").append(`Components: ${monster.components}<br />`);
+            $("#general-stats").append(`Material: ${monster.material} <br />`);
+
+            $("#more-stats").append(`School: ${monster.school[0]}<br />`);
+            $("#more-stats").append(`Casting time: ${monster.casting_time}<br />`);
+            $("#more-stats").append(`Concentration: ${monster.concentration} <br />`);
+            $("#more-stats").append(`Ritual: ${monster.ritual}<br />`);
+            $("#more-stats").append(`Classes: ${monster.classes}<br />`);
+
+            $("#more-stats1").append(`Description: ${monster.desc[0]}<br /> ${monster.desc[1]}<br />`);
+            
+        }
+
+        logSomeData();
+        
+
+    }
+
+    var draw = function() {
+        if (searchType == "spells") {
+            createSpellLayout();
+        } else {
+            createMonsterLayout();
+        }
+    }();
+
+
+
 }
