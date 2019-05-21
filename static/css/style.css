@@ -52,7 +52,7 @@ body {
   height: 480px;
   margin: 15px;
   border-radius: 15px;
-  display: inline-flex; }
+  display: inline-block; }
   .cvs-anchor .card .feature-block {
     padding: 15px;
     display: inline-block;
