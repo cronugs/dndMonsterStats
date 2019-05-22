@@ -199,6 +199,9 @@ function removeOptions(selectbox) {
 var monster;
 
 function displaySelection(selector) {
+    var selectedText = selector.options[selector.selectedIndex].innerHTML;
+    var selectedValue = selector.value;
+    monster = dataList[selectedValue];
 
     function createMonsterLayout() {
 
@@ -245,17 +248,12 @@ function displaySelection(selector) {
         $('.card').append(statDiv3);
         $('.card').append(statDiv4);
 
-        var selectedText = selector.options[selector.selectedIndex].innerHTML;
-        var selectedValue = selector.value;
-
         function logSomeData() {
-
-            monster = dataList[selectedValue];
 
             /////////////////////////////////////////////////////////
             //add some stuff to the page
             /////////////////////////////////////////////////////////
-            $("#monster-name").append(`${monster.name}`);
+            $("#monster-name").append(`<h2>${monster.name}</h2>`);
             $("#general-stats").append(`Alignment: ${monster.alignment}<br />`);
             $("#general-stats").append(`Type: ${monster.type}<br />`);
             $("#general-stats").append(`Size: ${monster.size}<br />`);
@@ -269,23 +267,25 @@ function displaySelection(selector) {
             $("#more-stats1").append(`Senses: ${monster.senses}<br />`);
 
             $("#more-stats2").append(`Speed: ${monster.speed}<br />`);
-            $("#more-stats2").append(`Wisdom save: ${monster.wisdom_save} <br />`);
-            $("#more-stats2").append(`Charisma Save: ${monster.charisma_save}<br />`);
 
-
-
-            //$("#general-stats").append(`Subtype: ${monster.subtype}<br />`);
-
-
-
-            // $("#ability-scores").append(`Strength: ${monster.strength}<br />`);
-            // $("#ability-scores").append(`Dexterity: ${monster.dexterity}<br />`);
-            // $("#ability-scores").append(`Intelligence: ${monster.intelligence}<br />`);
-            // $("#ability-scores").append(`Wisdom: ${monster.wisdom}<br />`);
-            // $("#ability-scores").append(`Charisma: ${monster.charisma}<br />`);
-            // $("#ability-scores").append(`Consitution: ${monster.constitution}<br />`);
-
-
+            if ('charisma_save' in monster) {
+                $("#more-stats2").append(`Charisma Save: +${monster.charisma_save}<br />`);
+            }
+            if ('wisdom_save' in monster) {
+                $("#more-stats2").append(`Wisdom Save: +${monster.wisdom_save}<br />`);
+            }
+            if ('constitution_save' in monster) {
+                $("#more-stats2").append(`Constitution Save: +${monster.constitution_save}<br />`);
+            }
+            if ('dexterity_save' in monster) {
+                $("#more-stats2").append(`Dexterity Save: +${monster.dexterity_save}<br />`);
+            }
+            if ('strength_save' in monster) {
+                $("#more-stats2").append(`Strength Save: +${monster.strength_save}<br />`);
+            }
+            if ('intelligence_save' in monster) {
+                $("#more-stats2").append(`Intelligence Save: +${monster.intelligence_save}<br />`);
+            }
         }
 
         logSomeData();
@@ -294,6 +294,25 @@ function displaySelection(selector) {
     }
 
     function createSpellLayout() {
+
+        usedByClasses = [];
+        
+
+        for (let i = 0; i <= monster.classes.length - 1; i++) {
+            usedByClasses.push(monster.classes[i].name);
+        };
+
+        descriptionList = [];
+
+        for (let i = 0; i <= monster.desc.length -1; i++) {
+            descriptionList.push(monster.desc[i]);
+        };
+
+        console.log(descriptionList.join(" "));
+        
+
+        //console.log(usedByClassesList);
+
 
         //clear card first and then dynamically create the elements needed.
         $(".card").empty();
@@ -328,19 +347,19 @@ function displaySelection(selector) {
         $('.card').append(statDiv2);
         $('.card').append(statDiv3);
         $('.card').append(statDiv4);
-        
 
-        var selectedText = selector.options[selector.selectedIndex].innerHTML;
-        var selectedValue = selector.value;
+
+        //var selectedText = selector.options[selector.selectedIndex].innerHTML;
+        //var selectedValue = selector.value;
 
         function logSomeData() {
 
-            monster = dataList[selectedValue];
+            //monster = dataList[selectedValue];                  
 
             /////////////////////////////////////////////////////////
             //add some stuff to the page
             /////////////////////////////////////////////////////////
-            $("#spell-name").append(`${monster.name}`);
+            $("#spell-name").append(`<h2>${monster.name}</h2>`);
             $("#general-stats").append(`Level: ${monster.level}<br />`);
             $("#general-stats").append(`Range: ${monster.range}<br />`);
             $("#general-stats").append(`Duration: ${monster.duration}<br />`);
@@ -351,17 +370,17 @@ function displaySelection(selector) {
             $("#more-stats").append(`Casting time: ${monster.casting_time}<br />`);
             $("#more-stats").append(`Concentration: ${monster.concentration} <br />`);
             $("#more-stats").append(`Ritual: ${monster.ritual}<br />`);
-            $("#class-can-use").append(`Classes: ${monster.classes}<br />`);
+            $("#class-can-use").append(`Classes: ${usedByClasses.join(", ")}<br />`);
 
-            $("#spell-description").append(`Description: ${monster.desc[0]}<br /> ${monster.desc[1]}<br />`);
-            
+            $("#spell-description").append(`Description: ${descriptionList.join(" ")}<br />`);
+
         }
 
-        logSomeData();       
+        logSomeData();
 
     }
 
-    var draw = function() {
+    var draw = function () {
         if (searchType == "spells") {
             createSpellLayout();
         } else {

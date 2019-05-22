@@ -36,7 +36,7 @@
   <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">Monster Quick Cards</a>
+        <a class="navbar-brand" href="#">Quick Cards</a>
       </div>
     </div>
   </nav>
@@ -48,22 +48,35 @@
         <div class="row">
           <div class="col-xs-12 col-sm-12">
             <span class="search-title">
-              <h4>Search Monster: </h4>
+              <h4>Search: </h4>
             </span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 search-row">
+            <input type="text" id="monsterName" name="search-box" />
+          </div>
+
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 search-row">
             <select id="category-dropdown" onchange='categorySelect()'>
-                <option value="monster">Monsters</option>
-                <option value="spell">Spells</option>
+              <option value="monster">Monsters</option>
+              <option value="spell">Spells</option>
             </select>
           </div>
-          <div class="col-xs-12 col-sm-12">
-            <input type="text" id="monsterName" name="search-box" />
-            <input type="submit" id="search-button" name="search-button" value="Search"
+
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 search-row">
+            <input type=" submit" id="search-button" name="search-button" value="Search"
               onclick="searchMonsterData('http://www.dnd5eapi.co/api/monsters')" /><br>
           </div>
-          <div class="col-xs-12 col-sm-12">
+
+        </div>
+        <div class="row">
+          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 result-dropdown-div">
             <select id="selector" onchange='displaySelection(this)' onfocus='this.selectedIndex = -1;'></select>
           </div>
         </div>
+      </div>
     </section>
 
 
@@ -72,11 +85,20 @@
         <div class="row">
           <div class="col-xs-12 col-sm-12 text-center cvs-anchor">
             <div class="card">
-              <span class="ability-headings" id="monster-name"></span>
+              <div id="welcome">
+                <h2>Welcome to Quick Cards</h2>
+              </div>
+              <div>
+                <p>
+                  Quick cards is a quick referrence for monsters and spells in Dungeons and Dragons 5e.<br />
+                  Search for a monster or spell name, or even a partial search like 'as'. Select from monsters and spells and hit search.
+                </p>
+              </div>
+              <!-- <span class="ability-headings" id="monster-name"></span>
               <div class="feature-block" id="general-stats"></div>
               <div class="feature-block" id="more-stats"></div>
 
-              <canvas id="cvs" width="300" height="200"></canvas>
+              <canvas id="cvs" width="300" height="200"></canvas> -->
             </div>
           </div>
         </div>
@@ -84,7 +106,7 @@
 
         <div class="row">
           <div class="col-xs-12 col-sm-12 text-center cvs-anchor">
-            <div class="card text-center">
+            <div class="card2 text-center">
               <span class="ability-headings" id="monster-name1"></span>
               <div class="feature-block" id="general-stats1"></div>
 

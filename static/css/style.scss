@@ -35,9 +35,7 @@ body {
 
 }
 
-#monsterName {
-    width: 80%;
-}
+
 
 .navbar {
     background-image: none;
@@ -62,6 +60,53 @@ body {
 
 }
 
+
+
+
+
+#monsterName {
+    width: 100%;
+    //display: inline-block;
+    height: 35px;
+    font-size: 18px;
+    background-color: map-get($colors, card);
+    border: 1px black solid;
+    padding: 0;
+}
+
+#category-dropdown {
+    width: 100%;
+    //display: inline-block;
+    font-size: 18px;
+    background-color: map-get($colors, card);
+    border: 1px black solid;
+    height: 35px;
+    padding: 0;
+}
+
+#search-button {
+    width: 100%;
+    //display: inline-block;
+    background-color: map-get($colors, card);
+    border: 1px black solid;
+    height: 35px;
+    padding: 0;
+    font-size: 18px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+#selector {
+    display: none;
+    width: 100%;
+    float: left;
+    margin: 0;
+    padding: 0;
+    height: 30px;
+    font-size: 18px;
+    background-color: map-get($colors, card)
+}
+
 .section {
     //border-bottom: 1px solid #e6e6e6;
     padding: 30px 0;
@@ -79,10 +124,10 @@ body {
 
 }
 
-#selector {
-    display: none;
+.search-row {
+    padding: 0;
+    margin: 0;
 }
-
 
 .cvs-anchor {
     //display: inline-flex;
@@ -90,22 +135,28 @@ body {
     .card {
         background-color: map-get($colors, card);
         color: map-get($font-colors, dark);
+        padding: 15px;
         width: 80%;
-        height: 480px;
+        height: auto;
         margin: 15px;
+        text-align: justify;
         border-radius: 15px;
         display: inline-block;
+
+        #welcome {
+            text-align: center;
+        }
 
         .feature-block {
             padding: 15px;
             display: inline-block;
             width: 50%;
-            text-align: center;
-            font-family: map-get($font, Arbutus);
-            font-size: 16px;
             
+            font-family: map-get($font, Arbutus);
+            font-size: 17px;
+
         }
-        
+
         #cvs {
             margin: auto;
             display: block;
@@ -125,7 +176,23 @@ body {
             font-size: 16px;
         }
 
-        
+        div {
+
+            h2 {
+                margin-top: 15px;
+            }
+
+            p {                
+                margin-top: 15px;
+                font-size: 17px;
+            }
+        }
+
+
+    }
+
+    .card2 {
+        display: none;
     }
 }
 

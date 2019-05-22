@@ -15,9 +15,6 @@ body {
     position: absolute;
     z-index: -1; }
 
-#monsterName {
-  width: 80%; }
-
 .navbar {
   background-image: none;
   margin-bottom: 0;
@@ -32,6 +29,42 @@ body {
 .section-heading {
   margin-bottom: 50px; }
 
+#monsterName {
+  width: 100%;
+  height: 35px;
+  font-size: 18px;
+  background-color: tan;
+  border: 1px black solid;
+  padding: 0; }
+
+#category-dropdown {
+  width: 100%;
+  font-size: 18px;
+  background-color: tan;
+  border: 1px black solid;
+  height: 35px;
+  padding: 0; }
+
+#search-button {
+  width: 100%;
+  background-color: tan;
+  border: 1px black solid;
+  height: 35px;
+  padding: 0;
+  font-size: 18px;
+  text-align: center;
+  margin-left: 10px; }
+
+#selector {
+  display: none;
+  width: 100%;
+  float: left;
+  margin: 0;
+  padding: 0;
+  height: 30px;
+  font-size: 18px;
+  background-color: tan; }
+
 .section {
   padding: 30px 0; }
 
@@ -42,24 +75,28 @@ body {
   margin-bottom: 10px;
   display: inline-block; }
 
-#selector {
-  display: none; }
+.search-row {
+  padding: 0;
+  margin: 0; }
 
 .cvs-anchor .card {
   background-color: tan;
   color: #272727;
+  padding: 15px;
   width: 80%;
-  height: 480px;
+  height: auto;
   margin: 15px;
+  text-align: justify;
   border-radius: 15px;
   display: inline-block; }
+  .cvs-anchor .card #welcome {
+    text-align: center; }
   .cvs-anchor .card .feature-block {
     padding: 15px;
     display: inline-block;
     width: 50%;
-    text-align: center;
     font-family: "Arbutus";
-    font-size: 16px; }
+    font-size: 17px; }
   .cvs-anchor .card #cvs {
     margin: auto;
     display: block; }
@@ -73,6 +110,13 @@ body {
     width: 100%;
     font-family: "Arbutus";
     font-size: 16px; }
+  .cvs-anchor .card div h2 {
+    margin-top: 15px; }
+  .cvs-anchor .card div p {
+    margin-top: 15px;
+    font-size: 17px; }
+.cvs-anchor .card2 {
+  display: none; }
 
 .ability-headings {
   font-size: 18px;
