@@ -196,6 +196,11 @@ function removeOptions(selectbox) {
     }
 }
 
+const capitalize = (s) => {
+    if (typeof s !== 'string') return ''
+    return s.charAt(0).toUpperCase() + s.slice(1)
+}
+
 var monster;
 
 function displaySelection(selector) {
@@ -209,7 +214,7 @@ function displaySelection(selector) {
         $(".card").empty();
 
         var newSpan = $('<span/>', {
-            'class': 'ability-headings',
+            'class': 'card-heading',
             id: 'monster-name'
         });
 
@@ -248,43 +253,70 @@ function displaySelection(selector) {
         $('.card').append(statDiv3);
         $('.card').append(statDiv4);
 
+        if (monster.special_abilities) {
+            var abilitiesDiv = $('<div/>', {
+                'class': 'special-abilities',
+                id: 'ability-div'
+            });
+
+            $('.card').append(abilitiesDiv);
+            $('#ability-div').append(`<span><h5>Special Abilities: </h5></span>`);
+
+            var abilitiesArr = [];
+
+            for (let i = 0; i <= monster.special_abilities.length -1; i++) {
+                abilitiesArr.push(monster.special_abilities[i]);
+            }
+            console.log(abilitiesArr);
+
+            $("#ability-div").append(`<b>Attack bonus:</b> ${abilitiesArr[0].attack_bonus}<br />`);
+
+            for (let j = 0; j <= abilitiesArr.length -1; j++) {
+                
+                $("#ability-div").append(`<p><b>${abilitiesArr[j].name}</b><br /> ${abilitiesArr[j].desc}</p>`);
+                //$("#ability-div").append(`${abilitiesArr[j].desc}<br />`);
+
+            }
+            
+        }
+
         function logSomeData() {
 
             /////////////////////////////////////////////////////////
             //add some stuff to the page
             /////////////////////////////////////////////////////////
             $("#monster-name").append(`<h2>${monster.name}</h2>`);
-            $("#general-stats").append(`Alignment: ${monster.alignment}<br />`);
-            $("#general-stats").append(`Type: ${monster.type}<br />`);
-            $("#general-stats").append(`Size: ${monster.size}<br />`);
+            $("#general-stats").append(`<b>Alignment:</b> ${capitalize(monster.alignment)}<br />`);
+            $("#general-stats").append(`<b>Type:</b> ${capitalize(monster.type)}<br />`);
+            $("#general-stats").append(`<b>Size:</b> ${capitalize(monster.size)}<br />`);
 
-            $("#more-stats").append(`Challenge rating: ${monster.challenge_rating}<br />`);
-            $("#more-stats").append(`Hit points: ${monster.hit_points} <br />`);
-            $("#more-stats").append(`Armor Class: ${monster.armor_class}<br />`);
+            $("#more-stats").append(`<b>Challenge rating:</b> ${monster.challenge_rating}<br />`);
+            $("#more-stats").append(`<b>Hit points:</b> ${monster.hit_points} <br />`);
+            $("#more-stats").append(`<b>Armor Class:</b> ${monster.armor_class}<br />`);
 
-            $("#more-stats1").append(`Languages: ${monster.languages}<br />`);
-            $("#more-stats1").append(`Damage_Immunities: ${monster.damage_immunities} <br />`);
-            $("#more-stats1").append(`Senses: ${monster.senses}<br />`);
+            $("#more-stats1").append(`<b>Languages:</b> ${capitalize(monster.languages)}<br />`);
+            $("#more-stats1").append(`<b>Damage Immunities:</b> ${capitalize(monster.damage_immunities)} <br />`);
+            $("#more-stats1").append(`<b>Senses: </b>${capitalize(monster.senses)}<br />`);
 
-            $("#more-stats2").append(`Speed: ${monster.speed}<br />`);
+            $("#more-stats2").append(`<b>Speed: </b>${capitalize(monster.speed)}<br />`);
 
             if ('charisma_save' in monster) {
-                $("#more-stats2").append(`Charisma Save: +${monster.charisma_save}<br />`);
+                $("#more-stats2").append(`<b>Charisma Save:</b> +${monster.charisma_save}<br />`);
             }
             if ('wisdom_save' in monster) {
-                $("#more-stats2").append(`Wisdom Save: +${monster.wisdom_save}<br />`);
+                $("#more-stats2").append(`<b>Wisdom Save:</b> +${monster.wisdom_save}<br />`);
             }
             if ('constitution_save' in monster) {
-                $("#more-stats2").append(`Constitution Save: +${monster.constitution_save}<br />`);
+                $("#more-stats2").append(`<b>Constitution Save:</b> +${monster.constitution_save}<br />`);
             }
             if ('dexterity_save' in monster) {
-                $("#more-stats2").append(`Dexterity Save: +${monster.dexterity_save}<br />`);
+                $("#more-stats2").append(`<b>Dexterity Save:</b> +${monster.dexterity_save}<br />`);
             }
             if ('strength_save' in monster) {
-                $("#more-stats2").append(`Strength Save: +${monster.strength_save}<br />`);
+                $("#more-stats2").append(`<b>Strength Save:</b> +${monster.strength_save}<br />`);
             }
             if ('intelligence_save' in monster) {
-                $("#more-stats2").append(`Intelligence Save: +${monster.intelligence_save}<br />`);
+                $("#more-stats2").append(`<b>Intelligence Save:</b> +${monster.intelligence_save}<br />`);
             }
         }
 
@@ -296,7 +328,6 @@ function displaySelection(selector) {
     function createSpellLayout() {
 
         usedByClasses = [];
-        
 
         for (let i = 0; i <= monster.classes.length - 1; i++) {
             usedByClasses.push(monster.classes[i].name);
@@ -304,12 +335,12 @@ function displaySelection(selector) {
 
         descriptionList = [];
 
-        for (let i = 0; i <= monster.desc.length -1; i++) {
+        for (let i = 0; i <= monster.desc.length - 1; i++) {
             descriptionList.push(monster.desc[i]);
         };
 
         console.log(descriptionList.join(" "));
-        
+
 
         //console.log(usedByClassesList);
 
@@ -364,9 +395,12 @@ function displaySelection(selector) {
             $("#general-stats").append(`Range: ${monster.range}<br />`);
             $("#general-stats").append(`Duration: ${monster.duration}<br />`);
             $("#general-stats").append(`Components: ${monster.components}<br />`);
-            $("#general-stats").append(`Material: ${monster.material} <br />`);
 
-            $("#more-stats").append(`School: ${monster.school[0]}<br />`);
+            if (monster.material) {
+                $("#general-stats").append(`Material: ${monster.material} <br />`);
+            }
+
+            $("#more-stats").append(`School: ${monster.school.name}<br />`);
             $("#more-stats").append(`Casting time: ${monster.casting_time}<br />`);
             $("#more-stats").append(`Concentration: ${monster.concentration} <br />`);
             $("#more-stats").append(`Ritual: ${monster.ritual}<br />`);

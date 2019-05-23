@@ -9,7 +9,8 @@ $colors: (primary: #cc0000,
     primary-dark: #980d0d,
     accent: #f98e8e,
     nav: #37393c,
-    card: tan);
+    card: tan,
+    highlight: #53566b);
 
 $font-colors: (primary: #efefef,
     dark: #272727);
@@ -107,6 +108,11 @@ body {
     background-color: map-get($colors, card)
 }
 
+#result-dropdown-div {
+    margin: 0;
+    padding: 0;
+}
+
 .section {
     //border-bottom: 1px solid #e6e6e6;
     padding: 30px 0;
@@ -132,6 +138,14 @@ body {
 .cvs-anchor {
     //display: inline-flex;
 
+    .card-heading {
+        font-size: 18px;
+        display: block;
+        margin-top: 20px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
     .card {
         background-color: map-get($colors, card);
         color: map-get($font-colors, dark);
@@ -154,12 +168,17 @@ body {
             
             font-family: map-get($font, Arbutus);
             font-size: 17px;
-
+            text-align: left;
         }
 
         #cvs {
             margin: auto;
             display: block;
+            width: 100%;
+            padding-right: 15px;
+            margin: 0;
+            border-radius: 15px;
+            background-color: map-get($colors, highlight);
         }
 
         #class-can-use {
@@ -188,6 +207,17 @@ body {
             }
         }
 
+        .special-abilities {
+            background-color: lightgray;
+            height: auto;
+            width: 98%;
+            position: relative;
+            padding: 10px;
+            display: block;
+            border-radius: 15px;
+            
+        }
+
 
     }
 
@@ -197,20 +227,3 @@ body {
 }
 
 
-.ability-headings {
-    font-size: 18px;
-    display: block;
-    margin-top: 20px;
-    margin-bottom: 15px;
-    text-align: center;
-}
-
-.feature-block {
-    text-align: left;
-}
-
-.special-abilities {
-    position: absolute;
-    top: 50px;
-    left: 100px;
-}

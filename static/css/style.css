@@ -65,6 +65,10 @@ body {
   font-size: 18px;
   background-color: tan; }
 
+#result-dropdown-div {
+  margin: 0;
+  padding: 0; }
+
 .section {
   padding: 30px 0; }
 
@@ -79,6 +83,12 @@ body {
   padding: 0;
   margin: 0; }
 
+.cvs-anchor .card-heading {
+  font-size: 18px;
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  text-align: center; }
 .cvs-anchor .card {
   background-color: tan;
   color: #272727;
@@ -96,10 +106,16 @@ body {
     display: inline-block;
     width: 50%;
     font-family: "Arbutus";
-    font-size: 17px; }
+    font-size: 17px;
+    text-align: left; }
   .cvs-anchor .card #cvs {
     margin: auto;
-    display: block; }
+    display: block;
+    width: 100%;
+    padding-right: 15px;
+    margin: 0;
+    border-radius: 15px;
+    background-color: #53566b; }
   .cvs-anchor .card #class-can-use {
     display: block;
     width: 100%;
@@ -115,22 +131,15 @@ body {
   .cvs-anchor .card div p {
     margin-top: 15px;
     font-size: 17px; }
+  .cvs-anchor .card .special-abilities {
+    background-color: lightgray;
+    height: auto;
+    width: 98%;
+    position: relative;
+    padding: 10px;
+    display: block;
+    border-radius: 15px; }
 .cvs-anchor .card2 {
   display: none; }
-
-.ability-headings {
-  font-size: 18px;
-  display: block;
-  margin-top: 20px;
-  margin-bottom: 15px;
-  text-align: center; }
-
-.feature-block {
-  text-align: left; }
-
-.special-abilities {
-  position: absolute;
-  top: 50px;
-  left: 100px; }
 
 /*# sourceMappingURL=style.css.map */
