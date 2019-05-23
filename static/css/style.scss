@@ -164,6 +164,7 @@ body {
         #stat-background {
             height: auto;
             width: 100%;
+            margin-top: 30px;
             background-color: map-get($colors, nav);
             color: lightgray;
             border-radius: 15px;

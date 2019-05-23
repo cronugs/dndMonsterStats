@@ -361,7 +361,7 @@ function displaySelection(selector) {
         });
         
         var titleSpan = $('<span/>', {
-            'class': 'ability-headings',
+            'class': 'card-heading',
             id: 'spell-name'
         });
 

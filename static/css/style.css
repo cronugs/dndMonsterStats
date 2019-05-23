@@ -104,6 +104,7 @@ body {
   .card-anchor .card #stat-background {
     height: auto;
     width: 100%;
+    margin-top: 30px;
     background-color: #37393c;
     color: lightgray;
     border-radius: 15px; }
