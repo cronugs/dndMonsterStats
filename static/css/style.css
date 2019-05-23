@@ -83,13 +83,7 @@ body {
   padding: 0;
   margin: 0; }
 
-.cvs-anchor .card-heading {
-  font-size: 18px;
-  display: block;
-  margin-top: 20px;
-  margin-bottom: 15px;
-  text-align: center; }
-.cvs-anchor .card {
+.card-anchor .card {
   background-color: tan;
   color: #272727;
   padding: 15px;
@@ -99,39 +93,54 @@ body {
   text-align: justify;
   border-radius: 15px;
   display: inline-block; }
-  .cvs-anchor .card #welcome {
+  .card-anchor .card #welcome {
     text-align: center; }
-  .cvs-anchor .card .feature-block {
+  .card-anchor .card .card-heading {
+    font-size: 18px;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    text-align: center; }
+  .card-anchor .card #stat-background {
+    height: auto;
+    width: 100%;
+    background-color: #37393c;
+    color: lightgray;
+    border-radius: 15px; }
+  .card-anchor .card .feature-block {
     padding: 15px;
     display: inline-block;
-    width: 50%;
     font-family: "Arbutus";
     font-size: 17px;
     text-align: left; }
-  .cvs-anchor .card #cvs {
-    margin: auto;
-    display: block;
-    width: 100%;
-    padding-right: 15px;
-    margin: 0;
+  .card-anchor .card #cvs-anchor {
+    background-color: #37393c;
     border-radius: 15px;
-    background-color: #53566b; }
-  .cvs-anchor .card #class-can-use {
+    text-align: center;
+    height: 350px; }
+  .card-anchor .card #cvs {
+    margin-top: 30px;
+    display: inline-block; }
+  .card-anchor .card #class-can-use {
     display: block;
     width: 100%;
     font-family: "Arbutus";
     font-size: 16px; }
-  .cvs-anchor .card #spell-description {
+  .card-anchor .card #spell-description {
     display: block;
     width: 100%;
     font-family: "Arbutus";
+    background-color: lightgrey;
+    border-radius: 15px;
+    padding: 15px;
+    padding-bottom: 0;
     font-size: 16px; }
-  .cvs-anchor .card div h2 {
+  .card-anchor .card div h2 {
     margin-top: 15px; }
-  .cvs-anchor .card div p {
+  .card-anchor .card div p {
     margin-top: 15px;
     font-size: 17px; }
-  .cvs-anchor .card .special-abilities {
+  .card-anchor .card .special-abilities {
     background-color: lightgray;
     height: auto;
     width: 98%;
@@ -139,7 +148,7 @@ body {
     padding: 10px;
     display: block;
     border-radius: 15px; }
-.cvs-anchor .card2 {
+.card-anchor .card2 {
   display: none; }
 
 /*# sourceMappingURL=style.css.map */

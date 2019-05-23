@@ -135,16 +135,8 @@ body {
     margin: 0;
 }
 
-.cvs-anchor {
-    //display: inline-flex;
-
-    .card-heading {
-        font-size: 18px;
-        display: block;
-        margin-top: 20px;
-        margin-bottom: 15px;
-        text-align: center;
-    }
+.card-anchor { 
+    
 
     .card {
         background-color: map-get($colors, card);
@@ -159,27 +151,52 @@ body {
 
         #welcome {
             text-align: center;
+        } 
+
+        .card-heading {
+            font-size: 18px;
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            text-align: center;
         }
+
+        #stat-background {
+            height: auto;
+            width: 100%;
+            background-color: map-get($colors, nav);
+            color: lightgray;
+            border-radius: 15px;
+        }        
 
         .feature-block {
             padding: 15px;
             display: inline-block;
-            width: 50%;
+            //width: 50%;
             
             font-family: map-get($font, Arbutus);
             font-size: 17px;
             text-align: left;
         }
 
-        #cvs {
-            margin: auto;
-            display: block;
-            width: 100%;
-            padding-right: 15px;
-            margin: 0;
-            border-radius: 15px;
-            background-color: map-get($colors, highlight);
+        #cvs-anchor {
+            background-color: map-get($colors, nav);
+            border-radius: 15px; 
+            text-align: center;
+            height: 350px;
+
+            
         }
+
+        #cvs {
+            margin-top: 30px;
+            display: inline-block;
+            //padding-right: 15px;
+            
+            
+                      
+        }
+        
 
         #class-can-use {
             display: block;
@@ -192,6 +209,10 @@ body {
             display: block;
             width: 100%;
             font-family: map-get($font, Arbutus);
+            background-color: lightgrey;
+            border-radius: 15px;
+            padding: 15px;
+            padding-bottom: 0;
             font-size: 16px;
         }
 

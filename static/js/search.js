@@ -15,6 +15,7 @@ function getData(url, cb) {
 
     xhr.open("GET", url);
     xhr.send();
+
 }
 
 // A quick snippet of text so pressing enter triggers the search box
@@ -39,8 +40,7 @@ function categorySelect() {
         console.log(searchType);
     } else {
         url = 'http://www.dnd5eapi.co/api/monsters';
-        searchType = 'monsters';
-        console.log(searchType);
+        searchType = 'monsters';        
     }
 }
 
@@ -218,38 +218,45 @@ function displaySelection(selector) {
             id: 'monster-name'
         });
 
-        var statDiv = $('<div/>', {
-            'class': 'feature-block',
-            id: 'general-stats'
+        var featureBlock1 = $('<div/>', {
+            'class': 'feature-block col-xs-6 col-sm-6 col-md-6 col-lg-6',
+            id: 'feature-block1'
         });
 
-        var statDiv2 = $('<div/>', {
-            'class': 'feature-block',
-            id: 'more-stats'
+        var featureBlock2 = $('<div/>', {
+            'class': 'feature-block col-xs-6 col-sm-6 col-md-6 col-lg-6',
+            id: 'feature-block2'
+        });
+
+        var cvsAnchor = $('<div/>', {
+            'class': 'cvs-anchor col-xs-12 col-sm-12 col-md-12 col-lg-12',
+            id: 'cvs-anchor'
         });
 
         var newCanvas = $('<canvas/>', {
             'class': 'graphCanvas',
             id: 'cvs'
         }).prop({
-            width: 300,
-            height: 200
+            width: 400,
+            height: 280
+
         });
 
         var statDiv3 = $('<div/>', {
-            'class': 'feature-block',
+            'class': 'feature-block col-xs-6 col-sm-6 col-md-6 col-lg-6',
             id: 'more-stats1'
         });
 
         var statDiv4 = $('<div/>', {
-            'class': 'feature-block',
+            'class': 'feature-block col-xs-6 col-sm-6 col-md-6 col-lg-6',
             id: 'more-stats2'
         });
 
         $('.card').append(newSpan);
-        $('.card').append(statDiv);
-        $('.card').append(statDiv2);
-        $('.card').append(newCanvas);
+        $('.card').append(featureBlock1);
+        $('.card').append(featureBlock2);
+        $('.card').append(cvsAnchor);
+        $('#cvs-anchor').append(newCanvas);
         $('.card').append(statDiv3);
         $('.card').append(statDiv4);
 
@@ -280,19 +287,19 @@ function displaySelection(selector) {
             
         }
 
-        function logSomeData() {
+        function printMonsterCard() {
 
             /////////////////////////////////////////////////////////
             //add some stuff to the page
             /////////////////////////////////////////////////////////
             $("#monster-name").append(`<h2>${monster.name}</h2>`);
-            $("#general-stats").append(`<b>Alignment:</b> ${capitalize(monster.alignment)}<br />`);
-            $("#general-stats").append(`<b>Type:</b> ${capitalize(monster.type)}<br />`);
-            $("#general-stats").append(`<b>Size:</b> ${capitalize(monster.size)}<br />`);
+            $("#feature-block1").append(`<b>Alignment:</b> ${capitalize(monster.alignment)}<br />`);
+            $("#feature-block1").append(`<b>Type:</b> ${capitalize(monster.type)}<br />`);
+            $("#feature-block1").append(`<b>Size:</b> ${capitalize(monster.size)}<br />`);
 
-            $("#more-stats").append(`<b>Challenge rating:</b> ${monster.challenge_rating}<br />`);
-            $("#more-stats").append(`<b>Hit points:</b> ${monster.hit_points} <br />`);
-            $("#more-stats").append(`<b>Armor Class:</b> ${monster.armor_class}<br />`);
+            $("#feature-block2").append(`<b>Challenge rating:</b> ${monster.challenge_rating}<br />`);
+            $("#feature-block2").append(`<b>Hit points:</b> ${monster.hit_points} <br />`);
+            $("#feature-block2").append(`<b>Armor Class:</b> ${monster.armor_class}<br />`);
 
             $("#more-stats1").append(`<b>Languages:</b> ${capitalize(monster.languages)}<br />`);
             $("#more-stats1").append(`<b>Damage Immunities:</b> ${capitalize(monster.damage_immunities)} <br />`);
@@ -320,7 +327,7 @@ function displaySelection(selector) {
             }
         }
 
-        logSomeData();
+        printMonsterCard();
         statSpiderGraph();
 
     }
@@ -348,19 +355,24 @@ function displaySelection(selector) {
         //clear card first and then dynamically create the elements needed.
         $(".card").empty();
 
+        var statBackground = $('<div/>', {
+            'class': 'background',
+            id: 'stat-background'
+        });
+        
         var titleSpan = $('<span/>', {
             'class': 'ability-headings',
             id: 'spell-name'
         });
 
-        var statDiv = $('<div/>', {
-            'class': 'feature-block',
-            id: 'general-stats'
+        var featureBlock1 = $('<div/>', {
+            'class': 'feature-block col-xs-6 col-sm-6 col-md-6 col-lg-6',
+            id: 'feature-block1'
         });
 
-        var statDiv2 = $('<div/>', {
-            'class': 'feature-block',
-            id: 'more-stats'
+        var featureBlock2 = $('<div/>', {
+            'class': 'feature-block col-xs-6 col-sm-6 col-md-6 col-lg-6',
+            id: 'feature-block2'
         });
 
         var statDiv3 = $('<div/>', {
@@ -374,8 +386,10 @@ function displaySelection(selector) {
         });
 
         $('.card').append(titleSpan);
-        $('.card').append(statDiv);
-        $('.card').append(statDiv2);
+        $('.card').append(statBackground);
+        
+        $('#stat-background').append(featureBlock1);
+        $('#stat-background').append(featureBlock2);
         $('.card').append(statDiv3);
         $('.card').append(statDiv4);
 
@@ -383,34 +397,33 @@ function displaySelection(selector) {
         //var selectedText = selector.options[selector.selectedIndex].innerHTML;
         //var selectedValue = selector.value;
 
-        function logSomeData() {
+        function printCard() {                
 
-            //monster = dataList[selectedValue];                  
-
-            /////////////////////////////////////////////////////////
-            //add some stuff to the page
-            /////////////////////////////////////////////////////////
+            //
+            
+            
             $("#spell-name").append(`<h2>${monster.name}</h2>`);
-            $("#general-stats").append(`Level: ${monster.level}<br />`);
-            $("#general-stats").append(`Range: ${monster.range}<br />`);
-            $("#general-stats").append(`Duration: ${monster.duration}<br />`);
-            $("#general-stats").append(`Components: ${monster.components}<br />`);
+            $("#feature-block1").append(`<b>Level:</b> ${monster.level}<br />`);
+            $("#feature-block1").append(`<b>Range:</b> ${monster.range}<br />`);
+            $("#feature-block1").append(`<b>Duration:</b> ${monster.duration}<br />`);
+            $("#feature-block1").append(`<b>Components:</b> ${monster.components}<br />`);
 
             if (monster.material) {
-                $("#general-stats").append(`Material: ${monster.material} <br />`);
+                $("#feature-block1").append(`<b>Material:</b> ${monster.material} <br />`);
             }
 
-            $("#more-stats").append(`School: ${monster.school.name}<br />`);
-            $("#more-stats").append(`Casting time: ${monster.casting_time}<br />`);
-            $("#more-stats").append(`Concentration: ${monster.concentration} <br />`);
-            $("#more-stats").append(`Ritual: ${monster.ritual}<br />`);
-            $("#class-can-use").append(`Classes: ${usedByClasses.join(", ")}<br />`);
+            $("#feature-block2").append(`<b>School:</b> ${monster.school.name}<br />`);
+            $("#feature-block2").append(`<b>Casting time</b>: ${monster.casting_time}<br />`);
+            $("#feature-block2").append(`<b>Concentration:</b> ${monster.concentration} <br />`);
+            $("#feature-block2").append(`<b>Ritual:</b> ${monster.ritual}<br />`);
+            
+            $("#class-can-use").append(`<b>Classes:</b> ${usedByClasses.join(", ")}<br />`);
 
-            $("#spell-description").append(`Description: ${descriptionList.join(" ")}<br />`);
+            $("#spell-description").append(`<b>Description:</b> <p>${descriptionList.join(" ")}</p><br />`);
 
         }
 
-        logSomeData();
+        printCard();
 
     }
 
