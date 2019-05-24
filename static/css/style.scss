@@ -36,8 +36,6 @@ body {
 
 }
 
-
-
 .navbar {
     background-image: none;
     margin-bottom: 0;
@@ -72,7 +70,7 @@ body {
     font-size: 18px;
     background-color: map-get($colors, card);
     border: 1px black solid;
-    padding: 0;
+    padding-left: 10px;
 }
 
 #category-dropdown {
@@ -82,7 +80,7 @@ body {
     background-color: map-get($colors, card);
     border: 1px black solid;
     height: 35px;
-    padding: 0;
+    padding-left: 10px;
 }
 
 #search-button {
@@ -95,6 +93,11 @@ body {
     font-size: 18px;
     text-align: center;
     margin-left: 10px;
+
+    &:hover {
+        background-color: map-get($colors, highlight);
+
+    }
 }
 
 #selector {
@@ -227,6 +230,17 @@ body {
                 margin-top: 15px;
                 font-size: 17px;
             }
+        }
+
+        .actions {
+            background-color: lightgray;
+            height: auto;
+            width: 98%;
+            position: relative;
+            padding: 10px;
+            display: block;
+            border-radius: 15px;
+            margin-bottom: 15px;
         }
 
         .special-abilities {

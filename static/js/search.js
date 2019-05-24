@@ -40,7 +40,7 @@ function categorySelect() {
         console.log(searchType);
     } else {
         url = 'http://www.dnd5eapi.co/api/monsters';
-        searchType = 'monsters';        
+        searchType = 'monsters';
     }
 }
 
@@ -196,7 +196,7 @@ function removeOptions(selectbox) {
     }
 }
 
-const capitalize = (s) => {
+var capitalize = (s) => {
     if (typeof s !== 'string') return ''
     return s.charAt(0).toUpperCase() + s.slice(1)
 }
@@ -260,6 +260,45 @@ function displaySelection(selector) {
         $('.card').append(statDiv3);
         $('.card').append(statDiv4);
 
+
+        if (monster.actions) {
+            var actionsDiv = $('<div/>', {
+                'class': 'actions',
+                id: 'action-div'
+            });
+
+            $('.card').append(actionsDiv);
+            $('#action-div').append(`<span><h5>Actions: </h5></span>`);
+
+            var actionsArr = [];
+
+            for (let i = 0; i <= monster.actions.length - 1; i++) {
+                actionsArr.push(monster.actions[i]);
+            }
+
+            console.log(actionsArr);
+
+            for (let j = 0; j <= actionsArr.length - 1; j++) {                
+
+                $("#action-div").append(`<p><b>${actionsArr[j].name}</b><br />`);
+                
+                if (actionsArr[j].attack_bonus) {
+                    if (actionsArr[j].attack_bonus != 0) {
+                        $("#action-div").append(`<b>Attack bonus: </b>${actionsArr[j].attack_bonus}<br />`);
+                    } 
+                }               
+
+                if (actionsArr[j].damage_bonus) {
+                    if (actionsArr[j].damage_bonus != 0) {
+                        $("#action-div").append(`<b>Damage bonus: </b>${actionsArr[j].damage_bonus} <br /> 
+                        <b>Damage dice: </b>${actionsArr[j].damage_dice}`);
+                    }
+                }
+
+                $("#action-div").append(`<b>Description: </b>${actionsArr[j].desc}</p>`);                   
+            }
+        }
+
         if (monster.special_abilities) {
             var abilitiesDiv = $('<div/>', {
                 'class': 'special-abilities',
@@ -271,20 +310,25 @@ function displaySelection(selector) {
 
             var abilitiesArr = [];
 
-            for (let i = 0; i <= monster.special_abilities.length -1; i++) {
+            for (let i = 0; i <= monster.special_abilities.length - 1; i++) {
                 abilitiesArr.push(monster.special_abilities[i]);
             }
-            console.log(abilitiesArr);
+            console.log(abilitiesArr);           
+            
+            
+            for (let j = 0; j <= abilitiesArr.length - 1; j++) {
 
-            $("#ability-div").append(`<b>Attack bonus:</b> ${abilitiesArr[0].attack_bonus}<br />`);
+                if (abilitiesArr[j].attack_bonus) {
+                    if (abilitiesArr[j].attack_bonus != 0) {
+                        $("#ability-div").append(`<b>Attack bonus:</b> ${abilitiesArr[j].attack_bonus}<br />`);
+                    }
+                }
 
-            for (let j = 0; j <= abilitiesArr.length -1; j++) {
-                
                 $("#ability-div").append(`<p><b>${abilitiesArr[j].name}</b><br /> ${abilitiesArr[j].desc}</p>`);
                 //$("#ability-div").append(`${abilitiesArr[j].desc}<br />`);
 
             }
-            
+
         }
 
         function printMonsterCard() {
@@ -296,16 +340,33 @@ function displaySelection(selector) {
             $("#feature-block1").append(`<b>Alignment:</b> ${capitalize(monster.alignment)}<br />`);
             $("#feature-block1").append(`<b>Type:</b> ${capitalize(monster.type)}<br />`);
             $("#feature-block1").append(`<b>Size:</b> ${capitalize(monster.size)}<br />`);
+            $("#feature-block1").append(`<b>Speed: </b>${capitalize(monster.speed)}<br />`);
 
             $("#feature-block2").append(`<b>Challenge rating:</b> ${monster.challenge_rating}<br />`);
             $("#feature-block2").append(`<b>Hit points:</b> ${monster.hit_points} <br />`);
             $("#feature-block2").append(`<b>Armor Class:</b> ${monster.armor_class}<br />`);
+            $("#feature-block2").append(`<b>Stealth:</b> ${monster.stealth}<br />`);
 
             $("#more-stats1").append(`<b>Languages:</b> ${capitalize(monster.languages)}<br />`);
-            $("#more-stats1").append(`<b>Damage Immunities:</b> ${capitalize(monster.damage_immunities)} <br />`);
             $("#more-stats1").append(`<b>Senses: </b>${capitalize(monster.senses)}<br />`);
 
-            $("#more-stats2").append(`<b>Speed: </b>${capitalize(monster.speed)}<br />`);
+
+
+            if (monster.condition_immunities != "") {
+                $("#more-stats2").append(`<b>Condition Immunities:</b> ${capitalize(monster.condition_immunities)} <br />`);
+            }
+
+            if (monster.damage_immunities != "") {
+                $("#more-stats2").append(`<b>Damage Immunities:</b> ${capitalize(monster.damage_immunities)} <br />`);
+            }
+
+            if (monster.damage_resistances != "") {
+                $("#more-stats2").append(`<b>Damage Resistances:</b> ${capitalize(monster.damage_resistances)} <br />`);
+            }
+
+            if (monster.damage_vulnerabilities != "") {
+                $("#more-stats2").append(`<b>Damage Vulnerabilities:</b> ${capitalize(monster.damage_vulnerabilities)} <br />`);
+            }
 
             if ('charisma_save' in monster) {
                 $("#more-stats2").append(`<b>Charisma Save:</b> +${monster.charisma_save}<br />`);
@@ -359,7 +420,7 @@ function displaySelection(selector) {
             'class': 'background',
             id: 'stat-background'
         });
-        
+
         var titleSpan = $('<span/>', {
             'class': 'card-heading',
             id: 'spell-name'
@@ -387,7 +448,7 @@ function displaySelection(selector) {
 
         $('.card').append(titleSpan);
         $('.card').append(statBackground);
-        
+
         $('#stat-background').append(featureBlock1);
         $('#stat-background').append(featureBlock2);
         $('.card').append(statDiv3);
@@ -397,11 +458,11 @@ function displaySelection(selector) {
         //var selectedText = selector.options[selector.selectedIndex].innerHTML;
         //var selectedValue = selector.value;
 
-        function printCard() {                
+        function printCard() {
 
             //
-            
-            
+
+
             $("#spell-name").append(`<h2>${monster.name}</h2>`);
             $("#feature-block1").append(`<b>Level:</b> ${monster.level}<br />`);
             $("#feature-block1").append(`<b>Range:</b> ${monster.range}<br />`);
@@ -416,7 +477,7 @@ function displaySelection(selector) {
             $("#feature-block2").append(`<b>Casting time</b>: ${monster.casting_time}<br />`);
             $("#feature-block2").append(`<b>Concentration:</b> ${monster.concentration} <br />`);
             $("#feature-block2").append(`<b>Ritual:</b> ${monster.ritual}<br />`);
-            
+
             $("#class-can-use").append(`<b>Classes:</b> ${usedByClasses.join(", ")}<br />`);
 
             $("#spell-description").append(`<b>Description:</b> <p>${descriptionList.join(" ")}</p><br />`);

@@ -35,7 +35,7 @@ body {
   font-size: 18px;
   background-color: tan;
   border: 1px black solid;
-  padding: 0; }
+  padding-left: 10px; }
 
 #category-dropdown {
   width: 100%;
@@ -43,7 +43,7 @@ body {
   background-color: tan;
   border: 1px black solid;
   height: 35px;
-  padding: 0; }
+  padding-left: 10px; }
 
 #search-button {
   width: 100%;
@@ -54,6 +54,8 @@ body {
   font-size: 18px;
   text-align: center;
   margin-left: 10px; }
+  #search-button:hover {
+    background-color: #53566b; }
 
 #selector {
   display: none;
@@ -141,6 +143,15 @@ body {
   .card-anchor .card div p {
     margin-top: 15px;
     font-size: 17px; }
+  .card-anchor .card .actions {
+    background-color: lightgray;
+    height: auto;
+    width: 98%;
+    position: relative;
+    padding: 10px;
+    display: block;
+    border-radius: 15px;
+    margin-bottom: 15px; }
   .card-anchor .card .special-abilities {
     background-color: lightgray;
     height: auto;
