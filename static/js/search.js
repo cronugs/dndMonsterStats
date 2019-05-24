@@ -260,34 +260,41 @@ function displaySelection(selector) {
         $('.card').append(statDiv3);
         $('.card').append(statDiv4);
 
-
+        //if the monster has extra actions, create a div.
         if (monster.actions) {
             var actionsDiv = $('<div/>', {
                 'class': 'actions',
                 id: 'action-div'
             });
 
+            //append our new action-div to .card
             $('.card').append(actionsDiv);
+
+            //begin appending data for monster actions
             $('#action-div').append(`<span><h5>Actions: </h5></span>`);
 
+            //create a new array
             var actionsArr = [];
-
+            //fill the actionsArr with the actions available to the monster
             for (let i = 0; i <= monster.actions.length - 1; i++) {
                 actionsArr.push(monster.actions[i]);
             }
+            //console.log(actionsArr);
 
-            console.log(actionsArr);
-
+            //for each action in actionsArr
             for (let j = 0; j <= actionsArr.length - 1; j++) {                
 
+                //append name, bonuses and description
                 $("#action-div").append(`<p><b>${actionsArr[j].name}</b><br />`);
                 
+                //if attack_bonus exists and isn't 0, append it.
                 if (actionsArr[j].attack_bonus) {
                     if (actionsArr[j].attack_bonus != 0) {
                         $("#action-div").append(`<b>Attack bonus: </b>${actionsArr[j].attack_bonus}<br />`);
                     } 
                 }               
 
+                //if damage_bonus exists and isn't 0, append it along with damage dice.
                 if (actionsArr[j].damage_bonus) {
                     if (actionsArr[j].damage_bonus != 0) {
                         $("#action-div").append(`<b>Damage bonus: </b>${actionsArr[j].damage_bonus} <br /> 
@@ -299,46 +306,54 @@ function displaySelection(selector) {
             }
         }
 
+        //if the monster has special abilities, create a div
         if (monster.special_abilities) {
             var abilitiesDiv = $('<div/>', {
                 'class': 'special-abilities',
                 id: 'ability-div'
             });
 
+            //append out new ability-div to .card
             $('.card').append(abilitiesDiv);
+
+            //begin appending data for monster abilities
             $('#ability-div').append(`<span><h5>Special Abilities: </h5></span>`);
-
+            
+            //create a new array
             var abilitiesArr = [];
-
+            
+            //push the monsters abilities to abilitiesArr
             for (let i = 0; i <= monster.special_abilities.length - 1; i++) {
                 abilitiesArr.push(monster.special_abilities[i]);
             }
-            console.log(abilitiesArr);           
+            //console.log(abilitiesArr);           
             
-            
+            //for each ability in abilitiesArr
             for (let j = 0; j <= abilitiesArr.length - 1; j++) {
 
+                //if attack_bonus exits and isn't equal to 0, append it.
                 if (abilitiesArr[j].attack_bonus) {
                     if (abilitiesArr[j].attack_bonus != 0) {
                         $("#ability-div").append(`<b>Attack bonus:</b> ${abilitiesArr[j].attack_bonus}<br />`);
                     }
                 }
 
+                //append ability name and description
                 $("#ability-div").append(`<p><b>${abilitiesArr[j].name}</b><br /> ${abilitiesArr[j].desc}</p>`);
-                //$("#ability-div").append(`${abilitiesArr[j].desc}<br />`);
-
             }
 
         }
 
         function printMonsterCard() {
 
-            /////////////////////////////////////////////////////////
-            //add some stuff to the page
-            /////////////////////////////////////////////////////////
+            //add more general monster stats and info to the card.           
             $("#monster-name").append(`<h2>${monster.name}</h2>`);
             $("#feature-block1").append(`<b>Alignment:</b> ${capitalize(monster.alignment)}<br />`);
-            $("#feature-block1").append(`<b>Type:</b> ${capitalize(monster.type)}<br />`);
+            $("#feature-block1").append(`<span id="type-span"><b>Type:</b> ${capitalize(monster.type)} </span><br />`);
+            if (monster.subtype != "") {
+                $("#type-span").append(`(<b>Subtype: </b>${capitalize(monster.subtype)})`);
+            }
+
             $("#feature-block1").append(`<b>Size:</b> ${capitalize(monster.size)}<br />`);
             $("#feature-block1").append(`<b>Speed: </b>${capitalize(monster.speed)}<br />`);
 

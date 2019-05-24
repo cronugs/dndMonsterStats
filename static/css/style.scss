@@ -52,8 +52,6 @@ body {
     margin-left: 0px;
 }
 
-;
-
 .section-heading {
     margin-bottom: 50px;
 
@@ -65,7 +63,6 @@ body {
 
 #monsterName {
     width: 100%;
-    //display: inline-block;
     height: 35px;
     font-size: 18px;
     background-color: map-get($colors, card);
@@ -75,7 +72,6 @@ body {
 
 #category-dropdown {
     width: 100%;
-    //display: inline-block;
     font-size: 18px;
     background-color: map-get($colors, card);
     border: 1px black solid;
@@ -84,15 +80,15 @@ body {
 }
 
 #search-button {
-    width: 100%;
-    //display: inline-block;
+    width: 90%;
+    float: right;
     background-color: map-get($colors, card);
     border: 1px black solid;
     height: 35px;
     padding: 0;
     font-size: 18px;
     text-align: center;
-    margin-left: 10px;
+    
 
     &:hover {
         background-color: map-get($colors, highlight);
@@ -100,20 +96,20 @@ body {
     }
 }
 
-#selector {
-    display: none;
-    width: 100%;
-    float: left;
+.result-dropdown-div {
     margin: 0;
     padding: 0;
-    height: 30px;
-    font-size: 18px;
-    background-color: map-get($colors, card)
-}
 
-#result-dropdown-div {
-    margin: 0;
-    padding: 0;
+    #selector {
+        display: none;
+        width: 100%;
+        margin: 0;
+        margin-top: 15px;
+        padding: 0;
+        height: 30px;
+        font-size: 18px;
+        background-color: map-get($colors, card)
+    }
 }
 
 .section {
@@ -187,18 +183,12 @@ body {
             background-color: map-get($colors, nav);
             border-radius: 15px; 
             text-align: center;
-            height: 350px;
-
-            
+            height: 350px;            
         }
 
         #cvs {
             margin-top: 30px;
-            display: inline-block;
-            //padding-right: 15px;
-            
-            
-                      
+            display: inline-block;                 
         }
         
 
