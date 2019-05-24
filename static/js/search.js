@@ -343,10 +343,12 @@ function displaySelection(selector) {
             $("#feature-block1").append(`<b>Speed: </b>${capitalize(monster.speed)}<br />`);
 
             $("#feature-block2").append(`<b>Challenge rating:</b> ${monster.challenge_rating}<br />`);
-            $("#feature-block2").append(`<b>Hit points:</b> ${monster.hit_points} <br />`);
+            $("#feature-block2").append(`<b>Hit points:</b> ${monster.hit_points}<br />`);
             $("#feature-block2").append(`<b>Armor Class:</b> ${monster.armor_class}<br />`);
-            $("#feature-block2").append(`<b>Stealth:</b> ${monster.stealth}<br />`);
-
+            if (monster.stealth != 0) {
+                $("#feature-block2").append(`<b>Stealth:</b> ${monster.stealth}<br />`);
+            }
+            
             $("#more-stats1").append(`<b>Languages:</b> ${capitalize(monster.languages)}<br />`);
             $("#more-stats1").append(`<b>Senses: </b>${capitalize(monster.senses)}<br />`);
 
