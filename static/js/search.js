@@ -291,7 +291,7 @@ function displaySelection(selector) {
                 if (actionsArr[j].damage_bonus) {
                     if (actionsArr[j].damage_bonus != 0) {
                         $("#action-div").append(`<b>Damage bonus: </b>${actionsArr[j].damage_bonus} <br /> 
-                        <b>Damage dice: </b>${actionsArr[j].damage_dice}`);
+                        <b>Damage dice: </b>${actionsArr[j].damage_dice}<br />`);
                     }
                 }
 
