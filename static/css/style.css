@@ -163,8 +163,20 @@ body {
     border: none;
     outline: none;
     border-radius: 15px; }
+    .card-anchor .card #action-collapse:after {
+      content: '\02795';
+      /* Unicode character for "plus" sign (+) */
+      font-size: 13px;
+      color: white;
+      float: right;
+      margin-left: 5px; }
     .card-anchor .card #action-collapse:active {
       background-color: tan; }
+      .card-anchor .card #action-collapse:active:after {
+        content: "\2796";
+        /* Unicode character for "minus" sign (-) */ }
+    .card-anchor .card #action-collapse span {
+      display: inline-block; }
   .card-anchor .card .action-extension {
     border-bottom-right-radius: 0px;
     border-bottom-left-radius: 0px;
@@ -182,7 +194,6 @@ body {
   .card-anchor .card .special-abilities {
     background-color: lightgray;
     height: auto;
-    width: 98%;
     position: relative;
     padding: 10px;
     display: block;

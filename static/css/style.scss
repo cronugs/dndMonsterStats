@@ -233,7 +233,15 @@ body {
             border: none;
             outline: none;
             border-radius: 15px;
-            //transition: 0.4s;            
+            //transition: 0.4s;   
+            
+            &:after {
+                content: '\02795'; /* Unicode character for "plus" sign (+) */
+                font-size: 13px;
+                color: white;
+                float: right;
+                margin-left: 5px;
+            }
 
             &:hover {
                 background-color: map-get($colors, dark);
@@ -241,7 +249,17 @@ body {
 
             &:active {
                 background-color: map-get($colors, card);
+
+                &:after {
+                    content: "\2796"; /* Unicode character for "minus" sign (-) */
+                }
             }
+
+            span {
+                display: inline-block;
+            }
+
+            
         }
 
         .action-extension {
@@ -279,7 +297,7 @@ body {
         .special-abilities {
             background-color: lightgray;
             height: auto;
-            width: 98%;
+            //width: 98%;
             position: relative;
             padding: 10px;
             display: block;

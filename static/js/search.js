@@ -262,7 +262,7 @@ function displaySelection(selector) {
 
 
 
-        //if the monster has extra actions, create a div.
+        //if the monster has extra actions, create a collapsible.
         if (monster.actions) {
             console.log(monster.actions);
             /*var actionsDiv = $('<div/>', {
