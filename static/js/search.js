@@ -260,18 +260,68 @@ function displaySelection(selector) {
         $('.card').append(statDiv3);
         $('.card').append(statDiv4);
 
+
+
         //if the monster has extra actions, create a div.
         if (monster.actions) {
-            var actionsDiv = $('<div/>', {
+            console.log(monster.actions);
+            /*var actionsDiv = $('<div/>', {
                 'class': 'actions',
                 id: 'action-div'
+            }); */
+
+            //and create an accordion
+
+            var actionAccordion = $('<button/>', {
+                'class': 'collapsible',
+                id: 'action-collapse'
             });
 
+            var panel1 = $('<div/>', {
+                'class': 'content',
+                id: 'action-content'
+            });
+
+            //append accordion to card
+            $('.card').append(actionAccordion);
+
+            $('.card').append(panel1);
+
+            //create accordion
+            var coll = document.getElementsByClassName('collapsible');
+            var i;
+            console.log(coll);
+
+            $('.card').on('click','button',function(){
+                console.log(this.style.borderBottomLeftRadius);
+                if (this.style.borderBottomLeftRadius != '0px') {
+                    this.style.borderBottomRightRadius = '0px';
+                    this.style.borderBottomLeftRadius = '0px';
+                } else {
+                    this.style.borderBottomRightRadius = '15px';
+                    this.style.borderBottomLeftRadius = '15px';
+                }
+            });
+
+            for (i = 0; i < coll.length; i++) {
+                coll[i].addEventListener("click", function () {
+                    
+                    this.classList.toggle("active");
+                    var content = this.nextElementSibling;
+                    if (content.style.display === "block") {
+                        content.style.display = "none";
+                    } else {
+                        content.style.display = "block";
+                    }
+                });
+
+            }
+
             //append our new action-div to .card
-            $('.card').append(actionsDiv);
+            //$('.card').append(actionsDiv);
 
             //begin appending data for monster actions
-            $('#action-div').append(`<span><h5>Actions: </h5></span>`);
+            $('.collapsible').append(`<span><h5>Actions: </h5></span>`);
 
             //create a new array
             var actionsArr = [];
@@ -282,27 +332,27 @@ function displaySelection(selector) {
             //console.log(actionsArr);
 
             //for each action in actionsArr
-            for (let j = 0; j <= actionsArr.length - 1; j++) {                
+            for (let j = 0; j <= actionsArr.length - 1; j++) {
 
                 //append name, bonuses and description
-                $("#action-div").append(`<p><b>${actionsArr[j].name}</b><br />`);
-                
+                $("#action-content").append(`<p><b>${actionsArr[j].name}</b><br />`);
+
                 //if attack_bonus exists and isn't 0, append it.
                 if (actionsArr[j].attack_bonus) {
                     if (actionsArr[j].attack_bonus != 0) {
-                        $("#action-div").append(`<b>Attack bonus: </b>${actionsArr[j].attack_bonus}<br />`);
-                    } 
-                }               
+                        $("#action-content").append(`<b>Attack bonus: </b>${actionsArr[j].attack_bonus}<br />`);
+                    }
+                }
 
                 //if damage_bonus exists and isn't 0, append it along with damage dice.
                 if (actionsArr[j].damage_bonus) {
                     if (actionsArr[j].damage_bonus != 0) {
-                        $("#action-div").append(`<b>Damage bonus: </b>${actionsArr[j].damage_bonus} <br /> 
+                        $("#action-content").append(`<b>Damage bonus: </b>${actionsArr[j].damage_bonus} <br /> 
                         <b>Damage dice: </b>${actionsArr[j].damage_dice}<br />`);
                     }
                 }
 
-                $("#action-div").append(`<b>Description: </b>${actionsArr[j].desc}</p>`);                   
+                $("#action-content").append(`<b>Description: </b>${actionsArr[j].desc}</p>`);
             }
         }
 
@@ -318,16 +368,16 @@ function displaySelection(selector) {
 
             //begin appending data for monster abilities
             $('#ability-div').append(`<span><h5>Special Abilities: </h5></span>`);
-            
+
             //create a new array
             var abilitiesArr = [];
-            
+
             //push the monsters abilities to abilitiesArr
             for (let i = 0; i <= monster.special_abilities.length - 1; i++) {
                 abilitiesArr.push(monster.special_abilities[i]);
             }
             //console.log(abilitiesArr);           
-            
+
             //for each ability in abilitiesArr
             for (let j = 0; j <= abilitiesArr.length - 1; j++) {
 
@@ -363,7 +413,7 @@ function displaySelection(selector) {
             if (monster.stealth != 0) {
                 $("#feature-block2").append(`<b>Stealth:</b> ${monster.stealth}<br />`);
             }
-            
+
             $("#more-stats1").append(`<b>Languages:</b> ${capitalize(monster.languages)}<br />`);
             $("#more-stats1").append(`<b>Senses: </b>${capitalize(monster.senses)}<br />`);
 

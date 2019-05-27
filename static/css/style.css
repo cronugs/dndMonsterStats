@@ -93,7 +93,18 @@ body {
   margin: 15px;
   text-align: justify;
   border-radius: 15px;
-  display: inline-block; }
+  display: inline-block;
+  /*.actions {
+      background-color: lightgray;
+      height: auto;
+      width: 98%;
+      position: relative;
+      padding: 10px;
+      display: block;
+      border-radius: 15px;
+      margin-bottom: 15px;
+      
+  }*/ }
   .card-anchor .card #welcome {
     text-align: center; }
   .card-anchor .card .card-heading {
@@ -142,14 +153,31 @@ body {
   .card-anchor .card div p {
     margin-top: 15px;
     font-size: 17px; }
-  .card-anchor .card .actions {
-    background-color: lightgray;
-    height: auto;
-    width: 98%;
-    position: relative;
-    padding: 10px;
-    display: block;
-    border-radius: 15px;
+  .card-anchor .card #action-collapse {
+    background-color: #a1763d;
+    color: black;
+    cursor: pointer;
+    padding: 15px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    border-radius: 15px; }
+    .card-anchor .card #action-collapse:active {
+      background-color: tan; }
+  .card-anchor .card .action-extension {
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px; }
+  .card-anchor .card .content {
+    padding: 0 18px;
+    background-color: lightgrey;
+    display: none;
+    overflow: hidden;
+    overflow: hidden;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
     margin-bottom: 15px; }
   .card-anchor .card .special-abilities {
     background-color: lightgray;
@@ -158,7 +186,8 @@ body {
     position: relative;
     padding: 10px;
     display: block;
-    border-radius: 15px; }
+    border-radius: 15px;
+    margin-top: 15px; }
 .card-anchor .card2 {
   display: none; }
 

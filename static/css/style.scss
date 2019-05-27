@@ -10,6 +10,7 @@ $colors: (primary: #cc0000,
     accent: #f98e8e,
     nav: #37393c,
     card: tan,
+    button: #a1763d,
     highlight: #53566b);
 
 $font-colors: (primary: #efefef,
@@ -222,7 +223,48 @@ body {
             }
         }
 
-        .actions {
+        #action-collapse {
+            background-color: map-get($colors, button);
+            color: black;
+            cursor: pointer;
+            padding: 15px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            border-radius: 15px;
+            //transition: 0.4s;            
+
+            &:hover {
+                background-color: map-get($colors, dark);
+            }
+
+            &:active {
+                background-color: map-get($colors, card);
+            }
+        }
+
+        .action-extension {
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 0px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .content {
+            padding: 0 18px;
+            background-color: lightgrey;
+            display: none;
+            overflow: hidden;
+            //max-height: 0;
+            overflow: hidden;
+            border-bottom-right-radius: 15px;
+            border-bottom-left-radius: 15px;
+            margin-bottom: 15px;
+            //transition: max-height 0.2s ease-out;
+          }
+
+        /*.actions {
             background-color: lightgray;
             height: auto;
             width: 98%;
@@ -231,7 +273,8 @@ body {
             display: block;
             border-radius: 15px;
             margin-bottom: 15px;
-        }
+            
+        }*/
 
         .special-abilities {
             background-color: lightgray;
@@ -241,6 +284,7 @@ body {
             padding: 10px;
             display: block;
             border-radius: 15px;
+            margin-top: 15px;
             
         }
 
