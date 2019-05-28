@@ -424,16 +424,19 @@ function displaySelection(selector) {
 
     function createSpellLayout() {
 
+        //so I don't get confused about where I am in the code and what I am working on
+        let spell = monster;
+
         usedByClasses = [];
 
-        for (let i = 0; i <= monster.classes.length - 1; i++) {
-            usedByClasses.push(monster.classes[i].name);
+        for (let i = 0; i <= spell.classes.length - 1; i++) {
+            usedByClasses.push(spell.classes[i].name);
         };
 
         descriptionList = [];
 
-        for (let i = 0; i <= monster.desc.length - 1; i++) {
-            descriptionList.push(monster.desc[i]);
+        for (let i = 0; i <= spell.desc.length - 1; i++) {
+            descriptionList.push(spell.desc[i]);
         };
 
         console.log(descriptionList.join(" "));
@@ -479,30 +482,43 @@ function displaySelection(selector) {
         $('.card').append(statDiv3);
         $('.card').append(statDiv4);    
 
-        function printCard() {
+        function printSpellCard() {
 
-            let usefulAttributes = [];
+            $("#spell-name").append(`<h2>${spell.name}</h2>`);
 
-            $("#spell-name").append(`<h2>${monster.name}</h2>`);
-            $("#feature-block1").append(`<b>Level:</b> ${monster.level}<br />`);
-            $("#feature-block1").append(`<b>Range:</b> ${monster.range}<br />`);
-            $("#feature-block1").append(`<b>Duration:</b> ${monster.duration}<br />`);
-            $("#feature-block1").append(`<b>Components:</b> ${monster.components}<br />`);
+            let attrBlock1 = {"Name": spell.name, "Level": spell.level, "Duration": spell.duration, "Components": spell.duration};
+            let attrBlock2 = {"School": spell.school.name, "Casting time": spell.casting_time, "Concentration": spell.concentration, "Ritual": spell.ritual};
+
+            console.log(attrBlock1["name"]);
+
+            for (let key in attrBlock1) {
+                $("#feature-block1").append(`<b>${key}: </b> ` + attrBlock1[key] + '<br />');
+            } 
 
             if (monster.material) {
-                $("#feature-block1").append(`<b>Material:</b> ${monster.material} <br />`);
+                $("#feature-block1").append(`<b>Material: </b> ${spell.material} <br />`);
             }
 
-            $("#feature-block2").append(`<b>School:</b> ${monster.school.name}<br />`);
-            $("#feature-block2").append(`<b>Casting time</b>: ${monster.casting_time}<br />`);
-            $("#feature-block2").append(`<b>Concentration:</b> ${monster.concentration} <br />`);
-            $("#feature-block2").append(`<b>Ritual:</b> ${monster.ritual}<br />`);
+            for (let key in attrBlock2) {
+                $("#feature-block2").append(`<b>${key}:</b> ` + attrBlock2[key] + '<br />');
+            } 
+
+            
+            /*$("#feature-block1").append(`<b>Level:</b> ${spell.level}<br />`);
+            $("#feature-block1").append(`<b>Range:</b> ${spell.range}<br />`);
+            $("#feature-block1").append(`<b>Duration:</b> ${spell.duration}<br />`);
+            $("#feature-block1").append(`<b>Components:</b> ${spell.components}<br />`); */            
+
+            /*$("#feature-block2").append(`<b>School:</b> ${spell.school.name}<br />`);
+            $("#feature-block2").append(`<b>Casting time:</b> ${spell.casting_time}<br />`);
+            $("#feature-block2").append(`<b>Concentration:</b> ${spell.concentration} <br />`);
+            $("#feature-block2").append(`<b>Ritual:</b> ${spell.ritual}<br />`);*/
 
             $("#class-can-use").append(`<b>Classes:</b> ${usedByClasses.join(", ")}<br />`);
-            $("#spell-description").append(`<b>Description:</b> <p>${descriptionList.join(" ")}</p><br />`);
+            $("#spell-description").append(`<b>Description:</b> <p>${descriptionList.join(" ")}</p><br />`); 
         }
 
-        printCard();
+        printSpellCard();
     }
 
     //determine whether the user has chosen to search for monsters or spells and execute the appropriate function.
