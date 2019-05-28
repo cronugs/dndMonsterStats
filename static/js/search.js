@@ -374,7 +374,8 @@ function displaySelection(selector) {
             $("#feature-block2").append(`<b>Challenge rating:</b> ${monster.challenge_rating}<br />`);
             $("#feature-block2").append(`<b>Hit points:</b> ${monster.hit_points}<br />`);
             $("#feature-block2").append(`<b>Armor Class:</b> ${monster.armor_class}<br />`);
-            if (monster.stealth != 0) {
+            
+            if (monster.stealth && monster.stealth != 0) {
                 $("#feature-block2").append(`<b>Stealth:</b> ${monster.stealth}<br />`);
             }
 
@@ -479,6 +480,8 @@ function displaySelection(selector) {
         $('.card').append(statDiv4);    
 
         function printCard() {
+
+            let usefulAttributes = [];
 
             $("#spell-name").append(`<h2>${monster.name}</h2>`);
             $("#feature-block1").append(`<b>Level:</b> ${monster.level}<br />`);
