@@ -95,7 +95,7 @@ function searchMonsterData() {
 
         //we call getData again, this time to return the data for an individual monster
         // *** this needs to change to take multiple urls and 
-        getData(monsterURL, function (data) {
+        getData(monsterURL, function () {
 
             //console.log(monsterArr);
             console.log(resultArr);
@@ -111,33 +111,14 @@ function searchMonsterData() {
 
             //console.log(listOfURLS(resultArr));
 
-            displayMonster(resultArr, listOfURLS(resultArr));
+            displayMonster(listOfURLS(resultArr));
         })
     })
 }
 
-//getTableHeaders takes an object as a parameter, in this case it is the first result returned in our data array which contains
-//an object with two key, value pairs. The keys are name and url. Which will be our table headers
-function getTableHeaders(obj) {
-    //create a new array to hold out table headers
-    var tableHeaders = [];
+//displayMonster() takes an array of urls to individual monsters or spell and puts them in a newArray of objects
+function displayMonster(monsterURLList) {
 
-    var keys = Object.keys(obj)[0];
-    console.log(keys);
-
-    //for each key in our object 
-    //Object.keys(obj).forEach(function (key) {
-    //push the html tags enclosing the value of our key
-    tableHeaders.push(`<td>${keys}</td>`);
-    //});
-    //return the tableHeaders array, further encapsulated in <tr> tags.
-    return `<tr>${tableHeaders}</tr>`;
-}
-
-function displayMonster(resultArr, monsterURLList) {
-
-    //declare a new variable containing an empty array for our table rows
-    //var tableRows = [];
     var newArray = [];
     var counter = 0;
     //for each url in monsterURLList
@@ -156,22 +137,20 @@ function displayMonster(resultArr, monsterURLList) {
                 //buildTables(newArray);
                 populateResults(newArray);
             }
+            //update the global dataList variable so our array is available to other functions
             dataList = newArray;
 
         })
     }
 }
 
-//combinedArray is the result of code to this point. It is an array of objects containing monster data for each of the 
-//monsters that matched our search term.
-//populate results takes 
+//combinedArray is an array of objects containing monster data for each of the monsters that matched our search term.
+//populateResults() adds the name and index for each monster or spell that matched the search and addes them to the select element
 function populateResults(combinedArray) {
 
     console.log(combinedArray);
-    /*var select = document.getElementById("example-select");
-     select.options[select.options.length] = new Option('Text 1', 'Value1');
-    */
-    //https://www.electrictoolbox.com/javascript-add-options-html-select/
+
+    //https://www.electrictoolbox.com/javascript-add-options-html-select/ 
 
     var select = document.getElementById("selector");
     select.style.display = "block";
@@ -196,6 +175,7 @@ function removeOptions(selectbox) {
     }
 }
 
+//capitalize the fist letter
 var capitalize = (s) => {
     if (typeof s !== 'string') return ''
     return s.charAt(0).toUpperCase() + s.slice(1)
@@ -203,14 +183,15 @@ var capitalize = (s) => {
 
 var monster;
 
+//displaySelection() 
 function displaySelection(selector) {
-    var selectedText = selector.options[selector.selectedIndex].innerHTML;
+    //var selectedText = selector.options[selector.selectedIndex].innerHTML;
     var selectedValue = selector.value;
     monster = dataList[selectedValue];
 
     function createMonsterLayout() {
 
-        //clear card first and then dynamically create the elements needed.
+        //clear card first and then create the elements needed.
         $(".card").empty();
 
         var newSpan = $('<span/>', {
@@ -265,14 +246,8 @@ function displaySelection(selector) {
         //if the monster has extra actions, create a collapsible.
         if (monster.actions) {
             console.log(monster.actions);
-            /*var actionsDiv = $('<div/>', {
-                'class': 'actions',
-                id: 'action-div'
-            }); */
-
-            //and create an accordion
-
-            var actionAccordion = $('<button/>', {
+            
+            var actionCollapse = $('<button/>', {
                 'class': 'collapsible',
                 id: 'action-collapse'
             });
@@ -282,18 +257,18 @@ function displaySelection(selector) {
                 id: 'action-content'
             });
 
-            //append accordion to card
-            $('.card').append(actionAccordion);
+            //append elements to .card for the collapsible
+            $('.card').append(actionCollapse);
 
             $('.card').append(panel1);
 
-            //create accordion
+            //create collapsible
             var coll = document.getElementsByClassName('collapsible');
             var i;
-            console.log(coll);
 
+            //style the collapse button and content so they look like a single element when expanded
             $('.card').on('click','button',function(){
-                console.log(this.style.borderBottomLeftRadius);
+
                 if (this.style.borderBottomLeftRadius != '0px') {
                     this.style.borderBottomRightRadius = '0px';
                     this.style.borderBottomLeftRadius = '0px';
@@ -303,6 +278,7 @@ function displaySelection(selector) {
                 }
             });
 
+            //expand and contract collapsible
             for (i = 0; i < coll.length; i++) {
                 coll[i].addEventListener("click", function () {
                     
@@ -317,10 +293,7 @@ function displaySelection(selector) {
 
             }
 
-            //append our new action-div to .card
-            //$('.card').append(actionsDiv);
-
-            //begin appending data for monster actions
+            //append data for monster actions
             $('.collapsible').append(`<span><h5>Actions: </h5></span>`);
 
             //create a new array
@@ -356,6 +329,7 @@ function displaySelection(selector) {
             }
         }
 
+        //special abilites can sometimes contain extended text, so these are also a candidate for hiding behind a collapsible element.
         //if the monster has special abilities, create a div
         if (monster.special_abilities) {
             var abilitiesDiv = $('<div/>', {
@@ -555,6 +529,7 @@ function displaySelection(selector) {
 
     }
 
+    //determine whether the user has chosen to search for monsters or spells and execute the appropriate function.
     var draw = function () {
         if (searchType == "spells") {
             createSpellLayout();
