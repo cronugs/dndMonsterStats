@@ -15,7 +15,6 @@ function getData(url, cb) {
 
     xhr.open("GET", url);
     xhr.send();
-
 }
 
 // A quick snippet of text so pressing enter triggers the search box
@@ -59,7 +58,6 @@ function searchMonsterData() {
         // Directly return the joined string
         return splitStr.join(' ');
     }
-
 
     var searchTerm = titleCase(search);
     var monsterData;
@@ -107,9 +105,7 @@ function searchMonsterData() {
                     URL_list.push(mons[i].url);
                 }
                 return URL_list;
-            }
-
-            //console.log(listOfURLS(resultArr));
+            }          
 
             displayMonster(listOfURLS(resultArr));
         })
@@ -139,7 +135,6 @@ function displayMonster(monsterURLList) {
             }
             //update the global dataList variable so our array is available to other functions
             dataList = newArray;
-
         })
     }
 }
@@ -241,8 +236,6 @@ function displaySelection(selector) {
         $('.card').append(statDiv3);
         $('.card').append(statDiv4);
 
-
-
         //if the monster has extra actions, create a collapsible.
         if (monster.actions) {
             console.log(monster.actions);
@@ -290,7 +283,6 @@ function displaySelection(selector) {
                         content.style.display = "block";
                     }
                 });
-
             }
 
             //append data for monster actions
@@ -301,8 +293,7 @@ function displaySelection(selector) {
             //fill the actionsArr with the actions available to the monster
             for (let i = 0; i <= monster.actions.length - 1; i++) {
                 actionsArr.push(monster.actions[i]);
-            }
-            //console.log(actionsArr);
+            }            
 
             //for each action in actionsArr
             for (let j = 0; j <= actionsArr.length - 1; j++) {
@@ -349,8 +340,7 @@ function displaySelection(selector) {
             //push the monsters abilities to abilitiesArr
             for (let i = 0; i <= monster.special_abilities.length - 1; i++) {
                 abilitiesArr.push(monster.special_abilities[i]);
-            }
-            //console.log(abilitiesArr);           
+            }     
 
             //for each ability in abilitiesArr
             for (let j = 0; j <= abilitiesArr.length - 1; j++) {
@@ -391,8 +381,6 @@ function displaySelection(selector) {
             $("#more-stats1").append(`<b>Languages:</b> ${capitalize(monster.languages)}<br />`);
             $("#more-stats1").append(`<b>Senses: </b>${capitalize(monster.senses)}<br />`);
 
-
-
             if (monster.condition_immunities != "") {
                 $("#more-stats2").append(`<b>Condition Immunities:</b> ${capitalize(monster.condition_immunities)} <br />`);
             }
@@ -431,7 +419,6 @@ function displaySelection(selector) {
 
         printMonsterCard();
         statSpiderGraph();
-
     }
 
     function createSpellLayout() {
@@ -449,10 +436,6 @@ function displaySelection(selector) {
         };
 
         console.log(descriptionList.join(" "));
-
-
-        //console.log(usedByClassesList);
-
 
         //clear card first and then dynamically create the elements needed.
         $(".card").empty();
@@ -493,16 +476,9 @@ function displaySelection(selector) {
         $('#stat-background').append(featureBlock1);
         $('#stat-background').append(featureBlock2);
         $('.card').append(statDiv3);
-        $('.card').append(statDiv4);
-
-
-        //var selectedText = selector.options[selector.selectedIndex].innerHTML;
-        //var selectedValue = selector.value;
+        $('.card').append(statDiv4);    
 
         function printCard() {
-
-            //
-
 
             $("#spell-name").append(`<h2>${monster.name}</h2>`);
             $("#feature-block1").append(`<b>Level:</b> ${monster.level}<br />`);
@@ -520,13 +496,10 @@ function displaySelection(selector) {
             $("#feature-block2").append(`<b>Ritual:</b> ${monster.ritual}<br />`);
 
             $("#class-can-use").append(`<b>Classes:</b> ${usedByClasses.join(", ")}<br />`);
-
             $("#spell-description").append(`<b>Description:</b> <p>${descriptionList.join(" ")}</p><br />`);
-
         }
 
         printCard();
-
     }
 
     //determine whether the user has chosen to search for monsters or spells and execute the appropriate function.
@@ -537,7 +510,4 @@ function displaySelection(selector) {
             createMonsterLayout();
         }
     }();
-
-
-
 }
