@@ -27,7 +27,7 @@ function statSpiderGraph() {
              'Intelligence ' + int, 'Wisdom ' + wis, 'Charisma ' + cha],
             //labelsAxes: 'e',
             labelsAxesColor: 'black',
-            textSize: 10,
+            textSize: 12,
             textColor: 'white',
             //clearto: 'white',
             labelsAxesBoxed: false,
