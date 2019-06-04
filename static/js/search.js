@@ -241,7 +241,7 @@ function displaySelection(selector) {
             console.log(monster.actions);
             
             var actionCollapse = $('<button/>', {
-                'class': 'collapsible',
+                'class': 'collapsible inactive',
                 id: 'action-collapse'
             });
 
@@ -259,23 +259,27 @@ function displaySelection(selector) {
             var coll = document.getElementsByClassName('collapsible');
             var i;
 
-            //style the collapse button and content so they look like a single element when expanded
-            $('.card').on('click','button',function(){
 
-                if (this.style.borderBottomLeftRadius != '0px') {
-                    this.style.borderBottomRightRadius = '0px';
-                    this.style.borderBottomLeftRadius = '0px';
+
+            //style the collapse button and content so they look like a single element when expanded
+            /*$('.card').on('click','button',function(){
+
+                if (actionCollapse.style.borderBottomLeftRadius != '0px') {
+                    actionCollapse.style.borderBottomRightRadius = '0px';
+                    actionCollapse.style.borderBottomLeftRadius = '0px';
                 } else {
-                    this.style.borderBottomRightRadius = '15px';
-                    this.style.borderBottomLeftRadius = '15px';
+                    actionCollapse.style.borderBottomRightRadius = '15px';
+                    actionCollapse.style.borderBottomLeftRadius = '15px';
                 }
-            });
+            });*/
 
             //expand and contract collapsible
             for (i = 0; i < coll.length; i++) {
                 coll[i].addEventListener("click", function () {
                     
                     this.classList.toggle("active");
+                    this.classList.toggle("inactive");
+                    this.classList.toggle("action-extension")
                     var content = this.nextElementSibling;
                     if (content.style.display === "block") {
                         content.style.display = "none";

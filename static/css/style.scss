@@ -11,10 +11,27 @@ $colors: (primary: #cc0000,
     nav: #37393c,
     card: tan,
     button: #a1763d,
+    dark: #272727,
     highlight: #53566b);
 
 $font-colors: (primary: #efefef,
     dark: #272727);
+
+$desktop: 840px;
+
+$mobile: 575px;
+
+@mixin desktop {
+    @media (min-width: #{$desktop}) {
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media (max-width: #{$mobile}) {
+        @content;
+    }
+}
 
 body {
     font-family: map-get($font, Arbutus);
@@ -33,6 +50,14 @@ body {
         height: 100%;
         position: absolute;
         z-index: -1;
+
+        @include desktop {
+            clip-path: polygon(0 0, 75% 0, 55% 100%, 0% 100%);
+        }
+
+        @include mobile {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
     }
 
 }
@@ -40,7 +65,11 @@ body {
 .navbar {
     background-image: none;
     margin-bottom: 0;
-    color: map-get($font-colors, primary);
+    color: map-get($font-colors, nav);
+
+    .navbar-brand {
+        font-size: 2rem;
+    }   
 
     .container-fluid {
         margin-left: 0;
@@ -48,19 +77,13 @@ body {
     }
 }
 
-
 .navbar-brand {
     margin-left: 0px;
 }
 
 .section-heading {
     margin-bottom: 50px;
-
 }
-
-
-
-
 
 #monsterName {
     width: 100%;
@@ -69,6 +92,11 @@ body {
     background-color: map-get($colors, card);
     border: 1px black solid;
     padding-left: 10px;
+
+    @include mobile {
+        width: 90%;
+        margin: 0 5%;
+    }
 }
 
 #category-dropdown {
@@ -78,6 +106,11 @@ body {
     border: 1px black solid;
     height: 35px;
     padding-left: 10px;
+
+    @include mobile {
+        width: 90%;
+        margin: 0 5%;
+    }
 }
 
 #search-button {
@@ -88,12 +121,17 @@ body {
     height: 35px;
     padding: 0;
     font-size: 18px;
-    text-align: center;
-    
+    text-align: center;   
 
     &:hover {
         background-color: map-get($colors, highlight);
 
+    }
+
+    @include mobile {
+        width: 90%;
+        float: none;
+        margin: 0 5%;
     }
 }
 
@@ -110,6 +148,12 @@ body {
         height: 30px;
         font-size: 18px;
         background-color: map-get($colors, card)
+    }
+
+    @include mobile {
+        width: 90%;
+        margin: 0 5%;
+        text-align: center;
     }
 }
 
@@ -135,8 +179,7 @@ body {
     margin: 0;
 }
 
-.card-anchor { 
-    
+.card-anchor {     
 
     .card {
         background-color: map-get($colors, card);
@@ -148,6 +191,12 @@ body {
         text-align: justify;
         border-radius: 15px;
         display: inline-block;
+
+        @include mobile {
+            width: 99%;
+            margin: auto 0;
+            padding: 5px;
+        }
 
         #welcome {
             text-align: center;
@@ -184,14 +233,23 @@ body {
             background-color: map-get($colors, nav);
             border-radius: 15px; 
             text-align: center;
-            height: 350px;            
+            height: 350px;  
+            
+            @include mobile {
+                width: 100%;
+                height: 280px;
+            }
         }
 
         #cvs {
             margin-top: 30px;
-            display: inline-block;                 
-        }
-        
+            display: inline-block;  
+            
+            @include mobile {
+                width: 300px;
+                
+            }
+        }        
 
         #class-can-use {
             display: block;
@@ -224,6 +282,7 @@ body {
         }
 
         #action-collapse {
+            $ac: &;
             background-color: map-get($colors, button);
             color: black;
             cursor: pointer;
@@ -232,42 +291,50 @@ body {
             text-align: left;
             border: none;
             outline: none;
-            border-radius: 15px;
-            //transition: 0.4s;   
+        
+            //transition: 0.4s;  
+            
             
             &:after {
                 content: '\02795'; /* Unicode character for "plus" sign (+) */
                 font-size: 13px;
-                color: white;
+                color: black;
                 float: right;
                 margin-left: 5px;
             }
 
             &:hover {
-                background-color: map-get($colors, dark);
-            }
-
-            &:active {
-                background-color: map-get($colors, card);
-
-                &:after {
-                    content: "\2796"; /* Unicode character for "minus" sign (-) */
+                background-color: map-get($colors, nav);
+                color: map-get($font-colors, primary);
+                
+                &::after {
+                    color: map-get($font-colors, primary);
                 }
             }
 
             span {
                 display: inline-block;
-            }
-
+            } 
             
-        }
-
-        .action-extension {
-            border-bottom-right-radius: 0px;
-            border-bottom-left-radius: 0px;
-            border-top-left-radius: 15px;
-            border-top-right-radius: 15px;
-        }
+            &.inactive {
+                border-radius: 15px;
+            } 
+            
+            &.active {
+                //background-color: map-get($colors, card);
+                
+                border-top-left-radius: 15px;
+                border-top-right-radius: 15px;
+                border-bottom-right-radius: 0;
+                border-bottom-left-radius: 0;                
+            
+                &:after {
+                        content: '\2796'; /* Unicode character for "minus" sign (-) */
+                }                
+                
+            }  
+            
+        }        
 
         .content {
             padding: 0 18px;
@@ -282,18 +349,6 @@ body {
             //transition: max-height 0.2s ease-out;
           }
 
-        /*.actions {
-            background-color: lightgray;
-            height: auto;
-            width: 98%;
-            position: relative;
-            padding: 10px;
-            display: block;
-            border-radius: 15px;
-            margin-bottom: 15px;
-            
-        }*/
-
         .special-abilities {
             background-color: lightgray;
             height: auto;
@@ -306,12 +361,9 @@ body {
             
         }
 
-
-    }
-
-    .card2 {
-        display: none;
     }
 }
+
+
 
 
