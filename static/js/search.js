@@ -241,7 +241,7 @@ function displaySelection(selector) {
             'class': 'graphCanvas',
             id: 'cvs'
         }).prop({
-            width: 400,
+            width: 450,
             height: 280
 
         });

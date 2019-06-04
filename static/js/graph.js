@@ -33,7 +33,8 @@ function statSpiderGraph() {
             labelsAxesBoxed: false,
             labelsAxesBoxedZero: true,
             textAccessible: false,
-            textAccessibleOverflow: 'visable'
+            textAccessibleOverflow: 'visible'
+            
         }
     }).grow();  
     

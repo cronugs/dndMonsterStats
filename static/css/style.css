@@ -171,6 +171,14 @@ body {
     background-color: #37393c;
     color: lightgray;
     border-radius: 15px; }
+    @media (max-width: 575px) {
+      .card-anchor .card #stat-background {
+        padding: 10px;
+        margin-bottom: 10px; } }
+    @media (max-width: 767px) {
+      .card-anchor .card #stat-background {
+        padding: 10px;
+        margin-bottom: 10px; } }
   .card-anchor .card .feature-block {
     padding: 15px;
     display: inline-block;
@@ -189,21 +197,23 @@ body {
       .card-anchor .card #cvs-anchor {
         width: 100%;
         height: 280px;
-        margin-bottom: 10px; } }
+        margin: 0; } }
     @media (max-width: 575px) {
       .card-anchor .card #cvs-anchor {
         width: 100%;
         height: 280px;
-        margin-bottom: 10px; } }
+        margin: 0; } }
   .card-anchor .card #cvs {
     margin-top: 30px;
     display: inline-block; }
     @media (max-width: 767px) {
       .card-anchor .card #cvs {
-        width: 300px; } }
+        margin-top: 35px;
+        width: 100%; } }
     @media (max-width: 575px) {
       .card-anchor .card #cvs {
-        width: 300px; } }
+        margin-top: 35px;
+        width: 100%; } }
   .card-anchor .card #class-can-use {
     display: block;
     width: 100%;
