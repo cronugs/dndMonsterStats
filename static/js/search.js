@@ -7,9 +7,19 @@ function getData(url, cb) {
         //if the ready state is 4 and the status is 200
         if (this.readyState == 4 && this.status == 200) {
             //we call our callback function in the getData call and parse is as JSON data. The data held in this.responseText
-            //(xhr.responseText) is passed back into the the searchMonsterData function.
-            //console.log(xhr.responseText);
+            //(xhr.responseText) is passed back into the the searchMonsterData function.    
             cb(JSON.parse(this.responseText));
+        } else {
+            if (this.status == 404) {
+                $('.card').empty();
+
+                var errorSpan = $('<span/>', {
+                    'class': 'not-found-error'
+                });
+
+                $('.card').append(errorSpan);
+                $('.not-found-error').append(`The spell or monster you are searching for cound not be found`);
+            }
         }
     };
 
@@ -34,9 +44,7 @@ function categorySelect() {
     var category = document.getElementById("category-dropdown").value;
     if (category == "spell") {
         url = 'http://www.dnd5eapi.co/api/spells';
-        searchType = 'spells';
-
-        console.log(searchType);
+        searchType = 'spells';        
     } else {
         url = 'http://www.dnd5eapi.co/api/monsters';
         searchType = 'monsters';
@@ -44,6 +52,27 @@ function categorySelect() {
 }
 
 function searchMonsterData() {
+
+    
+    function loadSpinner() {
+    
+    //create a div for the spinner
+    var loadingHeader = $('<span/>', {
+        'class': 'card-heading'
+    });
+    
+    var loader = $('<div/>', {
+        'class': 'loader',
+    });
+
+    $('.card').empty();
+    $('.card').append(loadingHeader);
+    $('.card-heading').append(`<h3>Loading results</h3>`)
+    $('.card').append(loader);
+    
+    };
+
+    loadSpinner();
 
     var search = document.getElementById("monsterName").value;
 
@@ -70,8 +99,7 @@ function searchMonsterData() {
 
         //monster data is an array of key value objects with the name and url for each monster
         monsterData = data.results;
-        console.log(monsterData);
-
+        
         //here we use our regex to match the search string to names of monsters and return matching elements
         result = monsterData.filter(function (element) {
             if (element.name.match(reg)) {
@@ -83,20 +111,15 @@ function searchMonsterData() {
         if (result.length > 0) {
             //create a new variable for our result array. It contains an array of name url key value pairs for monsters that match
             //our search
-            resultArr = result;
-            //console.log(resultArr);
+            resultArr = result;            
             //this takes the url of the first result and puts it in the monsterURL variable
             // *** This is a problem because we actuall want the url for each returned monster ***
-            monsterURL = resultArr[0].url;
-            //console.log(monsterURL);
+            monsterURL = resultArr[0].url;            
         }
 
         //we call getData again, this time to return the data for an individual monster
         // *** this needs to change to take multiple urls and 
         getData(monsterURL, function () {
-
-            //console.log(monsterArr);
-            console.log(resultArr);
 
             //create an array containing the URLS from resultArr
             function listOfURLS(mons) {
@@ -143,7 +166,13 @@ function displayMonster(monsterURLList) {
 //populateResults() adds the name and index for each monster or spell that matched the search and addes them to the select element
 function populateResults(combinedArray) {
 
-    console.log(combinedArray);
+    var finishedLoading = $('<span/>', {
+        'class': 'card-heading'
+    });
+
+    $('.card').empty();
+    $('.card').append(finishedLoading);
+    $('.card-heading').append(`<h3>Finished loading</h3><p>Choose your spell or monster from the dropdown menu</p>`);
 
     //https://www.electrictoolbox.com/javascript-add-options-html-select/ 
 
@@ -154,7 +183,6 @@ function populateResults(combinedArray) {
 
     //for each object in combinedArray create a new list item object with index.name and index as args
     for (index in combinedArray) {
-        console.log(select.options.length);
         select.options[select.options.length] = new Option(combinedArray[index].name, index);
     }
 }
@@ -237,8 +265,7 @@ function displaySelection(selector) {
         $('.card').append(statDiv4);
 
         //if the monster has extra actions, create a collapsible.
-        if (monster.actions) {
-            console.log(monster.actions);
+        if (monster.actions) {            
             
             var actionCollapse = $('<button/>', {
                 'class': 'collapsible inactive',
@@ -443,8 +470,6 @@ function displaySelection(selector) {
             descriptionList.push(spell.desc[i]);
         };
 
-        console.log(descriptionList.join(" "));
-
         //clear card first and then dynamically create the elements needed.
         $(".card").empty();
 
@@ -493,8 +518,6 @@ function displaySelection(selector) {
             let attrBlock1 = {"Name": spell.name, "Level": spell.level, "Duration": spell.duration, "Components": spell.duration};
             let attrBlock2 = {"School": spell.school.name, "Casting time": spell.casting_time, "Concentration": spell.concentration, "Ritual": spell.ritual};
 
-            console.log(attrBlock1["name"]);
-
             for (let key in attrBlock1) {
                 $("#feature-block1").append(`<b>${key}: </b> ` + attrBlock1[key] + '<br />');
             } 
@@ -506,17 +529,6 @@ function displaySelection(selector) {
             for (let key in attrBlock2) {
                 $("#feature-block2").append(`<b>${key}:</b> ` + attrBlock2[key] + '<br />');
             } 
-
-            
-            /*$("#feature-block1").append(`<b>Level:</b> ${spell.level}<br />`);
-            $("#feature-block1").append(`<b>Range:</b> ${spell.range}<br />`);
-            $("#feature-block1").append(`<b>Duration:</b> ${spell.duration}<br />`);
-            $("#feature-block1").append(`<b>Components:</b> ${spell.components}<br />`); */            
-
-            /*$("#feature-block2").append(`<b>School:</b> ${spell.school.name}<br />`);
-            $("#feature-block2").append(`<b>Casting time:</b> ${spell.casting_time}<br />`);
-            $("#feature-block2").append(`<b>Concentration:</b> ${spell.concentration} <br />`);
-            $("#feature-block2").append(`<b>Ritual:</b> ${spell.ritual}<br />`);*/
 
             $("#class-can-use").append(`<b>Classes:</b> ${usedByClasses.join(", ")}<br />`);
             $("#spell-description").append(`<b>Description:</b> <p>${descriptionList.join(" ")}</p><br />`); 
