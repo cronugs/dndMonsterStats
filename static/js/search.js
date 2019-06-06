@@ -172,7 +172,7 @@ function populateResults(combinedArray) {
 
     $('.card').empty();
     $('.card').append(finishedLoading);
-    $('.card-heading').append(`<h3>Finished loading</h3><p>Choose your spell or monster from the dropdown menu</p>`);
+    $('.card-heading').append(`<h3>Success!</h3><p>Choose your spell or monster from the dropdown menu</p>`);
 
     //https://www.electrictoolbox.com/javascript-add-options-html-select/ 
 
