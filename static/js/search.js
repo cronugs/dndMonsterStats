@@ -389,42 +389,31 @@ function displaySelection(selector) {
             $("#feature-block3").append(`<b>Languages:</b> ${capitalize(monster.languages)}<br />`);
             $("#feature-block3").append(`<b>Senses: </b>${capitalize(monster.senses)}<br />`);
 
-            //these can be looped
-            if (monster.condition_immunities != "") {
-                $("#feature-block4").append(`<b>Condition Immunities:</b> ${capitalize(monster.condition_immunities)} <br />`);
+            let ftrResImm = {
+            "Condition immunities": monster.condition_immunities,
+            "Damage immunities": monster.damage_immunities,
+            "Damage resistances": monster.damage_resistances,
+            "Damage vulnerabilities": monster.damage_vulnerabilities};
+            
+            let saves = {"charisma_save": monster.charisma_save,
+            "wisdom_save": monster.wisdom_save,
+            "constitution_save": monster.constitution_save,
+            "dexterity_save": monster.dexterity_save,
+            "strength_save": monster.strength_save,
+            "intelligence_save": monster.intelligence_save};        
+
+            for (let key in ftrResImm) {
+                if (ftrResImm[key] != "") {
+                    $("#feature-block4").append(`<b>${key}: </b> ` + capitalize(ftrResImm[key]) + '<br />');
+                }
             }
 
-            if (monster.damage_immunities != "") {
-                $("#feature-block4").append(`<b>Damage Immunities:</b> ${capitalize(monster.damage_immunities)} <br />`);
-            }
-
-            if (monster.damage_resistances != "") {
-                $("#feature-block4").append(`<b>Damage Resistances:</b> ${capitalize(monster.damage_resistances)} <br />`);
-            }
-
-            if (monster.damage_vulnerabilities != "") {
-                $("#feature-block4").append(`<b>Damage Vulnerabilities:</b> ${capitalize(monster.damage_vulnerabilities)} <br />`);
-            }
-
-            //these can be looped
-            if ('charisma_save' in monster) {
-                $("#feature-block4").append(`<b>Charisma Save:</b> +${monster.charisma_save}<br />`);
-            }
-            if ('wisdom_save' in monster) {
-                $("#feature-block4").append(`<b>Wisdom Save:</b> +${monster.wisdom_save}<br />`);
-            }
-            if ('constitution_save' in monster) {
-                $("#feature-block4").append(`<b>Constitution Save:</b> +${monster.constitution_save}<br />`);
-            }
-            if ('dexterity_save' in monster) {
-                $("#feature-block4").append(`<b>Dexterity Save:</b> +${monster.dexterity_save}<br />`);
-            }
-            if ('strength_save' in monster) {
-                $("#feature-block4").append(`<b>Strength Save:</b> +${monster.strength_save}<br />`);
-            }
-            if ('intelligence_save' in monster) {
-                $("#feature-block4").append(`<b>Intelligence Save:</b> +${monster.intelligence_save}<br />`);
-            }
+            for (let key in saves) {
+                keyString = capitalize(key.split("_").join(" "));
+                if (key in monster) {
+                    $("#feature-block4").append(`<b>${keyString}:</b> ` + saves[key] + '<br />');
+                }
+            }            
         }
 
         printMonsterCard();
