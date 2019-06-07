@@ -486,7 +486,7 @@ function displaySelection(selector) {
                 "Name": spell.name,
                 "Level": spell.level,
                 "Duration": spell.duration,
-                "Components": spell.duration
+                "Components": spell.components
             };
             let attrBlock2 = {
                 "School": spell.school.name,
