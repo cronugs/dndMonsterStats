@@ -222,15 +222,13 @@ function displaySelection(selector) {
             id: 'monster-name'
         });
 
-        var featureBlock1 = $('<div/>', {
-            'class': 'feature-block col-xs-6 col-sm-6 col-md-6 col-lg-6',
-            id: 'feature-block1'
-        });
-
-        var featureBlock2 = $('<div/>', {
-            'class': 'feature-block col-xs-6 col-sm-6 col-md-6 col-lg-6',
-            id: 'feature-block2'
-        });
+        //replaced four individual code blocks with this for loop
+        for (let i = 0; i <= 4; i++) {
+            window["featureBlock"+i] = $('<div/>', {
+                'class': 'feature-block col-xs-6 col-sm-6 col-md-6 col-lg-6',
+                id: `feature-block${i}`
+            });
+        }
 
         var cvsAnchor = $('<div/>', {
             'class': 'cvs-anchor col-xs-12 col-sm-12 col-md-12 col-lg-12',
@@ -244,25 +242,15 @@ function displaySelection(selector) {
             width: 450,
             height: 280
 
-        });
-
-        var statDiv3 = $('<div/>', {
-            'class': 'feature-block col-xs-6 col-sm-6 col-md-6 col-lg-6',
-            id: 'more-stats1'
-        });
-
-        var statDiv4 = $('<div/>', {
-            'class': 'feature-block col-xs-6 col-sm-6 col-md-6 col-lg-6',
-            id: 'more-stats2'
-        });
+        });        
 
         $('.card').append(newSpan);
         $('.card').append(featureBlock1);
         $('.card').append(featureBlock2);
         $('.card').append(cvsAnchor);
         $('#cvs-anchor').append(newCanvas);
-        $('.card').append(statDiv3);
-        $('.card').append(statDiv4);
+        $('.card').append(featureBlock3);
+        $('.card').append(featureBlock4);
 
         //if the monster has extra actions, create a collapsible.
         if (monster.actions) {
@@ -285,20 +273,6 @@ function displaySelection(selector) {
             //create collapsible
             var coll = document.getElementsByClassName('collapsible');
             var i;
-
-
-
-            //style the collapse button and content so they look like a single element when expanded
-            /*$('.card').on('click','button',function(){
-
-                if (actionCollapse.style.borderBottomLeftRadius != '0px') {
-                    actionCollapse.style.borderBottomRightRadius = '0px';
-                    actionCollapse.style.borderBottomLeftRadius = '0px';
-                } else {
-                    actionCollapse.style.borderBottomRightRadius = '15px';
-                    actionCollapse.style.borderBottomLeftRadius = '15px';
-                }
-            });*/
 
             //expand and contract collapsible
             for (i = 0; i < coll.length; i++) {
@@ -393,8 +367,10 @@ function displaySelection(selector) {
 
             //add more general monster stats and info to the card.           
             $("#monster-name").append(`<h2>${monster.name}</h2>`);
+            
             $("#feature-block1").append(`<b>Alignment:</b> ${capitalize(monster.alignment)}<br />`);
             $("#feature-block1").append(`<span id="type-span"><b>Type:</b> ${capitalize(monster.type)} </span><br />`);
+            
             if (monster.subtype != "") {
                 $("#type-span").append(`(<b>Subtype: </b>${capitalize(monster.subtype)})`);
             }
@@ -410,42 +386,44 @@ function displaySelection(selector) {
                 $("#feature-block2").append(`<b>Stealth:</b> ${monster.stealth}<br />`);
             }
 
-            $("#more-stats1").append(`<b>Languages:</b> ${capitalize(monster.languages)}<br />`);
-            $("#more-stats1").append(`<b>Senses: </b>${capitalize(monster.senses)}<br />`);
+            $("#feature-block3").append(`<b>Languages:</b> ${capitalize(monster.languages)}<br />`);
+            $("#feature-block3").append(`<b>Senses: </b>${capitalize(monster.senses)}<br />`);
 
+            //these can be looped
             if (monster.condition_immunities != "") {
-                $("#more-stats2").append(`<b>Condition Immunities:</b> ${capitalize(monster.condition_immunities)} <br />`);
+                $("#feature-block4").append(`<b>Condition Immunities:</b> ${capitalize(monster.condition_immunities)} <br />`);
             }
 
             if (monster.damage_immunities != "") {
-                $("#more-stats2").append(`<b>Damage Immunities:</b> ${capitalize(monster.damage_immunities)} <br />`);
+                $("#feature-block4").append(`<b>Damage Immunities:</b> ${capitalize(monster.damage_immunities)} <br />`);
             }
 
             if (monster.damage_resistances != "") {
-                $("#more-stats2").append(`<b>Damage Resistances:</b> ${capitalize(monster.damage_resistances)} <br />`);
+                $("#feature-block4").append(`<b>Damage Resistances:</b> ${capitalize(monster.damage_resistances)} <br />`);
             }
 
             if (monster.damage_vulnerabilities != "") {
-                $("#more-stats2").append(`<b>Damage Vulnerabilities:</b> ${capitalize(monster.damage_vulnerabilities)} <br />`);
+                $("#feature-block4").append(`<b>Damage Vulnerabilities:</b> ${capitalize(monster.damage_vulnerabilities)} <br />`);
             }
 
+            //these can be looped
             if ('charisma_save' in monster) {
-                $("#more-stats2").append(`<b>Charisma Save:</b> +${monster.charisma_save}<br />`);
+                $("#feature-block4").append(`<b>Charisma Save:</b> +${monster.charisma_save}<br />`);
             }
             if ('wisdom_save' in monster) {
-                $("#more-stats2").append(`<b>Wisdom Save:</b> +${monster.wisdom_save}<br />`);
+                $("#feature-block4").append(`<b>Wisdom Save:</b> +${monster.wisdom_save}<br />`);
             }
             if ('constitution_save' in monster) {
-                $("#more-stats2").append(`<b>Constitution Save:</b> +${monster.constitution_save}<br />`);
+                $("#feature-block4").append(`<b>Constitution Save:</b> +${monster.constitution_save}<br />`);
             }
             if ('dexterity_save' in monster) {
-                $("#more-stats2").append(`<b>Dexterity Save:</b> +${monster.dexterity_save}<br />`);
+                $("#feature-block4").append(`<b>Dexterity Save:</b> +${monster.dexterity_save}<br />`);
             }
             if ('strength_save' in monster) {
-                $("#more-stats2").append(`<b>Strength Save:</b> +${monster.strength_save}<br />`);
+                $("#feature-block4").append(`<b>Strength Save:</b> +${monster.strength_save}<br />`);
             }
             if ('intelligence_save' in monster) {
-                $("#more-stats2").append(`<b>Intelligence Save:</b> +${monster.intelligence_save}<br />`);
+                $("#feature-block4").append(`<b>Intelligence Save:</b> +${monster.intelligence_save}<br />`);
             }
         }
 
