@@ -386,7 +386,11 @@ function displaySelection(selector) {
                 $("#feature-block2").append(`<b>Stealth:</b> ${monster.stealth}<br />`);
             }
 
-            $("#feature-block3").append(`<b>Languages:</b> ${capitalize(monster.languages)}<br />`);
+            if (monster.languages && monster.languages != "") {
+                $("#feature-block3").append(`<b>Languages:</b> ${capitalize(monster.languages)}<br />`);
+            }
+
+            //$("#feature-block3").append(`<b>Languages:</b> ${capitalize(monster.languages)}<br />`);
             $("#feature-block3").append(`<b>Senses: </b>${capitalize(monster.senses)}<br />`);
 
             let ftrResImm = {
