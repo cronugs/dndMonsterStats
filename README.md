@@ -15,14 +15,9 @@ The application will be used by dungeon masters when planning their sessions, to
 
 - Scenario 2 - The crew are fighting the bad guy at the end of a story arc, the battle is difficult and one of the player pulls out a new spell they had just gotten last session. This is the first time this spell has been cast and the DM is not familiar with how it works, they ask if there is an attack roll or a save. Instead of going to the players hand book, the player goes to Quick Cards and types 'fin' and changes the selector from monsters to spells and clicks search. Six results are returned, one of which is Finger of Death. The player then reads the spell to the DM. There is no spell attack roll listed and the spell description specifies that there is indeed a constitution save that the target of the spell can make, for a chance to reduce the damage. The game can continue with the players making their rolls.
 
-[Monster Quick Cards](http://quickcards.ddns.net)
-
-Since the API used in this project is being hosted on an insecure server, I have out of necessity, decided to host the project on my own web server.
-
-The server is a digital ocean droplet that I configured with a debian install along with a simple apache2 server that I had previoulsy used for my business site. Using apache virtual hosts and a free domain name from no-ip.com pointed to the server IP address, I can not only host my business site, but also host this project. 
-
-
 ## Features
+
+### Existing Features
 
 - Feature 1 - Allows users to search the dnd5e api for either monsters or spells. Since the API capitalises each word in the monster and spell names, capitalisation of the search term, so that it matches the API, is handled in the background so the user doesn't have to worry.
 
@@ -50,6 +45,16 @@ For instance, a Giant Wasp can't speak or understand language, so there is no en
 
 - Feature 12 - A simple, intuitive interface with no distractions. 
 
+### Features Left to Implement
 
+## Technologies used
+
+## Testing
+
+## Deployment
+
+Since the API used in this project is being hosted on an insecure server, I have out of necessity, decided to host the project on my own web server.
+
+The server is a digital ocean droplet that I configured with a debian install along with a simple apache2 server that I had previoulsy used for my business site. Using apache virtual hosts and a free domain name from no-ip.com pointed to the server IP address, I can not only host my business site, but also host this project. 
 
 
