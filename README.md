@@ -39,15 +39,31 @@ The application will be used by dungeon masters when planning their sessions, to
 
 - Feature 10 - There is a neat spider graph that helps to visualise a monsters ability scores. It is nicely animated as it changes shapes from one enrty to the next to reflect the changing scores.
 
-- Feature 11 - Only relevant statistics for each monster are shown. There are many attributes that have a value of 0 or null or contain empty strings, because a monster might not have those attributes. This results in the application displaying an empty entry for abililties that monster does not posess. These have been removed.
-
-For instance, a Giant Wasp can't speak or understand language, so there is no entry for languages. Neither has is any special resitances, saves or abilities. So none are displayed.
+- Feature 11 - Only relevant statistics for each monster are shown. There are many attributes that have a value of 0 or null or contain empty strings, because a monster might not have those attributes. This results in the application displaying an empty entry for abililties that monster does not posess. These have been removed. For instance, a Giant Wasp can't speak or understand language, so there is no entry for languages. Neither has is any special resitances, saves or abilities. So none are displayed.
 
 - Feature 12 - A simple, intuitive interface with no distractions. 
 
 ### Features Left to Implement
 
+There are many useful features planned for future releases. Unfortunatley, with a limited time budget, I had to omit many features to be better able to focus on delivering core functionality and a polished experience. Some of the planned features include;
+
+- Search filters to easily filter monster results by monster type, challenge rating, size etc. 
+
+- Search filters for spells to filter by magical school, level or by class.
+
+- Built in character generator that can be used to quickly create characters that fit certain specifications like being a certain level, class and race to be able to quickly create NPCs for when your players go way off track and end up in unknown territory. This can also be used to quickly roll a new character if a party member dies and you want to quickly get them back into the games as a new character.
+
+
+
 ## Technologies used
+
+This application relies heavily on Javascript and JQuery. Since all of the actual content in the application is provided in JSON format by the dnd5e API, there was extensive work to do in JS to get the JSON data from the server and manipulate it into useful data structures to make it accessible. 
+
+Once the data has been distilled down to the single spell or monster that the user wants to view, we use JQuery calls to create our card layout and append our elements to the DOM in the correct place and the correct order.
+
+I used bootstrap for basic resposive design, but the real heavy work is done in SCSS. There are several points that advanced SCSS techniques are used, beyond nesting and using maps. I make quite extensive use of mixins for all of the media queries and responsive design and even used some of the more advaced SCSS math functions to position the loading animation. Ialso used CSS clip paths to create a two toned background effect that changes as the screen size scales.
+
+The spider graph used to visualise a monsters ability scores was created using RGraph.js. I had initially intended to use D3.js for this part of the project, but found that documentation lacking where d3.js came to spider/radar graphs. After some searching I came across RGraph.js which made the spider graph fairly easy to impiment.
 
 ## Testing
 
