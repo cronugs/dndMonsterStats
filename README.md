@@ -125,17 +125,32 @@ user@somecoolhostname:~$ sudo apt-get install ruby-sass
 
 on Arch 
 
-1. Make a local copy of the repository by cloning it with git
+```
+user@somecoolhostname:~$ sudo pacman -S ruby-sass
+```
+If you are on Mac check out [compass.app](http://compass.kkbox.com/)
+
+Now that you are up and running with SASS/SCSS we can clone the repo and get to work
+1. change to the directory where you keep your projects
+
+```
+user@somecoolhostname:~$ cd ~/code/
+```
+
+2. Make a local copy of the repository by cloning it with git
 
 ```
 user@somecoolhostname:~$ git clone https://github.com/cronugs/dndMonsterStats
 ```
 
+3. Set SASS to watch the file static/css/style.scss this way updates to style.scss will be written to style.css every time it is saved
 
+```
+user@somecoolhostname:~$ sass --watch style.scss:style.css
 
+```
 
-
-
+4. Open your editor and point it to the project directory. I recommend a live preview so that the page is reloaded in the browser every time you save. VS code has a plugin available to do this called Live Server, which I highly recommend.
 
 ## Bugs
 
