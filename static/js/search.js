@@ -41,7 +41,8 @@ url = 'http://www.dnd5eapi.co/api/monsters';
 
 //set the searchType variable and set the url to point to monsters or spells with the select box
 function categorySelect() {
-    var category = document.getElementById("category-dropdown").value;
+    var select = document.getElementById("selector");
+    var category = document.getElementById("category-dropdown").value;    
     if (category == "spell") {
         url = 'http://www.dnd5eapi.co/api/spells';
         searchType = 'spells';
@@ -49,6 +50,7 @@ function categorySelect() {
         url = 'http://www.dnd5eapi.co/api/monsters';
         searchType = 'monsters';
     }
+    removeOptions(select);
 }
 
 function searchMonsterData() {
@@ -189,7 +191,7 @@ function populateResults(combinedArray) {
 
 var dataList = [];
 
-//here we have function to interate through out dropdown HTML element and remove the contents. (See README.md for reference)
+//here we have function to interate through the dropdown HTML element and remove the contents. (See README.md for reference)
 function removeOptions(selectbox) {
 
     var i;
@@ -454,15 +456,14 @@ function displaySelection(selector) {
             id: 'spell-name'
         });
 
-        var featureBlock1 = $('<div/>', {
-            'class': 'feature-block col-xs-6 col-sm-6 col-md-6 col-lg-6',
-            id: 'feature-block1'
-        });
-
-        var featureBlock2 = $('<div/>', {
-            'class': 'feature-block col-xs-6 col-sm-6 col-md-6 col-lg-6',
-            id: 'feature-block2'
-        });
+        //replaced two individual code blocks with this for loop
+        //create two divs
+        for (let i = 0; i <= 2; i++) {
+            window["featureBlock"+i] = $('<div/>', {
+                'class': 'feature-block col-xs-6 col-sm-6 col-md-6 col-lg-6',
+                id: `feature-block${i}`
+            });
+        }
 
         var statDiv3 = $('<div/>', {
             'class': 'feature-block',

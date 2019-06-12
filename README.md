@@ -62,7 +62,7 @@ There are many useful features planned for future releases. Unfortunately, with 
 
 - Search filters for spells to filter by magical school, level or by class.
 
-- Built in character generator that can be used to quickly create characters that fit certain specifications like being a certain level, class and race to be able to quickly create NPCs for when your players go way off track and end up in unknown territory. This can also be used to quickly roll a new character if a party member dies and you want to quickly get them back into the game as a new character.
+- Built in character generator that can be used to quickly create characters that fit certain specifications like being a certain level, class and race. This would allow users to quickly create NPCs for when your players go way off track and end up in unknown territory. This can also be used to quickly roll a new character if a party member dies and you want to quickly get them back into the game as a new character.
 
 ## Technologies used
 
@@ -92,7 +92,7 @@ I have performed extensive testing to ensure the application operates as expecte
 - Click on Actions again -> the collapsable closes as expected.
 - The bottom left and right border radius on the Action collapsible toggle when it is opened and closed as expected.
 
-The application has been tested this way across all the platforms and screen sizes I have immidiate access to, including; 
+The layout has been tested for responsive design across all the platforms and screen sizes I have immidiate access to, including; 
 
 - Mobile Chrome on Android and iOS
 - Mobile Safari on iOS
