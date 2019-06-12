@@ -26,9 +26,6 @@ Even though the finished project is somewhat different in design to the initial 
 
 ![Quick Cards Desktop Screenshot](http://quickcards.ddns.net/wireframes/QCCapture.PNG)
 
-![Quick Cards Mobile Screenshot](http://quickcards.ddns.net/wireframes/QCmobileScreen.jpg)
-
-
 ## Features
 
 ### Existing Features
