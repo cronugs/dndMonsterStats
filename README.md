@@ -18,9 +18,9 @@ The application will be used by dungeon masters when planning their sessions, to
 
 Even though the finished project is somewhat different in design to the initial wireframe and mockup, the basic elements are still intact and the evolution from wireframe to finised product should be evident.
 
-![Quick Cards Wireframe](https://imgur.com/tU1srhf)
+![Quick Cards Wireframe](http://quickcards.ddns.net/wireframes/QCwireframe.png)
 
-![Quick Cards Mockup](https://imgur.com/60HzgSL)
+![Quick Cards Mockup](http://quickcards.ddns.net/wireframes/QCmockup.png)
 
 ## Features
 
