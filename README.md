@@ -103,32 +103,30 @@ I also had the application tested by two Dungeon Masters and three players. Bugs
 
 ## Deployment
 
-Since the API used in this project is being hosted on an insecure server I can not host a live version from GitHub Pages. To be able to provide a link to my working application, I have out of necessity, decided to host the project on my own web server. I have many years of experience with Linux, Apache and other server administration, so it was a fairly simple task.
+Since the API used in this project is being hosted on an insecure server, a live version cannot be hosted from GitHub Pages. The live project is therefore hosted on another webserver that has been set up for the task.
 
-The server is a digital ocean droplet that I configured with a debian install along with a simple Apache2 server. I had previously been using the server to host my business website for my old acupuncture clinic. Using Apache virtual hosts and a free domain name from no-ip.com, I was able to quickly deploy a virtual host for this project. At the end of each day of coding, after I push my commits to GitHub, I connect to my server via ssh and do a git pull from the root directory of the virtual host. This pulls all my latest changes down from GitHub to my webserver and the latest version of my site is then live and available to be used at quickcards.ddns.net.
+The server is a digital ocean droplet that has been configured with debian and the Apache2 web server. The site is updated once (somtimes more) a day from the repository via ssh.
 
-In the future I will buy a domain name to point to the IP address of the server rather than using the temporary free domain name provided by no-ip.com
-
-If you are interested in deploying this project you can do so by following these steps;
+If you are interested in contributing to this project you can do so by following these steps;
 
 This project uses SASS/SCSS so you will need to make sure that is installed. 
 
-If you run windows you can follow instructions to install SASS [here](https://www.impressivewebs.com/sass-on-windows/). Alternatively, you can install Windows Subsystem for Linux (WSL) and follow the rest of the instructions for Linux. Insstructions to install WSL can be found [here](https://itsfoss.com/install-bash-on-windows/)
+If you run windows you can follow instructions to install SASS [here](https://www.impressivewebs.com/sass-on-windows/). Alternatively, you can install Windows Subsystem for Linux (WSL) and follow the rest of the instructions for Linux. Instructions to install WSL can be found [here](https://itsfoss.com/install-bash-on-windows/)
 
-If you run Linux you can use your package manager to search and install SASS and it's dependancies. 
+If you are on Mac check out [compass.app](http://compass.kkbox.com/)
 
-on Debian or Ubuntu
+If you run Linux you can use your package manager to search and install SASS and it's dependancies.
+
+on Debian or Ubuntu:
 
 ```
 user@somecoolhostname:~$ sudo apt-get install ruby-sass
 ````
-
-on Arch 
+on Arch:
 
 ```
 user@somecoolhostname:~$ sudo pacman -S ruby-sass
 ```
-If you are on Mac check out [compass.app](http://compass.kkbox.com/)
 
 Now that you are up and running with SASS/SCSS we can clone the repo and get to work
 1. change to the directory where you keep your projects
