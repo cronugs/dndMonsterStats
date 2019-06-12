@@ -27,7 +27,7 @@ function getData(url, cb) {
     xhr.send();
 }
 
-// A quick snippet of text so pressing enter triggers the search box
+// A quick snippet of text so pressing enter triggers the search box (see README.md for reference)
 $(document).ready(function () {
     $('#monsterName').keypress(function (e) {
         if (e.keyCode == 13)
@@ -76,7 +76,7 @@ function searchMonsterData() {
 
     var search = document.getElementById("monsterName").value;
 
-    //Capitalise each word in the seach term, so that it matches the data
+    //Capitalise each word in the seach term, so that it matches the data (see README.md for reference)
     function titleCase(str) {
         var splitStr = str.toLowerCase().split(' ');
         for (var i = 0; i < splitStr.length; i++) {
@@ -189,7 +189,7 @@ function populateResults(combinedArray) {
 
 var dataList = [];
 
-//here we have function to interate through out dropdown HTML element and remove the contents.
+//here we have function to interate through out dropdown HTML element and remove the contents. (See README.md for reference)
 function removeOptions(selectbox) {
 
     var i;
@@ -198,7 +198,7 @@ function removeOptions(selectbox) {
     }
 }
 
-//capitalize the fist letter
+//capitalize the fist letter (see README.md for reference)
 var capitalize = (s) => {
     if (typeof s !== 'string') return ''
     return s.charAt(0).toUpperCase() + s.slice(1)
