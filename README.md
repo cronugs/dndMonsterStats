@@ -14,6 +14,14 @@ The application will be used by dungeon masters when planning their sessions, to
 
 - Scenario 2 - The crew are fighting the bad guy at the end of a story arc, the battle is difficult and one of the players pulls out a new spell they had just gotten last session. This is the first time this spell has been cast and the DM is not familiar with how it works, they ask if there is an attack roll or a save. Instead of going to the players hand book, the player goes to Quick Cards and types 'fin' and changes the selector from monsters to spells and clicks search. Six results are returned, one of which is Finger of Death. The player then reads the spell to the DM. There is no spell attack roll listed and the spell description specifies that there is indeed a constitution save that the target of the spell can make, for a chance to reduce the damage. The game can continue with the players making their rolls.
 
+### Wireframe and Mockup
+
+Even though the finished project is somewhat different in design to the initial wireframe and mockup, the basic elements are still intact and the evolution from wireframe to finised product should be evident.
+
+![Quick Cards Wireframe](https://imgur.com/tU1srhf)
+
+![Quick Cards Mockup](https://imgur.com/60HzgSL)
+
 ## Features
 
 ### Existing Features
