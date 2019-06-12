@@ -10,15 +10,6 @@
   <link rel="stylesheet" href="static/css/bootstrap.min.css" type="text/css" />
   <link rel="stylesheet" href="static/css/style.css" type="text/css" />
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript" src="static/js/queue.min.js"></script>
-  <script type="text/javascript" src="static/js/RGraph.common.core.js"></script>
-  <script type="text/javascript" src="static/js/RGraph.common.tooltips.js"></script>
-  <script type="text/javascript" src="static/js/RGraph.common.dynamic.js"></script>
-  <script type="text/javascript" src="static/js/RGraph.radar.js"></script>
-  <script type="text/javascript" src="static/js/search.js"></script>
-  <script type="text/javascript" src="static/js/graph.js"></script>
-
 </head>
 
 
@@ -52,9 +43,9 @@
           </div>
 
           <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 search-row">
-            <select id="category-dropdown" onchange='categorySelect()'>
+            <select id="category-dropdown" onchange="categorySelect()">
               <option value="monster">Monsters</option>
-              <option value="spell">Spells</option>              
+              <option value="spell">Spells</option>
             </select>
           </div>
 
@@ -66,7 +57,7 @@
         </div>
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 result-dropdown-div">
-            <select id="selector" onchange='displaySelection(this)' onfocus='this.selectedIndex = -1;'></select>
+            <select id="selector" onchange="displaySelection(this)" onfocus="this.selectedIndex = -1;"></select>
           </div>
         </div>
       </div>
@@ -82,38 +73,29 @@
                 <h2>Welcome to Quick Cards</h2>
               </div>
               <div>
-                <p>
-                  Quick cards is a quick referrence for monsters and spells in Dungeons and Dragons 5e.<br />
-                  <p>Search for a monster or spell name, or even a partial search like 'as'. Select from monsters and spells and hit search.</p>
-                  <p>If you are just browsing, leave the search field blank for a full listing.</p>
-                  <p>Please note that it can take a few moments to display the search results for a full listing or for partial search terms, 
-                    since they can sometimes return hundreds of matches.</p>
-                </p>
+                <p>Quick cards is a quick referrence for monsters and spells in Dungeons and Dragons 5e.</p>
+                <p>Search for a monster or spell name, or even a partial search like 'as'. Select from monsters and
+                  spells and hit search.</p>
+                <p>If you are just browsing, leave the search field blank for a full listing.</p>
+                <p>Please note that it can take a few moments to display the search results for a full listing or for
+                  partial search terms,
+                  since they can sometimes return hundreds of matches.</p>
               </div>
-              <!-- <span class="ability-headings" id="monster-name"></span>
-              <div class="feature-block" id="general-stats"></div>
-              <div class="feature-block" id="more-stats"></div>
-
-              <canvas id="cvs" width="300" height="200"></canvas> -->
             </div>
           </div>
         </div>
-
-
-          <!--<div class="row">
-            <div class="col-xs-12 col-sm-12 text-center cvs-anchor">
-              <div class="card2 text-center">
-                <span class="card-heading" id="monster-name1"></span>
-                <div class="feature-block" id="general-stats1"></div>
-
-                <canvas id="cvs-1" width="200" height="200"></canvas>
-              </div>
-            </div>
-          </div> -->
       </div>
     </section>
 
   </main>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="static/js/queue.min.js"></script>
+  <script type="text/javascript" src="static/js/RGraph.common.core.js"></script>
+  <script type="text/javascript" src="static/js/RGraph.common.tooltips.js"></script>
+  <script type="text/javascript" src="static/js/RGraph.common.dynamic.js"></script>
+  <script type="text/javascript" src="static/js/RGraph.radar.js"></script>
+  <script type="text/javascript" src="static/js/search.js"></script>
+  <script type="text/javascript" src="static/js/graph.js"></script>
 </body>
 
 </html>

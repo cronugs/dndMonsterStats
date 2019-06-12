@@ -208,7 +208,7 @@ var monster;
 
 //displaySelection() 
 function displaySelection(selector) {
-    //var selectedText = selector.options[selector.selectedIndex].innerHTML;
+    
     var selectedValue = selector.value;
     monster = dataList[selectedValue];
 

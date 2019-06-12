@@ -92,6 +92,13 @@ I have performed extensive testing to ensure the application operates as expecte
 - Click on Actions again -> the collapsable closes as expected.
 - The bottom left and right border radius on the Action collapsible toggle when it is opened and closed as expected.
 
+The application has been tested this way across all the platforms and screen sizes I have immidiate access to, including; 
+
+- Mobile Chrome on Android and iOS
+- Mobile Safari on iOS
+- Desktop Chrome on Windows and Linux
+- Desktop Firefox on Windows and Linux
+
 I also had the application tested by two Dungeon Masters and three players. Bugs or unexpected behaviours that were reported were fixed.
 
 ## Deployment
@@ -101,6 +108,34 @@ Since the API used in this project is being hosted on an insecure server I can n
 The server is a digital ocean droplet that I configured with a debian install along with a simple Apache2 server. I had previously been using the server to host my business website for my old acupuncture clinic. Using Apache virtual hosts and a free domain name from no-ip.com, I was able to quickly deploy a virtual host for this project. At the end of each day of coding, after I push my commits to GitHub, I connect to my server via ssh and do a git pull from the root directory of the virtual host. This pulls all my latest changes down from GitHub to my webserver and the latest version of my site is then live and available to be used at quickcards.ddns.net.
 
 In the future I will buy a domain name to point to the IP address of the server rather than using the temporary free domain name provided by no-ip.com
+
+If you are interested in deploying this project you can do so by following these steps;
+
+This project uses SASS/SCSS so you will need to make sure that is installed. 
+
+If you run windows you can follow instructions to install SASS [here](https://www.impressivewebs.com/sass-on-windows/). Alternatively, you can install Windows Subsystem for Linux (WSL) and follow the rest of the instructions for Linux. Insstructions to install WSL can be found [here](https://itsfoss.com/install-bash-on-windows/)
+
+If you run Linux you can use your package manager to search and install SASS and it's dependancies. 
+
+on Debian or Ubuntu
+
+```
+user@somecoolhostname:~$ sudo apt-get install ruby-sass
+````
+
+on Arch 
+
+1. Make a local copy of the repository by cloning it with git
+
+```
+user@somecoolhostname:~$ git clone https://github.com/cronugs/dndMonsterStats
+```
+
+
+
+
+
+
 
 ## Bugs
 
