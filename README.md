@@ -16,13 +16,13 @@ The application will be used by dungeon masters when planning their sessions, to
 
 ### Wireframe and Mockup
 
-Even though the finished project is somewhat different in design to the initial wireframe and mockup, the basic elements are still intact and the evolution from wireframe to finised product should be evident.
+Even though the finished project is somewhat different in design to the initial wireframe and mockup, the basic elements are still intact and the evolution from wireframe to finished product should be evident.
 
 ![Quick Cards Wireframe](http://quickcards.ddns.net/wireframes/QCwireframe.png)
 
 ![Quick Cards Mockup](http://quickcards.ddns.net/wireframes/QCmockup.png)
 
-### Screenshots
+### Screenshot
 
 ![Quick Cards Desktop Screenshot](http://quickcards.ddns.net/wireframes/QCCapture.PNG)
 
@@ -50,7 +50,7 @@ Even though the finished project is somewhat different in design to the initial 
 
 - Feature 10 - There is a neat spider graph that helps to visualise a monster's ability scores. It is nicely animated as it changes shapes from one entry to the next to reflect the changing scores.
 
-- Feature 11 - Only relevant statistics for each monster are shown. There are many attributes that have a value of 0 or null or contain empty strings, because a monster might not have those attributes. This results in the application displaying an empty entry for abilities that monster does not possess. These have been removed. For instance, a Giant Wasp can't speak or understand language, so there is no entry for languages. Neither has is any special resistances, saves or abilities. So none are displayed.
+- Feature 11 - Only relevant statistics for each monster are shown. There are many attributes that have a value of 0 or null or contain empty strings, because a monster might not have those attributes. This results in the application displaying an empty entry for abilities that monster does not possess. These have been removed. For instance, a Giant Wasp can't speak or understand language, so there is no entry for languages. Neither has it any special resistances, saves or abilities. So none are displayed.
 
 - Feature 12 - A simple, intuitive interface with no distractions.
 
@@ -62,7 +62,7 @@ There are many useful features planned for future releases. Unfortunately, with 
 
 - Search filters for spells to filter by magical school, level or by class.
 
-- Built in character generator that can be used to quickly create characters that fit certain specifications like being a certain level, class and race to be able to quickly create NPCs for when your players go way off track and end up in unknown territory. This can also be used to quickly roll a new character if a party member dies and you want to quickly get them back into the games as a new character.
+- Built in character generator that can be used to quickly create characters that fit certain specifications like being a certain level, class and race to be able to quickly create NPCs for when your players go way off track and end up in unknown territory. This can also be used to quickly roll a new character if a party member dies and you want to quickly get them back into the game as a new character.
 
 ## Technologies used
 
@@ -76,9 +76,9 @@ The spider graph used to visualise a monster's ability scores was created using 
 
 ## Testing
 
-I have performed extensive testing to ensure the application operates as expected. 
+I have performed extensive testing to ensure the application operates as expected.
 
-- Go to quickcards.ddns.net -> enter a monster name 'wolf' in all lower case -> press enter -> 5 results containing 'wolf' are return as expected. 
+- Go to quickcards.ddns.net -> enter a monster name 'wolf' in all lowercase -> press enter -> 5 results containing 'wolf' are return as expected.
 - enter a monster name in mixed case 'DrAgoN'-> click search -> 43 results containing the word 'dragon' are return as expected.
 - enter a string of random letters 'hasdfadf' -> returns a spell or monster not found error as expected.
 - enter a partial string 'ha' and leave monsters selected in the dropdown -> 19 matching monsters are returned.
@@ -88,9 +88,9 @@ I have performed extensive testing to ensure the application operates as expecte
 - Select 'Charm Person' from the dropdown -> The correct spell card is returned and replaces the previous monster card.
 - Leave the search term in place and make a new selection 'Thaumaturgy' from the results dropdown -> The spell card for 'Thaumaturgy' replaces the previous card.
 - With a spell already being displayed, enter a new search term 'spi' and change the selector to Monsters -> click search -> 9 monsters are returned.
-- Select 'Gynosphinx' from the dropdown -> The correct card is displayed -> Click on the Actions collapsable -> It opens to reveal the monsters actions.
+- Select 'Gynosphinx' from the dropdown -> The correct card is displayed -> Click on the Actions collapsable -> It opens to reveal the monster's actions.
 - Click on Actions again -> the collapsable closes as expected.
-- The bottom left and right border radius on the Action collapsable toggle when it is opened and closed as expected.
+- The bottom left and right border radius on the Action collapsible toggle when it is opened and closed as expected.
 
 I also had the application tested by two Dungeon Masters and three players. Bugs or unexpected behaviours that were reported were fixed.
 
@@ -98,15 +98,15 @@ I also had the application tested by two Dungeon Masters and three players. Bugs
 
 Since the API used in this project is being hosted on an insecure server I can not host a live version from GitHub Pages. To be able to provide a link to my working application, I have out of necessity, decided to host the project on my own web server. I have many years of experience with Linux, Apache and other server administration, so it was a fairly simple task.
 
-The server is a digital ocean droplet that I configured with a debian install along with a simple Apache2 server. I had previously been using the server to host my business website for my old acupuncture clinic. Using Apache virtual hosts and a free domain name from no-ip.com, I was able to quickly deploy a virtual host for this project. At the end of each day of coding, after I push my commits to GitHub, I connect to my server via ssh and do a git pull from the root directory of the virtual host. This pulls all my latest changes down from GitHub to my webserver and the latest version of my site is then live and available to be used at quickcards.ddns.net. 
+The server is a digital ocean droplet that I configured with a debian install along with a simple Apache2 server. I had previously been using the server to host my business website for my old acupuncture clinic. Using Apache virtual hosts and a free domain name from no-ip.com, I was able to quickly deploy a virtual host for this project. At the end of each day of coding, after I push my commits to GitHub, I connect to my server via ssh and do a git pull from the root directory of the virtual host. This pulls all my latest changes down from GitHub to my webserver and the latest version of my site is then live and available to be used at quickcards.ddns.net.
 
 In the future I will buy a domain name to point to the IP address of the server rather than using the temporary free domain name provided by no-ip.com
 
 ## Bugs
 
-There are currently two issues that remain, both of which are in the API. As previously mentioned, the API is hosted on an insecure server. While this isn't a problem at the moment since there is no sensitive data being transfered, it does create some issues with hosting the project on some services like GitHub. 
+There are currently two issues that remain, both of which are in the API. As previously mentioned, the API is hosted on an insecure server. While this isn't a problem at the moment since there is no sensitive data being transferred, it does create some issues with hosting the project on some services like GitHub.
 
-The second issue is that some of the text in spell descriptions contain unexpected characters. For instance, the desription of the spell 'Spirit Guardians' reads; "An affected creatureâ€™s speed is halved in the area". After researching this issue it seems that this has happend because the text has been badly encoded from UTF-8 to a microsoft encoding, and back to UTF-8 again, bringing those characters along the way. I have contacted the author of the dnd5eapi on slack about both of these issues and have not received any response. The slack channel is very quiet and since I intend to continue work on this project in the future, I will continue in my attempts to get in touch, and may even get involved with development of the API. 
+The second issue is that some of the text in spell descriptions contain unexpected characters. For instance, the description of the spell 'Spirit Guardians' reads; "An affected creatureâ€™s speed is halved in the area". After researching this issue it seems that this has happened because the text has been badly encoded from UTF-8 to a microsoft encoding, and back to UTF-8 again, bringing those characters along the way. I have contacted the author of the dnd5eapi on slack about both of these issues and have not received any response. The slack channel is very quiet and since I intend to continue work on this project in the future, I will continue in my attempts to get in touch, and may even get involved with development of the API.
 
 ## Credits
 
@@ -122,16 +122,11 @@ I'd especially like to thank Kyle Simpson whose books 'Scope & Closures' and 'th
 
 There are some snippets of code that I found while searching for answers to problems I was solving.
 
-Thanks to user somethinghere on stackoverflow for a function that capitaises the first letter in every word in a string [found here](https://stackoverflow.com/questions/32589197/capitalize-first-letter-of-each-word-in-a-string-javascript/32589256).
+Thanks to user somethinghere on stackoverflow for a function that capitalises the first letter in every word in a string [found here](https://stackoverflow.com/questions/32589197/capitalize-first-letter-of-each-word-in-a-string-javascript/32589256).
 
 Thanks to user Fabiano on stackoverflow for this snippet to remove entries in a selector [found here](https://stackoverflow.com/questions/3364493/how-do-i-clear-all-options-in-a-dropdown-box/3364546#3364546).
 
 Thanks to Flavio Copes for a snippet to caps the first letter in a string [found here](https://flaviocopes.com/how-to-uppercase-first-letter-javascript/).
 
 Thanks to w3schools for the loading animation [found here](https://www.w3schools.com/howto/howto_css_loader.asp).
-
-
-
-
-
 
