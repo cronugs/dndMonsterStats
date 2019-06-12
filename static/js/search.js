@@ -1,9 +1,9 @@
 //This is called from the searchMonsterData function 
-function getData(url, cb) {
+const getData = (url, cb) => {
     var xhr = new XMLHttpRequest();
 
     //we set onredystatechange to an anon function which tests the status of the data from the API
-    xhr.onreadystatechange = function () {
+    xhr.onreadystatechange = function() {
         //if the ready state is 4 and the status is 200
         if (this.readyState == 4 && this.status == 200) {
             //we call our callback function in the getData call and parse is as JSON data. The data held in this.responseText
@@ -13,7 +13,7 @@ function getData(url, cb) {
             if (this.status == 404) {
                 $('.card').empty();
 
-                var errorSpan = $('<span/>', {
+                const errorSpan = $('<span/>', {
                     'class': 'not-found-error'
                 });
 
@@ -28,21 +28,21 @@ function getData(url, cb) {
 }
 
 // A quick snippet of text so pressing enter triggers the search box (see README.md for reference)
-$(document).ready(function () {
-    $('#monsterName').keypress(function (e) {
+$(document).ready(() => {
+    $('#monsterName').keypress((e) => {
         if (e.keyCode == 13)
             $('#search-button').click();
     });
 });
 
 // this variable is used for the displaySelection() function to know which layout to render
-var searchType;
+let searchType;
 url = 'http://www.dnd5eapi.co/api/monsters';
 
 //set the searchType variable and set the url to point to monsters or spells with the select box
-function categorySelect() {
-    var select = document.getElementById("selector");
-    var category = document.getElementById("category-dropdown").value;    
+const categorySelect = () => {
+    const select = document.getElementById("selector");
+    const category = document.getElementById("category-dropdown").value;    
     if (category == "spell") {
         url = 'http://www.dnd5eapi.co/api/spells';
         searchType = 'spells';
@@ -53,17 +53,17 @@ function categorySelect() {
     removeOptions(select);
 }
 
-function searchMonsterData() {
+const searchMonsterData = () => {
 
 
-    function loadSpinner() {
+    const loadSpinner = () => {
 
         //create a div for the spinner
-        var loadingHeader = $('<span/>', {
+        const loadingHeader = $('<span/>', {
             'class': 'card-heading'
         });
 
-        var loader = $('<div/>', {
+        const loader = $('<div/>', {
             'class': 'loader',
         });
 
@@ -76,12 +76,12 @@ function searchMonsterData() {
 
     loadSpinner();
 
-    var search = document.getElementById("monsterName").value;
+    const search = document.getElementById("monsterName").value;
 
     //Capitalise each word in the seach term, so that it matches the data (see README.md for reference)
-    function titleCase(str) {
-        var splitStr = str.toLowerCase().split(' ');
-        for (var i = 0; i < splitStr.length; i++) {
+    const titleCase = (str) => {
+        const splitStr = str.toLowerCase().split(' ');
+        for (let i = 0; i < splitStr.length; i++) {
             // You do not need to check if i is larger than splitStr length, as your for does that for you
             // Assign it back to the array
             splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
@@ -90,20 +90,20 @@ function searchMonsterData() {
         return splitStr.join(' ');
     }
 
-    var searchTerm = titleCase(search);
-    var monsterData;
-    var result;
-    var monsterURL;
-    var reg = new RegExp(searchTerm.split('').join('\\w*').replace(/\W/, ""), 'i');
+    const searchTerm = titleCase(search);
+    let monsterData;
+    let result;
+    let monsterURL;
+    const reg = new RegExp(searchTerm.split('').join('\\w*').replace(/\W/, ""), 'i');
 
     //call the get data function and give it the url 
-    getData(url, function (data) {
+    getData(url, (data) => {
 
         //monster data is an array of key value objects with the name and url for each monster
         monsterData = data.results;
 
         //here we use our regex to match the search string to names of monsters and return matching elements
-        result = monsterData.filter(function (element) {
+        result = monsterData.filter((element) => {
             if (element.name.match(reg)) {
                 return element;
             }
@@ -121,10 +121,10 @@ function searchMonsterData() {
 
         //we call getData again, this time to return the data for an individual monster
         // *** this needs to change to take multiple urls and 
-        getData(monsterURL, function () {
+        getData(monsterURL, () => {
 
             //create an array containing the URLS from resultArr
-            function listOfURLS(mons) {
+            const listOfURLS = (mons) => {
                 let URL_list = [];
                 for (let i = 0; i < mons.length; i += 1) {
                     URL_list.push(mons[i].url);
@@ -138,15 +138,15 @@ function searchMonsterData() {
 }
 
 //displayMonster() takes an array of urls to individual monsters or spell and puts them in a newArray of objects
-function displayMonster(monsterURLList) {
+const displayMonster = (monsterURLList) => {
 
-    var newArray = [];
-    var counter = 0;
+    let newArray = [];
+    let counter = 0;
     //for each url in monsterURLList
 
     for (let i = 0; i < monsterURLList.length; i += 1) {
         //call getData for url and get data back
-        getData(monsterURLList[i], function (data) {
+        getData(monsterURLList[i], (data) => {
 
             //add data to newArray 
             newArray.push(data);
@@ -166,9 +166,9 @@ function displayMonster(monsterURLList) {
 
 //combinedArray is an array of objects containing monster data for each of the monsters that matched our search term.
 //populateResults() adds the name and index for each monster or spell that matched the search and addes them to the select element
-function populateResults(combinedArray) {
+const populateResults = (combinedArray) => {
 
-    var finishedLoading = $('<span/>', {
+    const finishedLoading = $('<span/>', {
         'class': 'card-heading'
     });
 
@@ -178,7 +178,7 @@ function populateResults(combinedArray) {
 
     //https://www.electrictoolbox.com/javascript-add-options-html-select/ 
 
-    var select = document.getElementById("selector");
+    const select = document.getElementById("selector");
     select.style.display = "block";
     //make sure the list is clear first
     removeOptions(select);
@@ -189,37 +189,37 @@ function populateResults(combinedArray) {
     }
 }
 
-var dataList = [];
+let dataList = [];
 
 //here we have function to interate through the dropdown HTML element and remove the contents. (See README.md for reference)
-function removeOptions(selectbox) {
+const removeOptions = (selectbox) => {
 
-    var i;
+    let i;
     for (i = selectbox.options.length - 1; i >= 0; i--) {
         selectbox.remove(i);
     }
 }
 
 //capitalize the fist letter (see README.md for reference)
-var capitalize = (s) => {
+const capitalize = (s) => {
     if (typeof s !== 'string') return ''
     return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
-var monster;
+let monster;
 
 //displaySelection() 
-function displaySelection(selector) {
+const displaySelection = (selector) => {
     
-    var selectedValue = selector.value;
+    const selectedValue = selector.value;
     monster = dataList[selectedValue];
 
-    function createMonsterLayout() {
+    const createMonsterLayout = () => {
 
         //clear card first and then create the elements needed.
         $(".card").empty();
 
-        var newSpan = $('<span/>', {
+        const newSpan = $('<span/>', {
             'class': 'card-heading',
             id: 'monster-name'
         });
@@ -232,12 +232,12 @@ function displaySelection(selector) {
             });
         }
 
-        var cvsAnchor = $('<div/>', {
+        const cvsAnchor = $('<div/>', {
             'class': 'cvs-anchor col-xs-12 col-sm-12 col-md-12 col-lg-12',
             id: 'cvs-anchor'
         });
 
-        var newCanvas = $('<canvas/>', {
+        const newCanvas = $('<canvas/>', {
             'class': 'graphCanvas',
             id: 'cvs'
         }).prop({
@@ -257,12 +257,12 @@ function displaySelection(selector) {
         //if the monster has extra actions, create a collapsible.
         if (monster.actions) {
 
-            var actionCollapse = $('<button/>', {
+            const actionCollapse = $('<button/>', {
                 'class': 'collapsible inactive',
                 id: 'action-collapse'
             });
 
-            var panel1 = $('<div/>', {
+            const panel1 = $('<div/>', {
                 'class': 'content',
                 id: 'action-content'
             });
@@ -273,17 +273,17 @@ function displaySelection(selector) {
             $('.card').append(panel1);
 
             //create collapsible
-            var coll = document.getElementsByClassName('collapsible');
-            var i;
+            const coll = document.getElementsByClassName('collapsible');
+            let i;
 
             //expand and contract collapsible
             for (i = 0; i < coll.length; i++) {
-                coll[i].addEventListener("click", function () {
+                coll[i].addEventListener("click", function() {
 
                     this.classList.toggle("active");
                     this.classList.toggle("inactive");
                     this.classList.toggle("action-extension")
-                    var content = this.nextElementSibling;
+                    const content = this.nextElementSibling;
                     if (content.style.display === "block") {
                         content.style.display = "none";
                     } else {
@@ -296,7 +296,7 @@ function displaySelection(selector) {
             $('.collapsible').append(`<span><h5>Actions: </h5></span>`);
 
             //create a new array
-            var actionsArr = [];
+            let actionsArr = [];
             //fill the actionsArr with the actions available to the monster
             for (let i = 0; i <= monster.actions.length - 1; i++) {
                 actionsArr.push(monster.actions[i]);
@@ -330,7 +330,7 @@ function displaySelection(selector) {
         //special abilites can sometimes contain extended text, so these are also a candidate for hiding behind a collapsible element.
         //if the monster has special abilities, create a div
         if (monster.special_abilities) {
-            var abilitiesDiv = $('<div/>', {
+            const abilitiesDiv = $('<div/>', {
                 'class': 'special-abilities',
                 id: 'ability-div'
             });
@@ -342,7 +342,7 @@ function displaySelection(selector) {
             $('#ability-div').append(`<span><h5>Special Abilities: </h5></span>`);
 
             //create a new array
-            var abilitiesArr = [];
+            let abilitiesArr = [];
 
             //push the monsters abilities to abilitiesArr
             for (let i = 0; i <= monster.special_abilities.length - 1; i++) {
@@ -365,7 +365,7 @@ function displaySelection(selector) {
 
         }
 
-        function printMonsterCard() {
+        const printMonsterCard = () => {
 
             //add more general monster stats and info to the card.           
             $("#monster-name").append(`<h2>${monster.name}</h2>`);
@@ -395,13 +395,13 @@ function displaySelection(selector) {
             //$("#feature-block3").append(`<b>Languages:</b> ${capitalize(monster.languages)}<br />`);
             $("#feature-block3").append(`<b>Senses: </b>${capitalize(monster.senses)}<br />`);
 
-            let ftrResImm = {
+            const ftrResImm = {
             "Condition immunities": monster.condition_immunities,
             "Damage immunities": monster.damage_immunities,
             "Damage resistances": monster.damage_resistances,
             "Damage vulnerabilities": monster.damage_vulnerabilities};
             
-            let saves = {"charisma_save": monster.charisma_save,
+            const saves = {"charisma_save": monster.charisma_save,
             "wisdom_save": monster.wisdom_save,
             "constitution_save": monster.constitution_save,
             "dexterity_save": monster.dexterity_save,
@@ -426,10 +426,10 @@ function displaySelection(selector) {
         statSpiderGraph();
     }
 
-    function createSpellLayout() {
+    const createSpellLayout = () => {
 
         //so I don't get confused about where I am in the code and what I am working on
-        let spell = monster;
+        const spell = monster;
 
         usedByClasses = [];
 
@@ -446,12 +446,12 @@ function displaySelection(selector) {
         //clear card first and then dynamically create the elements needed.
         $(".card").empty();
 
-        var statBackground = $('<div/>', {
+        const statBackground = $('<div/>', {
             'class': 'background',
             id: 'stat-background'
         });
 
-        var titleSpan = $('<span/>', {
+        const titleSpan = $('<span/>', {
             'class': 'card-heading',
             id: 'spell-name'
         });
@@ -465,12 +465,12 @@ function displaySelection(selector) {
             });
         }
 
-        var statDiv3 = $('<div/>', {
+        const statDiv3 = $('<div/>', {
             'class': 'feature-block',
             id: 'class-can-use'
         });
 
-        var statDiv4 = $('<div/>', {
+        const statDiv4 = $('<div/>', {
             'class': 'description-block',
             id: 'spell-description'
         });
@@ -483,17 +483,17 @@ function displaySelection(selector) {
         $('.card').append(statDiv3);
         $('.card').append(statDiv4);
 
-        function printSpellCard() {
+        const printSpellCard = () => {
 
             $("#spell-name").append(`<h2>${spell.name}</h2>`);
 
-            let attrBlock1 = {
+            const attrBlock1 = {
                 "Name": spell.name,
                 "Level": spell.level,
                 "Duration": spell.duration,
                 "Components": spell.components
             };
-            let attrBlock2 = {
+            const attrBlock2 = {
                 "School": spell.school.name,
                 "Casting time": spell.casting_time,
                 "Concentration": spell.concentration,
@@ -520,11 +520,11 @@ function displaySelection(selector) {
     }
 
     //determine whether the user has chosen to search for monsters or spells and execute the appropriate function.
-    var draw = function () {
+    (() => {
         if (searchType == "spells") {
             createSpellLayout();
         } else {
             createMonsterLayout();
         }
-    }();
+    })()
 }
