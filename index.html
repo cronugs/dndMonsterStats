@@ -50,6 +50,7 @@
           </div>
 
           <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 search-row">
+            <!--Search Button - When clicked, calls the searchMonsterData function and passes it the mosters url by default -->
             <input type="submit" id="search-button" name="search-button" value="Search"
               onclick="searchMonsterData('http://www.dnd5eapi.co/api/monsters')" /><br>
           </div>
@@ -57,6 +58,7 @@
         </div>
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 result-dropdown-div">
+            <!-- Category Selector - when changed from monster to spell or vice versa, -->
             <select id="selector" onchange="displaySelection(this)" onfocus="this.selectedIndex = -1;"></select>
           </div>
         </div>

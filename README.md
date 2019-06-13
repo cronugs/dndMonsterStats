@@ -96,6 +96,7 @@ The layout has been tested for responsive design across all the platforms and sc
 
 - Mobile Chrome on Android and iOS
 - Mobile Safari on iOS
+- Mobile Samsung Internet on Android
 - Desktop Chrome on Windows and Linux
 - Desktop Firefox on Windows and Linux
 

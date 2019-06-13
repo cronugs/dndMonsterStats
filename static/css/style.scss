@@ -1,8 +1,10 @@
 @import "https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700|Exo:100,200,300,400,500,600,700";
 @import "https://fonts.googleapis.com/css?family=Arbutus+Slab&display=swap";
+@import "https://fonts.googleapis.com/css?family=Cinzel:400,700&display=swap";
 
 $font: (Roboto: 'Roboto',
     Arbutus: 'Arbutus',
+    Heading: 'Cinzel'
 );
 
 $colors: (primary: #cc0000,
@@ -41,6 +43,17 @@ $mobile: 575px;
     }
 }
 
+h2,
+h3,
+h4 {
+    font-family: map-get($font, Heading);
+}
+
+h5 {
+    margin-bottom: 0;
+    font-family: map-get($font, Heading);
+}
+
 body {
     font-family: map-get($font, Arbutus);
     background-color: map-get($colors, nav);
@@ -73,9 +86,18 @@ body {
     background-image: none;
     margin-bottom: 0;
     color: map-get($font-colors, nav);
+    background-color: map-get($colors, dark);
+    padding: 0 16px 0;
+    margin-bottom: 20px;
+
+    @include mobile {
+        margin-bottom: 8px;
+    }
 
     .navbar-brand {
-        font-size: 2rem;
+        font-family: map-get($font, Heading);
+        font-size: 1.8rem;
+       // font-weight: 500;
     }
 
     .container-fluid {
@@ -182,6 +204,10 @@ body {
 .search-title {
     margin-bottom: 10px;
     display: inline-block;
+
+    @include mobile {
+        margin-bottom: 0;
+    }
 }
 
 .search-row {
@@ -208,7 +234,7 @@ body {
         @include mobile {
             width: 99%;
             margin: auto 0;
-            padding: 5px;
+            padding: 8px;
         }
 
         #welcome {
@@ -218,8 +244,9 @@ body {
         .not-found-error {
             display: block;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 20px;
             text-align: center;
+            font-family: map-get($font, Heading);
 
         }
         // This loader was taken from w3schools see README.md for reference
@@ -243,7 +270,7 @@ body {
             width: 100px;
             height: 100px;
             animation: spin 2s linear infinite;
-            margin: 30px 0 30px;
+            margin: 20px 0 30px;
         }
 
         @keyframes spin {
