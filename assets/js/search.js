@@ -27,7 +27,7 @@ const getData = (url, cb) => {
     xhr.send();
 }
 
-// A quick snippet of text so pressing enter triggers the search box (see README.md for reference)
+// Trigger the search when enter is pressed (see README.md for reference)
 $(document).ready(() => {
     $('#monsterName').keypress((e) => {
         if (e.keyCode == 13)
@@ -542,4 +542,47 @@ const displaySelection = (selector) => {
             createMonsterLayout();
         }
     })()
+}
+
+const statSpiderGraph = () => {
+
+    var str = monster.strength;
+    var dex = monster.dexterity;
+    var con = monster.constitution;
+    var int = monster.intelligence;
+    var wis = monster.wisdom;
+    var cha = monster.charisma;
+
+    spidy = new RGraph.Radar({
+        id: 'cvs',
+        data: [str, dex, con, int, wis, cha],
+        options: {
+            tooltips: [
+                'Strength ' + str, 'Dexterity ' + dex,
+                 'Constitution ' + con, 'Intelligence ' + int, 
+                 'Wisdom ' + wis, 'Charisma ' + cha
+            ],
+            backgroundCirclesPoly: true,
+            backgroundCirclesSpacing: 30,
+            colors: ['transparent'],
+            axesColor: 'transparent',
+            highlights: true,
+            colorsStroke: ['yellow'],
+            linewidth: 2,
+            labels: ['Strength ' + str, 'Dexterity ' + dex, 'Constitution ' + con,
+             'Intelligence ' + int, 'Wisdom ' + wis, 'Charisma ' + cha],
+            //labelsAxes: 'e',
+            labelsAxesColor: 'black',
+            textSize: 12,
+            textColor: 'white',
+            //clearto: 'white',
+            labelsAxesBoxed: false,
+            labelsAxesBoxedZero: true,
+            textAccessible: false,
+            textAccessibleOverflow: 'visible'
+            
+        }
+    }).grow();  
+    
+
 }
