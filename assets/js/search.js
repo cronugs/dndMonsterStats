@@ -162,8 +162,10 @@ const displayMonster = (monsterURLList) => {
     }
 }
 
-//combinedArray is an array of objects containing monster data for each of the monsters that matched our search term.
-//populateResults() adds the name and index for each monster or spell that matched the search and addes them to the select element
+/**
+ * populateResults adds the name and index for each monster or spell that matched the search and adds them to the select element
+ * The argument combinedArray is an array of objects containing monster data for each of the monsters that matched the search term.
+ */
 const populateResults = (combinedArray) => {
 
     const finishedLoading = $('<span/>', {
@@ -173,8 +175,6 @@ const populateResults = (combinedArray) => {
     $('.card').empty();
     $('.card').append(finishedLoading);
     $('.card-heading').append(`<h3>Success!</h3><p>Choose your spell or monster from the dropdown menu</p>`);
-
-    //https://www.electrictoolbox.com/javascript-add-options-html-select/ 
 
     const select = document.getElementById("selector");
     select.style.display = "block";
@@ -189,7 +189,10 @@ const populateResults = (combinedArray) => {
 
 let dataList = [];
 
-//here we have function to interate through the dropdown HTML element and remove the contents. (See README.md for reference)
+/**
+ * removeOptions interates through the dropdown HTML element and remove the contents of the select element 
+ * specified as an argument. (See README.md for reference) 
+ */
 const removeOptions = (selectbox) => {
 
     let i;
@@ -207,244 +210,251 @@ const capitalize = (s) => {
 let monster;
 
 //displaySelection() 
-const displaySelection = (selector) => {
+const displaySelection = (selectedResult) => {
 
-    const selectedValue = selector.value;
+    const selectedValue = selectedResult.value;
     monster = dataList[selectedValue];
 
     const createMonsterLayout = () => {
 
-        //clear card first and then create the elements needed.
-        $(".card").empty();
+        if (monster != undefined) {
 
-        const newSpan = $('<span/>', {
-            'class': 'card-heading',
-            id: 'monster-name'
-        });
+            //clear card first and then create the elements needed.
+            $(".card").empty();
 
-        //replaced four individual code blocks with this for loop
-        for (let i = 0; i <= 4; i++) {
-            window["featureBlock" + i] = $('<div/>', {
-                'class': 'feature-block col-xs-6 col-sm-6 col-md-6 col-lg-6',
-                id: `feature-block${i}`
-            });
-        }
-
-        const cvsAnchor = $('<div/>', {
-            'class': 'cvs-anchor col-xs-12 col-sm-12 col-md-12 col-lg-12',
-            id: 'cvs-anchor'
-        });
-
-        const newCanvas = $('<canvas/>', {
-            'class': 'graphCanvas',
-            id: 'cvs'
-        }).prop({
-            width: 450,
-            height: 280
-        });
-
-        $('.card').append(newSpan);
-        $('.card').append(featureBlock1);
-        $('.card').append(featureBlock2);
-        $('.card').append(cvsAnchor);
-        $('#cvs-anchor').append(newCanvas);
-        $('.card').append(featureBlock3);
-        $('.card').append(featureBlock4);
-
-        //if the monster has extra actions, create a collapsible.
-        if (monster.actions) {
-
-            const actionCollapse = $('<button/>', {
-                'class': 'collapsible inactive',
-                id: 'action-collapse'
+            const newSpan = $('<span/>', {
+                'class': 'card-heading',
+                id: 'monster-name'
             });
 
-            const panel1 = $('<div/>', {
-                'class': 'content',
-                id: 'action-content'
-            });
-
-            //append elements to .card for the collapsible
-            $('.card').append(actionCollapse);
-
-            $('.card').append(panel1);
-
-            //create collapsible
-            const coll = document.getElementsByClassName('collapsible');
-            let i;
-
-            //expand and contract collapsible
-            for (i = 0; i < coll.length; i++) {
-                coll[i].addEventListener("click", function () {
-
-                    this.classList.toggle("active");
-                    this.classList.toggle("inactive");
-                    this.classList.toggle("action-extension")
-                    const content = this.nextElementSibling;
-                    if (content.style.display === "block") {
-                        content.style.display = "none";
-                    } else {
-                        content.style.display = "block";
-                    }
+            //replaced four individual code blocks with this for loop
+            for (let i = 0; i <= 4; i++) {
+                window["featureBlock" + i] = $('<div/>', {
+                    'class': 'feature-block col-xs-6 col-sm-6 col-md-6 col-lg-6',
+                    id: `feature-block${i}`
                 });
             }
 
-            //append data for monster actions
-            $('.collapsible').append(`<span><h5>Actions: </h5></span>`);
-
-            //create a new array
-            let actionsArr = [];
-            //fill the actionsArr with the actions available to the monster
-            for (let i = 0; i <= monster.actions.length - 1; i++) {
-                actionsArr.push(monster.actions[i]);
-            }
-
-            //for each action in actionsArr
-            for (let j = 0; j <= actionsArr.length - 1; j++) {
-
-                //append name, bonuses and description
-                $("#action-content").append(`<p><b>${actionsArr[j].name}</b><br />`);
-
-                //if attack_bonus exists and isn't 0, append it.
-                if (actionsArr[j].attack_bonus) {
-                    if (actionsArr[j].attack_bonus != 0) {
-                        $("#action-content").append(`<b>Attack bonus: </b>${actionsArr[j].attack_bonus}<br />`);
-                    }
-                }
-
-                //if damage_bonus exists and isn't 0, append it along with damage dice.
-                if (actionsArr[j].damage_bonus) {
-                    if (actionsArr[j].damage_bonus != 0) {
-                        $("#action-content").append(`<b>Damage bonus: </b>${actionsArr[j].damage_bonus} <br /> 
-                        <b>Damage dice: </b>${actionsArr[j].damage_dice}<br />`);
-                    }
-                }
-
-                $("#action-content").append(`<b>Description: </b>${actionsArr[j].desc}</p>`);
-            }
-        }
-
-        //special abilites can sometimes contain extended text, so these are also a candidate for hiding behind a collapsible element.
-        //if the monster has special abilities, create a div
-        if (monster.special_abilities) {
-            const abilitiesDiv = $('<div/>', {
-                'class': 'special-abilities',
-                id: 'ability-div'
+            const cvsAnchor = $('<div/>', {
+                'class': 'cvs-anchor col-xs-12 col-sm-12 col-md-12 col-lg-12',
+                id: 'cvs-anchor'
             });
 
-            //append out new ability-div to .card
-            $('.card').append(abilitiesDiv);
+            const newCanvas = $('<canvas/>', {
+                'class': 'graphCanvas',
+                id: 'cvs'
+            }).prop({
+                width: 450,
+                height: 280
+            });
 
-            //begin appending data for monster abilities
-            $('#ability-div').append(`<span><h5>Special Abilities: </h5></span>`);
+            $('.card').append(newSpan);
+            $('.card').append(featureBlock1);
+            $('.card').append(featureBlock2);
+            $('.card').append(cvsAnchor);
+            $('#cvs-anchor').append(newCanvas);
+            $('.card').append(featureBlock3);
+            $('.card').append(featureBlock4);
 
-            //create a new array
-            let abilitiesArr = [];
+            //if the monster has extra actions, create a collapsible.
+            if (monster.actions) {
 
-            //push the monsters abilities to abilitiesArr
-            for (let i = 0; i <= monster.special_abilities.length - 1; i++) {
-                abilitiesArr.push(monster.special_abilities[i]);
-            }
+                const actionCollapse = $('<button/>', {
+                    'class': 'collapsible inactive',
+                    id: 'action-collapse'
+                });
 
-            //for each ability in abilitiesArr
-            for (let j = 0; j <= abilitiesArr.length - 1; j++) {
+                const panel1 = $('<div/>', {
+                    'class': 'content',
+                    id: 'action-content'
+                });
 
-                //if attack_bonus exits and isn't equal to 0, append it.
-                if (abilitiesArr[j].attack_bonus) {
-                    if (abilitiesArr[j].attack_bonus != 0) {
-                        $("#ability-div").append(`<b>Attack bonus:</b> ${abilitiesArr[j].attack_bonus}<br />`);
-                    }
+                //append elements to .card for the collapsible
+                $('.card').append(actionCollapse);
+
+                $('.card').append(panel1);
+
+                //create collapsible
+                const coll = document.getElementsByClassName('collapsible');
+                let i;
+
+                //expand and contract collapsible
+                for (i = 0; i < coll.length; i++) {
+                    coll[i].addEventListener("click", function () {
+
+                        this.classList.toggle("active");
+                        this.classList.toggle("inactive");
+                        this.classList.toggle("action-extension")
+                        const content = this.nextElementSibling;
+                        if (content.style.display === "block") {
+                            content.style.display = "none";
+                        } else {
+                            content.style.display = "block";
+                        }
+                    });
                 }
 
-                //append ability name and description
-                $("#ability-div").append(`<p><b>${abilitiesArr[j].name}</b><br /> ${abilitiesArr[j].desc}</p>`);
+                //append data for monster actions
+                $('.collapsible').append(`<span><h5>Actions: </h5></span>`);
+
+                //create a new array
+                let actionsArr = [];
+                //fill the actionsArr with the actions available to the monster
+                for (let i = 0; i <= monster.actions.length - 1; i++) {
+                    actionsArr.push(monster.actions[i]);
+                }
+
+                //for each action in actionsArr
+                for (let j = 0; j <= actionsArr.length - 1; j++) {
+
+                    //append name, bonuses and description
+                    $("#action-content").append(`<p><b>${actionsArr[j].name}</b><br />`);
+
+                    //if attack_bonus exists and isn't 0, append it.
+                    if (actionsArr[j].attack_bonus) {
+                        if (actionsArr[j].attack_bonus != 0) {
+                            $("#action-content").append(`<b>Attack bonus: </b>${actionsArr[j].attack_bonus}<br />`);
+                        }
+                    }
+
+                    //if damage_bonus exists and isn't 0, append it along with damage dice.
+                    if (actionsArr[j].damage_bonus) {
+                        if (actionsArr[j].damage_bonus != 0) {
+                            $("#action-content").append(`<b>Damage bonus: </b>${actionsArr[j].damage_bonus} <br /> 
+                        <b>Damage dice: </b>${actionsArr[j].damage_dice}<br />`);
+                        }
+                    }
+
+                    $("#action-content").append(`<b>Description: </b>${actionsArr[j].desc}</p>`);
+                }
+            } 
+
+            //special abilites can sometimes contain extended text, so these are also a candidate for hiding behind a collapsible element.
+            //if the monster has special abilities, create a div
+            if (monster.special_abilities) {
+                const abilitiesDiv = $('<div/>', {
+                    'class': 'special-abilities',
+                    id: 'ability-div'
+                });
+
+                //append out new ability-div to .card
+                $('.card').append(abilitiesDiv);
+
+                //begin appending data for monster abilities
+                $('#ability-div').append(`<span><h5>Special Abilities: </h5></span>`);
+
+                //create a new array
+                let abilitiesArr = [];
+
+                //push the monsters abilities to abilitiesArr
+                for (let i = 0; i <= monster.special_abilities.length - 1; i++) {
+                    abilitiesArr.push(monster.special_abilities[i]);
+                }
+
+                //for each ability in abilitiesArr
+                for (let j = 0; j <= abilitiesArr.length - 1; j++) {
+
+                    //if attack_bonus exits and isn't equal to 0, append it.
+                    if (abilitiesArr[j].attack_bonus) {
+                        if (abilitiesArr[j].attack_bonus != 0) {
+                            $("#ability-div").append(`<b>Attack bonus:</b> ${abilitiesArr[j].attack_bonus}<br />`);
+                        }
+                    }
+
+                    //append ability name and description
+                    $("#ability-div").append(`<p><b>${abilitiesArr[j].name}</b><br /> ${abilitiesArr[j].desc}</p>`);
+                }
             }
-        }
 
-        const printMonsterCard = () => {
+            const printMonsterCard = () => {
 
-            //Add monster name as card title.           
-            $("#monster-name").append(`<h2>${monster.name}</h2>`);
+                //Add monster name as card title.           
+                $("#monster-name").append(`<h2>${monster.name}</h2>`);
 
-            const blkOne = {
-                "Alignment": monster.alignment,
-                "Type": monster.type,
-                "Subtype": monster.subtype,
-                "Size": monster.size,
-                "Speed": monster.speed
-            };
+                const blkOne = {
+                    "Alignment": monster.alignment,
+                    "Type": monster.type,
+                    "Subtype": monster.subtype,
+                    "Size": monster.size,
+                    "Speed": monster.speed
+                };
 
-            const blkTwo = {
-                "Challenge rating": monster.challenge_rating,
-                "Hit Points": monster.hit_points,
-                "Armor Class": monster.armor_class,
-                "Stealth": monster.stealth
-            };
+                const blkTwo = {
+                    "Challenge rating": monster.challenge_rating,
+                    "Hit Points": monster.hit_points,
+                    "Armor Class": monster.armor_class,
+                    "Stealth": monster.stealth
+                };
 
-            const ftrResImm = {
-                "Condition immunities": monster.condition_immunities,
-                "Damage immunities": monster.damage_immunities,
-                "Damage resistances": monster.damage_resistances,
-                "Damage vulnerabilities": monster.damage_vulnerabilities
-            };
+                const ftrResImm = {
+                    "Condition immunities": monster.condition_immunities,
+                    "Damage immunities": monster.damage_immunities,
+                    "Damage resistances": monster.damage_resistances,
+                    "Damage vulnerabilities": monster.damage_vulnerabilities
+                };
 
-            const saves = {
-                "charisma_save": monster.charisma_save,
-                "wisdom_save": monster.wisdom_save,
-                "constitution_save": monster.constitution_save,
-                "dexterity_save": monster.dexterity_save,
-                "strength_save": monster.strength_save,
-                "intelligence_save": monster.intelligence_save
-            };
+                const saves = {
+                    "charisma_save": monster.charisma_save,
+                    "wisdom_save": monster.wisdom_save,
+                    "constitution_save": monster.constitution_save,
+                    "dexterity_save": monster.dexterity_save,
+                    "strength_save": monster.strength_save,
+                    "intelligence_save": monster.intelligence_save
+                };
 
-            for (let key in blkOne) {
-                if (key != "Type" && key != "Subtype" && blkOne[key] != "") {
-                    $("#feature-block1").append(`<b>${key}: </b>${capitalize(blkOne[key])}<br />`);
-                } else {
-                    if (key == "Type") {
-                        $("#feature-block1").append(`<span id="type-span"><b>${key}: </b>${capitalize(blkOne[key])} </span><br />`);
+                for (let key in blkOne) {
+                    if (key != "Type" && key != "Subtype" && blkOne[key] != "") {
+                        $("#feature-block1").append(`<b>${key}: </b>${capitalize(blkOne[key])}<br />`);
                     } else {
-                        if (monster.subtype != "") {
-                            $("#type-span").append(`(<b>${key}: </b>${capitalize(blkOne[key])})`);
+                        if (key == "Type") {
+                            $("#feature-block1").append(`<span id="type-span"><b>${key}: </b>${capitalize(blkOne[key])} </span><br />`);
+                        } else {
+                            if (monster.subtype != "") {
+                                $("#type-span").append(`(<b>${key}: </b>${capitalize(blkOne[key])})`);
+                            }
                         }
                     }
                 }
-            }            
 
-            for (let key in blkTwo) {
-                if (blkTwo[key] && blkTwo[key] != 0) {
-                    $("#feature-block2").append(`<b>${key}: </b>${blkTwo[key]}<br />`);
+                for (let key in blkTwo) {
+                    if (blkTwo[key] && blkTwo[key] != 0) {
+                        $("#feature-block2").append(`<b>${key}: </b>${blkTwo[key]}<br />`);
+                    }
+                }
+
+                if (monster.languages && monster.languages != "") {
+                    $("#feature-block3").append(`<b>Languages: </b>${capitalize(monster.languages)}<br />`);
+                }
+
+                $("#feature-block3").append(`<b>Senses: </b>${capitalize(monster.senses)}<br />`);
+
+                for (let key in ftrResImm) {
+                    if (ftrResImm[key] != "") {
+                        $("#feature-block4").append(`<b>${key}: </b> ` + capitalize(ftrResImm[key]) + '<br />');
+                    }
+                }
+
+                for (let key in saves) {
+                    keyString = capitalize(key.split("_").join(" "));
+                    if (key in monster) {
+                        $("#feature-block4").append(`<b>${keyString}: </b>` + saves[key] + '<br />');
+                    }
                 }
             }
 
-            if (monster.languages && monster.languages != "") {
-                $("#feature-block3").append(`<b>Languages: </b>${capitalize(monster.languages)}<br />`);
-            }
-
-            $("#feature-block3").append(`<b>Senses: </b>${capitalize(monster.senses)}<br />`);            
-
-            for (let key in ftrResImm) {
-                if (ftrResImm[key] != "") {
-                    $("#feature-block4").append(`<b>${key}: </b> ` + capitalize(ftrResImm[key]) + '<br />');
-                }
-            }
-
-            for (let key in saves) {
-                keyString = capitalize(key.split("_").join(" "));
-                if (key in monster) {
-                    $("#feature-block4").append(`<b>${keyString}: </b>` + saves[key] + '<br />');
-                }
-            }
+            printMonsterCard();
+            statSpiderGraph();
         }
-
-        printMonsterCard();
-        statSpiderGraph();
     }
 
     const createSpellLayout = () => {
 
+        
+
         //so I don't get confused about where I am in the code and what I am working on
         const spell = monster;
+
+        if (spell != undefined) {
 
         usedByClasses = [];
 
@@ -496,7 +506,7 @@ const displaySelection = (selector) => {
         $('#stat-background').append(featureBlock1);
         $('#stat-background').append(featureBlock2);
         $('.card').append(statDiv3);
-        $('.card').append(statDiv4);
+        $('.card').append(statDiv4);    
 
         const printSpellCard = () => {
 
@@ -529,10 +539,11 @@ const displaySelection = (selector) => {
 
             $("#class-can-use").append(`<b>Classes:</b> ${usedByClasses.join(", ")}<br />`);
             $("#spell-description").append(`<b>Description:</b> <p>${descriptionList.join(" ")}</p><br />`);
-        }
+        }    
 
         printSpellCard();
-    }
+        } 
+    } 
 
     //determine whether the user has chosen to search for monsters or spells and execute the appropriate function.
     (() => {
@@ -559,8 +570,8 @@ const statSpiderGraph = () => {
         options: {
             tooltips: [
                 'Strength ' + str, 'Dexterity ' + dex,
-                 'Constitution ' + con, 'Intelligence ' + int, 
-                 'Wisdom ' + wis, 'Charisma ' + cha
+                'Constitution ' + con, 'Intelligence ' + int,
+                'Wisdom ' + wis, 'Charisma ' + cha
             ],
             backgroundCirclesPoly: true,
             backgroundCirclesSpacing: 30,
@@ -570,7 +581,8 @@ const statSpiderGraph = () => {
             colorsStroke: ['yellow'],
             linewidth: 2,
             labels: ['Strength ' + str, 'Dexterity ' + dex, 'Constitution ' + con,
-             'Intelligence ' + int, 'Wisdom ' + wis, 'Charisma ' + cha],
+                'Intelligence ' + int, 'Wisdom ' + wis, 'Charisma ' + cha
+            ],
             //labelsAxes: 'e',
             labelsAxesColor: 'black',
             textSize: 12,
@@ -580,9 +592,7 @@ const statSpiderGraph = () => {
             labelsAxesBoxedZero: true,
             textAccessible: false,
             textAccessibleOverflow: 'visible'
-            
-        }
-    }).grow();  
-    
 
+        }
+    }).grow();
 }
