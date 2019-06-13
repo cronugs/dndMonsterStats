@@ -153,9 +153,8 @@ body {
     text-align: center;
 
     &:hover {
-        background-color: map-get($colors, nav);
+        background-color: map-get($colors, dark);
         color: map-get($font-colors, primary);
-
     }
 
     @include mobile {

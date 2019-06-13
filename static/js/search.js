@@ -3,7 +3,7 @@ const getData = (url, cb) => {
     var xhr = new XMLHttpRequest();
 
     //we set onredystatechange to an anon function which tests the status of the data from the API
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
         //if the ready state is 4 and the status is 200
         if (this.readyState == 4 && this.status == 200) {
             //we call our callback function in the getData call and parse is as JSON data. The data held in this.responseText
@@ -42,7 +42,7 @@ url = 'http://www.dnd5eapi.co/api/monsters';
 //set the searchType variable and set the url to point to monsters or spells with the select box
 const categorySelect = () => {
     const select = document.getElementById("selector");
-    const category = document.getElementById("category-dropdown").value;    
+    const category = document.getElementById("category-dropdown").value;
     if (category == "spell") {
         url = 'http://www.dnd5eapi.co/api/spells';
         searchType = 'spells';
@@ -54,7 +54,6 @@ const categorySelect = () => {
 }
 
 const searchMonsterData = () => {
-
 
     const loadSpinner = () => {
 
@@ -71,7 +70,6 @@ const searchMonsterData = () => {
         $('.card').append(loadingHeader);
         $('.card-heading').append(`<h3>Loading results</h3>`)
         $('.card').append(loader);
-
     };
 
     loadSpinner();
@@ -210,7 +208,7 @@ let monster;
 
 //displaySelection() 
 const displaySelection = (selector) => {
-    
+
     const selectedValue = selector.value;
     monster = dataList[selectedValue];
 
@@ -226,7 +224,7 @@ const displaySelection = (selector) => {
 
         //replaced four individual code blocks with this for loop
         for (let i = 0; i <= 4; i++) {
-            window["featureBlock"+i] = $('<div/>', {
+            window["featureBlock" + i] = $('<div/>', {
                 'class': 'feature-block col-xs-6 col-sm-6 col-md-6 col-lg-6',
                 id: `feature-block${i}`
             });
@@ -243,8 +241,7 @@ const displaySelection = (selector) => {
         }).prop({
             width: 450,
             height: 280
-
-        });        
+        });
 
         $('.card').append(newSpan);
         $('.card').append(featureBlock1);
@@ -278,7 +275,7 @@ const displaySelection = (selector) => {
 
             //expand and contract collapsible
             for (i = 0; i < coll.length; i++) {
-                coll[i].addEventListener("click", function() {
+                coll[i].addEventListener("click", function () {
 
                     this.classList.toggle("active");
                     this.classList.toggle("inactive");
@@ -362,51 +359,69 @@ const displaySelection = (selector) => {
                 //append ability name and description
                 $("#ability-div").append(`<p><b>${abilitiesArr[j].name}</b><br /> ${abilitiesArr[j].desc}</p>`);
             }
-
         }
 
         const printMonsterCard = () => {
 
-            //add more general monster stats and info to the card.           
+            //Add monster name as card title.           
             $("#monster-name").append(`<h2>${monster.name}</h2>`);
-            
-            $("#feature-block1").append(`<b>Alignment:</b> ${capitalize(monster.alignment)}<br />`);
-            $("#feature-block1").append(`<span id="type-span"><b>Type:</b> ${capitalize(monster.type)} </span><br />`);
-            
-            if (monster.subtype != "") {
-                $("#type-span").append(`(<b>Subtype: </b>${capitalize(monster.subtype)})`);
-            }
 
-            $("#feature-block1").append(`<b>Size:</b> ${capitalize(monster.size)}<br />`);
-            $("#feature-block1").append(`<b>Speed: </b>${capitalize(monster.speed)}<br />`);
+            const blkOne = {
+                "Alignment": monster.alignment,
+                "Type": monster.type,
+                "Subtype": monster.subtype,
+                "Size": monster.size,
+                "Speed": monster.speed
+            };
 
-            $("#feature-block2").append(`<b>Challenge rating:</b> ${monster.challenge_rating}<br />`);
-            $("#feature-block2").append(`<b>Hit points:</b> ${monster.hit_points}<br />`);
-            $("#feature-block2").append(`<b>Armor Class:</b> ${monster.armor_class}<br />`);
+            const blkTwo = {
+                "Challenge rating": monster.challenge_rating,
+                "Hit Points": monster.hit_points,
+                "Armor Class": monster.armor_class,
+                "Stealth": monster.stealth
+            };
 
-            if (monster.stealth && monster.stealth != 0) {
-                $("#feature-block2").append(`<b>Stealth:</b> ${monster.stealth}<br />`);
+            const ftrResImm = {
+                "Condition immunities": monster.condition_immunities,
+                "Damage immunities": monster.damage_immunities,
+                "Damage resistances": monster.damage_resistances,
+                "Damage vulnerabilities": monster.damage_vulnerabilities
+            };
+
+            const saves = {
+                "charisma_save": monster.charisma_save,
+                "wisdom_save": monster.wisdom_save,
+                "constitution_save": monster.constitution_save,
+                "dexterity_save": monster.dexterity_save,
+                "strength_save": monster.strength_save,
+                "intelligence_save": monster.intelligence_save
+            };
+
+            for (let key in blkOne) {
+                if (key != "Type" && key != "Subtype" && blkOne[key] != "") {
+                    $("#feature-block1").append(`<b>${key}: </b>${capitalize(blkOne[key])}<br />`);
+                } else {
+                    if (key == "Type") {
+                        $("#feature-block1").append(`<span id="type-span"><b>${key}: </b>${capitalize(blkOne[key])} </span><br />`);
+                    } else {
+                        if (monster.subtype != "") {
+                            $("#type-span").append(`(<b>${key}: </b>${capitalize(blkOne[key])})`);
+                        }
+                    }
+                }
+            }            
+
+            for (let key in blkTwo) {
+                if (blkTwo[key] && blkTwo[key] != 0) {
+                    $("#feature-block2").append(`<b>${key}: </b>${blkTwo[key]}<br />`);
+                }
             }
 
             if (monster.languages && monster.languages != "") {
-                $("#feature-block3").append(`<b>Languages:</b> ${capitalize(monster.languages)}<br />`);
+                $("#feature-block3").append(`<b>Languages: </b>${capitalize(monster.languages)}<br />`);
             }
 
-            //$("#feature-block3").append(`<b>Languages:</b> ${capitalize(monster.languages)}<br />`);
-            $("#feature-block3").append(`<b>Senses: </b>${capitalize(monster.senses)}<br />`);
-
-            const ftrResImm = {
-            "Condition immunities": monster.condition_immunities,
-            "Damage immunities": monster.damage_immunities,
-            "Damage resistances": monster.damage_resistances,
-            "Damage vulnerabilities": monster.damage_vulnerabilities};
-            
-            const saves = {"charisma_save": monster.charisma_save,
-            "wisdom_save": monster.wisdom_save,
-            "constitution_save": monster.constitution_save,
-            "dexterity_save": monster.dexterity_save,
-            "strength_save": monster.strength_save,
-            "intelligence_save": monster.intelligence_save};        
+            $("#feature-block3").append(`<b>Senses: </b>${capitalize(monster.senses)}<br />`);            
 
             for (let key in ftrResImm) {
                 if (ftrResImm[key] != "") {
@@ -417,9 +432,9 @@ const displaySelection = (selector) => {
             for (let key in saves) {
                 keyString = capitalize(key.split("_").join(" "));
                 if (key in monster) {
-                    $("#feature-block4").append(`<b>${keyString}:</b> ` + saves[key] + '<br />');
+                    $("#feature-block4").append(`<b>${keyString}: </b>` + saves[key] + '<br />');
                 }
-            }            
+            }
         }
 
         printMonsterCard();
@@ -459,7 +474,7 @@ const displaySelection = (selector) => {
         //replaced two individual code blocks with this for loop
         //create two divs
         for (let i = 0; i <= 2; i++) {
-            window["featureBlock"+i] = $('<div/>', {
+            window["featureBlock" + i] = $('<div/>', {
                 'class': 'feature-block col-xs-6 col-sm-6 col-md-6 col-lg-6',
                 id: `feature-block${i}`
             });
