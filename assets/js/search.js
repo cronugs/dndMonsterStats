@@ -129,7 +129,7 @@ const searchMonsterData = () => {
                 }
                 return URL_list;
             }
-
+            console.log(listOfURLS(resultArr));
             displayMonster(listOfURLS(resultArr));
         })
     })
@@ -137,6 +137,7 @@ const searchMonsterData = () => {
 
 //displayMonster() takes an array of urls to individual monsters or spell and puts them in a newArray of objects
 const displayMonster = (monsterURLList) => {
+    console.log(monsterURLList);
 
     let newArray = [];
     let counter = 0;
@@ -177,7 +178,9 @@ const populateResults = (combinedArray) => {
     $('.card-heading').append(`<h3>Success!</h3><p>Choose your spell or monster from the dropdown menu</p>`);
 
     const select = document.getElementById("selector");
+    const resetButton = document.getElementById("reset-button");
     select.style.display = "block";
+    resetButton.style.display = "block";
     //make sure the list is clear first
     removeOptions(select);
 
@@ -209,15 +212,22 @@ const capitalize = (s) => {
 
 let monster;
 
-//displaySelection() 
+/**
+ * 
+ * @param {*} selectedResult 
+ */
 const displaySelection = (selectedResult) => {
 
     const selectedValue = selectedResult.value;
     monster = dataList[selectedValue];
+    invokedItems.unshift(monster.url);
+    invokeItem();
 
     const createMonsterLayout = () => {
 
         if (monster != undefined) {
+
+
 
             //clear card first and then create the elements needed.
             $(".card").empty();
@@ -327,7 +337,7 @@ const displaySelection = (selectedResult) => {
 
                     $("#action-content").append(`<b>Description: </b>${actionsArr[j].desc}</p>`);
                 }
-            } 
+            }
 
             //special abilites can sometimes contain extended text, so these are also a candidate for hiding behind a collapsible element.
             //if the monster has special abilities, create a div
@@ -446,106 +456,111 @@ const displaySelection = (selectedResult) => {
             statSpiderGraph();
         }
     }
+    /**
+     * createSpellLayout creates divs for the spell card layout.
+     */
 
     const createSpellLayout = () => {
 
-        
-
-        //so I don't get confused about where I am in the code and what I am working on
         const spell = monster;
 
         if (spell != undefined) {
 
-        usedByClasses = [];
+            usedByClasses = [];
 
-        for (let i = 0; i <= spell.classes.length - 1; i++) {
-            usedByClasses.push(spell.classes[i].name);
-        };
+            for (let i = 0; i <= spell.classes.length - 1; i++) {
+                usedByClasses.push(spell.classes[i].name);
+            };
 
-        descriptionList = [];
+            descriptionList = [];
 
-        for (let i = 0; i <= spell.desc.length - 1; i++) {
-            descriptionList.push(spell.desc[i]);
-        };
+            for (let i = 0; i <= spell.desc.length - 1; i++) {
+                descriptionList.push(spell.desc[i]);
+            };
 
-        //clear card first and then dynamically create the elements needed.
-        $(".card").empty();
+            //clear card first and then dynamically create the elements needed.
+            $(".card").empty();
 
-        const statBackground = $('<div/>', {
-            'class': 'background',
-            id: 'stat-background'
-        });
-
-        const titleSpan = $('<span/>', {
-            'class': 'card-heading',
-            id: 'spell-name'
-        });
-
-        //replaced two individual code blocks with this for loop
-        //create two divs
-        for (let i = 0; i <= 2; i++) {
-            window["featureBlock" + i] = $('<div/>', {
-                'class': 'feature-block col-xs-6 col-sm-6 col-md-6 col-lg-6',
-                id: `feature-block${i}`
+            const statBackground = $('<div/>', {
+                'class': 'background',
+                id: 'stat-background'
             });
+
+            const titleSpan = $('<span/>', {
+                'class': 'card-heading',
+                id: 'spell-name'
+            });
+
+            //replaced two individual code blocks with this for loop
+            //create two divs
+            for (let i = 0; i <= 2; i++) {
+                window["featureBlock" + i] = $('<div/>', {
+                    'class': 'feature-block col-xs-6 col-sm-6 col-md-6 col-lg-6',
+                    id: `feature-block${i}`
+                });
+            }
+
+            const statDiv3 = $('<div/>', {
+                'class': 'feature-block',
+                id: 'class-can-use'
+            });
+
+            const statDiv4 = $('<div/>', {
+                'class': 'description-block',
+                id: 'spell-description'
+            });
+
+            $('.card').append(titleSpan);
+            $('.card').append(statBackground);
+
+            $('#stat-background').append(featureBlock1);
+            $('#stat-background').append(featureBlock2);
+            $('.card').append(statDiv3);
+            $('.card').append(statDiv4);
+
+            /**
+             * printSpellCard formats and appends content to the divs in the spell card
+             */
+            const printSpellCard = () => {
+
+                $("#spell-name").append(`<h2>${spell.name}</h2>`);
+
+                const attrBlock1 = {
+                    "Name": spell.name,
+                    "Level": spell.level,
+                    "Duration": spell.duration,
+                    "Components": spell.components
+                };
+                const attrBlock2 = {
+                    "School": spell.school.name,
+                    "Casting time": spell.casting_time,
+                    "Concentration": spell.concentration,
+                    "Ritual": spell.ritual
+                };
+
+                for (let key in attrBlock1) {
+                    $("#feature-block1").append(`<b>${key}: </b> ` + attrBlock1[key] + '<br />');
+                }
+
+                if (monster.material) {
+                    $("#feature-block1").append(`<b>Material: </b> ${spell.material} <br />`);
+                }
+
+                for (let key in attrBlock2) {
+                    $("#feature-block2").append(`<b>${key}:</b> ` + attrBlock2[key] + '<br />');
+                }
+
+                $("#class-can-use").append(`<b>Classes:</b> ${usedByClasses.join(", ")}<br />`);
+                $("#spell-description").append(`<b>Description:</b> <p>${descriptionList.join(" ")}</p><br />`);
+            }
+
+            printSpellCard();
         }
+    }
 
-        const statDiv3 = $('<div/>', {
-            'class': 'feature-block',
-            id: 'class-can-use'
-        });
-
-        const statDiv4 = $('<div/>', {
-            'class': 'description-block',
-            id: 'spell-description'
-        });
-
-        $('.card').append(titleSpan);
-        $('.card').append(statBackground);
-
-        $('#stat-background').append(featureBlock1);
-        $('#stat-background').append(featureBlock2);
-        $('.card').append(statDiv3);
-        $('.card').append(statDiv4);    
-
-        const printSpellCard = () => {
-
-            $("#spell-name").append(`<h2>${spell.name}</h2>`);
-
-            const attrBlock1 = {
-                "Name": spell.name,
-                "Level": spell.level,
-                "Duration": spell.duration,
-                "Components": spell.components
-            };
-            const attrBlock2 = {
-                "School": spell.school.name,
-                "Casting time": spell.casting_time,
-                "Concentration": spell.concentration,
-                "Ritual": spell.ritual
-            };
-
-            for (let key in attrBlock1) {
-                $("#feature-block1").append(`<b>${key}: </b> ` + attrBlock1[key] + '<br />');
-            }
-
-            if (monster.material) {
-                $("#feature-block1").append(`<b>Material: </b> ${spell.material} <br />`);
-            }
-
-            for (let key in attrBlock2) {
-                $("#feature-block2").append(`<b>${key}:</b> ` + attrBlock2[key] + '<br />');
-            }
-
-            $("#class-can-use").append(`<b>Classes:</b> ${usedByClasses.join(", ")}<br />`);
-            $("#spell-description").append(`<b>Description:</b> <p>${descriptionList.join(" ")}</p><br />`);
-        }    
-
-        printSpellCard();
-        } 
-    } 
-
-    //determine whether the user has chosen to search for monsters or spells and execute the appropriate function.
+    /**
+     * Determine whether the user has chosen to search for monsters or spells and execute the appropriate function.
+     */
     (() => {
         if (searchType == "spells") {
             createSpellLayout();
@@ -555,6 +570,9 @@ const displaySelection = (selectedResult) => {
     })()
 }
 
+/**
+ * statSpiderGraph uses RGraph.js to draw the spider graph
+ */
 const statSpiderGraph = () => {
 
     var str = monster.strength;
@@ -596,3 +614,44 @@ const statSpiderGraph = () => {
         }
     }).grow();
 }
+
+/**
+ * reset back to our starting point
+ */
+const reset = () => {
+    location.reload();
+}
+
+let invokedItems = [];
+divCounter = 0;
+
+const invokeItem = () => {    
+
+    console.log(invokedItems);
+
+    let i = 0;
+
+    //$('#prev-row').empty();
+    window["prevButton" + divCounter] = $('<button/>', {
+        text: monster.name,
+        type: 'button',
+        'class': 'prev-button col-xs-2 col-sm-2 col-md-2 col-lg-2',
+        id: `prev-button${divCounter}`
+    });
+
+    $('#prev-row').append(window["prevButton" + divCounter]);
+
+    i++;
+    divCounter++;
+
+    if (divCounter > 6) {
+        invokedItems.pop();
+        let remDiv = document.getElementById('prev-row');
+        console.log(remDiv);
+        $(remDiv).find('button').first().remove();
+    }
+}
+
+//const retievePrev = () => {
+//    getData()
+//}

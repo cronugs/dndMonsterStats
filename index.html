@@ -57,10 +57,21 @@
 
         </div>
         <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 result-dropdown-div">
+          <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 result-dropdown-div">
             <!-- Category Selector - when changed from monster to spell or vice versa, -->
             <select id="selector" onclick="displaySelection(this)" onfocus="this.selectedIndex = -1;"></select>
           </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" id="reset-div">
+            <button type="button" id="reset-button" onclick="reset()">Reset</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="prev-row">
+            
+              <!--<button type="button" id="prev-button" class="prev-button"></button> -->
+          
+          </div>
+
         </div>
       </div>
     </section>
