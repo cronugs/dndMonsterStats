@@ -229,47 +229,52 @@ const displaySelection = (selectedResult) => {
     const selectedValue = selectedResult.value;
     monster = dataList[selectedValue];
 
+
+
     recallArray.push(monster);
     // invokedItems.unshift(monster.url);
     console.log(recallArray);
-    const createRecallButtons = () => {      
+    const createRecallButtons = (monster) => {
 
-        $('#prev-row').empty();
+        
 
-        if (recallArray.length > 6) {
-            recallArray.shift();
-            let remDiv = document.getElementById('prev-row');
-            $(remDiv).find('button').first().remove();
-        }
+            $('#prev-row').empty();
 
-        for (let i = 0; i < recallArray.length; i++) {            
+            if (recallArray.length > 6) {
+                recallArray.shift();
+                let remDiv = document.getElementById('prev-row');
+                $(remDiv).find('button').first().remove();
+            }
 
-            const buttons = (() => {
-                window["prevButton" + i] = $('<button/>', {
-                    text: recallArray[i].name,
-                    type: 'button',
-                    click: () => {
-                        //console.log(monster);
-                        //console.log(reCounter());
-                        console.log(recallArray);
-                        //this.monster = monster;
-                        if (recallArray[i].casting_time){
-                            createSpellLayout(recallArray[i]);
-                        } else {
-                            createMonsterLayout(recallArray[i]);
-                        }
-                    },
-                    'class': 'prev-button col-xs-2 col-sm-2 col-md-2 col-lg-2',
-                    id: `prev-button${i}`
-                });
-                $('#prev-row').append(window["prevButton" + i]);
-            })()
-            
-        }
-        buttonNum++;
+            for (let i = 0; i < recallArray.length; i++) {
+
+                const buttons = (() => {
+                    window["prevButton" + i] = $('<button/>', {
+                        text: monster[i].name,
+                        type: 'button',
+                        click: () => {
+                            //console.log(monster);
+                            //console.log(reCounter());
+                            console.log(recallArray);
+                            //this.monster = monster;
+                            if (monster[i].casting_time) {
+                                createSpellLayout(monster[i]);
+                            } else {
+                                createMonsterLayout(monster[i]);
+                            }
+                        },
+                        'class': 'prev-button col-xs-2 col-sm-2 col-md-2 col-lg-2',
+                        id: `prev-button${i}`
+                    });
+                    $('#prev-row').append(window["prevButton" + i]);
+                })()
+
+            }
+            buttonNum++;
+        
     }
 
-    createRecallButtons();
+    createRecallButtons(recallArray);
 
     const createMonsterLayout = (monster) => {
 
