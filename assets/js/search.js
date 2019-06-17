@@ -252,7 +252,11 @@ const displaySelection = (selectedResult) => {
                         //console.log(reCounter());
                         console.log(recallArray);
                         //this.monster = monster;
-                        createMonsterLayout(recallArray[i]);
+                        if (recallArray[i].casting_time){
+                            createSpellLayout(recallArray[i]);
+                        } else {
+                            createMonsterLayout(recallArray[i]);
+                        }
                     },
                     'class': 'prev-button col-xs-2 col-sm-2 col-md-2 col-lg-2',
                     id: `prev-button${i}`
@@ -525,14 +529,14 @@ const displaySelection = (selectedResult) => {
             }
 
             printMonsterCard();
-            statSpiderGraph();
+            statSpiderGraph(monster);
         }
     }
     /**
      * createSpellLayout creates divs for the spell card layout.
      */
 
-    const createSpellLayout = () => {
+    const createSpellLayout = (monster) => {
 
         const spell = monster;
 
@@ -635,7 +639,7 @@ const displaySelection = (selectedResult) => {
      */
     (() => {
         if (searchType == "spells") {
-            createSpellLayout();
+            createSpellLayout(monster);
         } else {
             createMonsterLayout(monster);
         }
@@ -645,7 +649,7 @@ const displaySelection = (selectedResult) => {
 /**
  * statSpiderGraph uses RGraph.js to draw the spider graph
  */
-const statSpiderGraph = () => {
+const statSpiderGraph = (monster) => {
 
     var str = monster.strength;
     var dex = monster.dexterity;
