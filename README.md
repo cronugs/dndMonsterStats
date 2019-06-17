@@ -52,7 +52,11 @@ Even though the finished project is somewhat different in design to the initial 
 
 - Feature 11 - Only relevant statistics for each monster are shown. There are many attributes that have a value of 0 or null or contain empty strings, because a monster might not have those attributes. This results in the application displaying an empty entry for abilities that monster does not possess. These have been removed. For instance, a Giant Wasp can't speak or understand language, so there is no entry for languages. Neither has it any special resistances, saves or abilities. So none are displayed.
 
-- Feature 12 - A simple, intuitive interface with no distractions.
+- Feature 12 - Maintains a list of the previous 6 searches, to allow the use to quickly move between previously searched cards.
+
+- Feature 13 - There is a reset button to allow the user to easily reset the page.
+
+- Feature 14 - A simple, intuitive interface with no distractions.
 
 ### Features Left to Implement
 

@@ -236,12 +236,13 @@ const displaySelection = (selectedResult) => {
 
         $('#prev-row').empty();
 
-        for (let i = 0; i < recallArray.length; i++) {
-            if (recallArray.length > 6) {
-                recallArray.shift();
-                let remDiv = document.getElementById('prev-row');
-                $(remDiv).find('button').first().remove();
-            }
+        if (recallArray.length > 6) {
+            recallArray.shift();
+            let remDiv = document.getElementById('prev-row');
+            $(remDiv).find('button').first().remove();
+        }
+
+        for (let i = 0; i < recallArray.length; i++) {            
 
             const buttons = (() => {
                 window["prevButton" + i] = $('<button/>', {
@@ -266,37 +267,6 @@ const displaySelection = (selectedResult) => {
             
         }
         buttonNum++;
-        
-
-       
-
-        /* console.log(invokedItems);      
-    
-        window["prevButton" + divCounter] = $('<button/>', {
-            text: monster.name,
-            type: 'button',
-            click: () => {
-                
-                console.log(monster);
-                console.log(reCounter());
-                console.log(counter);
-                //this.monster = monster;
-                createMonsterLayout(recallArray[counter]);
-            },
-            'class': 'prev-button col-xs-2 col-sm-2 col-md-2 col-lg-2',
-            id: `prev-button${divCounter}`
-        });
-    
-        $('#prev-row').append(window["prevButton" + divCounter]);
-        
-        divCounter++;
-        reCounter();
-    
-        if (divCounter > 6) {
-            invokedItems.pop();
-            let remDiv = document.getElementById('prev-row');
-            $(remDiv).find('button').first().remove();
-        }      */
     }
 
     createRecallButtons();
