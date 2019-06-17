@@ -246,7 +246,6 @@ const displaySelection = (selectedResult) => {
     }
 
     recallArray.push(monster);
-    // invokedItems.unshift(monster.url);
     console.log(recallArray);
     const createRecallButtons = ((monster) => {
 
@@ -695,25 +694,3 @@ const displaySelection = (selectedResult) => {
 const reset = () => {
     location.reload();
 }
-
-let invokedItems = [];
-divCounter = 0;
-
-
-
-//const retrievePrev = () => {
-
-//displaySelection().createMonsterLayout(monster);
-
-//let prevList
-
-/*let newArray = [];
-for (let i = 0; i < invokedItems.length; i += 1) {
-    getData(invokedItems[i], (data) => {
-        newArray.push(data);
-        
-        //update the global dataList variable so our array is available to other functions
-        prevList = newArray;
-    })
-}*/
-//}
