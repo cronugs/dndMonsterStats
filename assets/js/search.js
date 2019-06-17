@@ -55,7 +55,7 @@ const categorySelect = () => {
 
 const searchMonsterData = () => {
 
-    const loadSpinner = () => {
+    const loadSpinner = (() => {
 
         //create a div for the spinner
         const loadingHeader = $('<span/>', {
@@ -70,9 +70,7 @@ const searchMonsterData = () => {
         $('.card').append(loadingHeader);
         $('.card-heading').append(`<h3>Loading results</h3>`)
         $('.card').append(loader);
-    };
-
-    loadSpinner();
+    })();
 
     const search = document.getElementById("monsterName").value;
 
@@ -184,6 +182,15 @@ const populateResults = (combinedArray) => {
     //make sure the list is clear first
     removeOptions(select);
 
+    //append a first defaut option
+
+    const defaultOption = $('<option/>', {
+        value: '',
+        text: 'Select a result'
+    });
+
+    $(select).append(defaultOption);    
+
     //for each object in combinedArray create a new list item object with index.name and index as args
     for (index in combinedArray) {
         select.options[select.options.length] = new Option(combinedArray[index].name, index);
@@ -202,6 +209,7 @@ const removeOptions = (selectbox) => {
     for (i = selectbox.options.length - 1; i >= 0; i--) {
         selectbox.remove(i);
     }
+
 }
 
 //capitalize the fist letter (see README.md for reference)
@@ -229,6 +237,10 @@ const displaySelection = (selectedResult) => {
     const selectedValue = selectedResult.value;
     monster = dataList[selectedValue];
 
+    //remove defaultOption
+    const resultSelect = document.getElementById("selector");
+    resultSelect.remove(0);
+
 
 
     recallArray.push(monster);
@@ -236,42 +248,42 @@ const displaySelection = (selectedResult) => {
     console.log(recallArray);
     const createRecallButtons = (monster) => {
 
-        
 
-            $('#prev-row').empty();
 
-            if (recallArray.length > 6) {
-                recallArray.shift();
-                let remDiv = document.getElementById('prev-row');
-                $(remDiv).find('button').first().remove();
-            }
+        $('#prev-row').empty();
 
-            for (let i = 0; i < recallArray.length; i++) {
+        if (recallArray.length > 6) {
+            recallArray.shift();
+            let remDiv = document.getElementById('prev-row');
+            $(remDiv).find('button').first().remove();
+        }
 
-                const buttons = (() => {
-                    window["prevButton" + i] = $('<button/>', {
-                        text: monster[i].name,
-                        type: 'button',
-                        click: () => {
-                            //console.log(monster);
-                            //console.log(reCounter());
-                            console.log(recallArray);
-                            //this.monster = monster;
-                            if (monster[i].casting_time) {
-                                createSpellLayout(monster[i]);
-                            } else {
-                                createMonsterLayout(monster[i]);
-                            }
-                        },
-                        'class': 'prev-button col-xs-2 col-sm-2 col-md-2 col-lg-2',
-                        id: `prev-button${i}`
-                    });
-                    $('#prev-row').append(window["prevButton" + i]);
-                })()
+        for (let i = 0; i < recallArray.length; i++) {
 
-            }
-            buttonNum++;
-        
+            const buttons = (() => {
+                window["prevButton" + i] = $('<button/>', {
+                    text: monster[i].name,
+                    type: 'button',
+                    click: () => {
+                        //console.log(monster);
+                        //console.log(reCounter());
+                        console.log(recallArray);
+                        //this.monster = monster;
+                        if (monster[i].casting_time) {
+                            createSpellLayout(monster[i]);
+                        } else {
+                            createMonsterLayout(monster[i]);
+                        }
+                    },
+                    'class': 'prev-button col-xs-2 col-sm-2 col-md-2 col-lg-2',
+                    id: `prev-button${i}`
+                });
+                $('#prev-row').append(window["prevButton" + i]);
+            })()
+
+        }
+        buttonNum++;
+
     }
 
     createRecallButtons(recallArray);

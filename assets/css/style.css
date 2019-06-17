@@ -50,6 +50,9 @@ body {
 .navbar-brand {
   margin-left: 0px; }
 
+.section {
+  padding-bottom: 10px; }
+
 .section-heading {
   margin-bottom: 50px; }
 
