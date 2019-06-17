@@ -189,7 +189,7 @@ const populateResults = (combinedArray) => {
         text: 'Select a result'
     });
 
-    $(select).append(defaultOption);    
+    $(select).append(defaultOption);
 
     //for each object in combinedArray create a new list item object with index.name and index as args
     for (index in combinedArray) {
@@ -240,7 +240,7 @@ const displaySelection = (selectedResult) => {
     //remove defaultOption
     const resultSelect = document.getElementById("selector");
     const firstOption = $(resultSelect).find("option:first-child").val();
-    
+
     if (firstOption == '') {
         resultSelect.remove(0);
     }
@@ -633,47 +633,61 @@ const displaySelection = (selectedResult) => {
 /**
  * statSpiderGraph uses RGraph.js to draw the spider graph
  */
-const statSpiderGraph = (monster) => {
 
-    var str = monster.strength;
-    var dex = monster.dexterity;
-    var con = monster.constitution;
-    var int = monster.intelligence;
-    var wis = monster.wisdom;
-    var cha = monster.charisma;
 
-    spidy = new RGraph.Radar({
-        id: 'cvs',
-        data: [str, dex, con, int, wis, cha],
-        options: {
-            tooltips: [
-                'Strength ' + str, 'Dexterity ' + dex,
-                'Constitution ' + con, 'Intelligence ' + int,
-                'Wisdom ' + wis, 'Charisma ' + cha
-            ],
-            backgroundCirclesPoly: true,
-            backgroundCirclesSpacing: 30,
-            colors: ['transparent'],
-            axesColor: 'transparent',
-            highlights: true,
-            colorsStroke: ['yellow'],
-            linewidth: 2,
-            labels: ['Strength ' + str, 'Dexterity ' + dex, 'Constitution ' + con,
-                'Intelligence ' + int, 'Wisdom ' + wis, 'Charisma ' + cha
-            ],
-            //labelsAxes: 'e',
-            labelsAxesColor: 'black',
-            textSize: 12,
-            textColor: 'white',
-            //clearto: 'white',
-            labelsAxesBoxed: false,
-            labelsAxesBoxedZero: true,
-            textAccessible: false,
-            textAccessibleOverflow: 'visible'
+((window) => {
+    var canCall = true;
+    window.statSpiderGraph = function (monster) {
+        if (!canCall)
+            return;
+        const statSpiderGraph = ((monster) => {
 
-        }
-    }).grow();
-}
+            var str = monster.strength;
+            var dex = monster.dexterity;
+            var con = monster.constitution;
+            var int = monster.intelligence;
+            var wis = monster.wisdom;
+            var cha = monster.charisma;
+
+            spidy = new RGraph.Radar({
+                id: 'cvs',
+                data: [str, dex, con, int, wis, cha],
+                options: {
+                    tooltips: [
+                        'Strength ' + str, 'Dexterity ' + dex,
+                        'Constitution ' + con, 'Intelligence ' + int,
+                        'Wisdom ' + wis, 'Charisma ' + cha
+                    ],
+                    backgroundCirclesPoly: true,
+                    backgroundCirclesSpacing: 30,
+                    colors: ['transparent'],
+                    axesColor: 'transparent',
+                    highlights: true,
+                    colorsStroke: ['yellow'],
+                    linewidth: 2,
+                    labels: ['Strength ' + str, 'Dexterity ' + dex, 'Constitution ' + con,
+                        'Intelligence ' + int, 'Wisdom ' + wis, 'Charisma ' + cha
+                    ],
+                    //labelsAxes: 'e',
+                    labelsAxesColor: 'black',
+                    textSize: 12,
+                    textColor: 'white',
+                    //clearto: 'white',
+                    labelsAxesBoxed: false,
+                    labelsAxesBoxedZero: true,
+                    textAccessible: false,
+                    textAccessibleOverflow: 'visible'
+
+                }
+            }).grow();
+        })(monster)
+
+        canCall = false;
+        setTimeout(function () {
+            canCall = true;
+        }, 200);
+    }
+})(window)
 
 /**
  * reset back to our starting point
