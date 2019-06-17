@@ -239,16 +239,16 @@ const displaySelection = (selectedResult) => {
 
     //remove defaultOption
     const resultSelect = document.getElementById("selector");
-    resultSelect.remove(0);
-
-
+    const firstOption = $(resultSelect).find("option:first-child").val();
+    
+    if (firstOption == '') {
+        resultSelect.remove(0);
+    }
 
     recallArray.push(monster);
     // invokedItems.unshift(monster.url);
     console.log(recallArray);
-    const createRecallButtons = (monster) => {
-
-
+    const createRecallButtons = ((monster) => {
 
         $('#prev-row').empty();
 
@@ -265,10 +265,7 @@ const displaySelection = (selectedResult) => {
                     text: monster[i].name,
                     type: 'button',
                     click: () => {
-                        //console.log(monster);
-                        //console.log(reCounter());
                         console.log(recallArray);
-                        //this.monster = monster;
                         if (monster[i].casting_time) {
                             createSpellLayout(monster[i]);
                         } else {
@@ -284,9 +281,9 @@ const displaySelection = (selectedResult) => {
         }
         buttonNum++;
 
-    }
+    })(recallArray)
 
-    createRecallButtons(recallArray);
+    //createRecallButtons(recallArray);
 
     const createMonsterLayout = (monster) => {
 
