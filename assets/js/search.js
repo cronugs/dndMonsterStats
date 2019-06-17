@@ -211,6 +211,14 @@ const capitalize = (s) => {
 }
 
 let monster;
+let recallArray = [];
+let buttonNum = 0;
+
+const reCounter = () => {
+    recallCounter = 0;
+    recallCounter++;
+    return recallCounter;
+}
 
 /**
  * 
@@ -220,14 +228,78 @@ const displaySelection = (selectedResult) => {
 
     const selectedValue = selectedResult.value;
     monster = dataList[selectedValue];
-    invokedItems.unshift(monster.url);
-    invokeItem();
 
-    const createMonsterLayout = () => {
+    recallArray.push(monster);
+    // invokedItems.unshift(monster.url);
+    console.log(recallArray);
+    const createRecallButtons = () => {      
+
+        $('#prev-row').empty();
+
+        for (let i = 0; i < recallArray.length; i++) {
+            if (recallArray.length > 6) {
+                recallArray.shift();
+                let remDiv = document.getElementById('prev-row');
+                $(remDiv).find('button').first().remove();
+            }
+
+            const buttons = (() => {
+                window["prevButton" + i] = $('<button/>', {
+                    text: recallArray[i].name,
+                    type: 'button',
+                    click: () => {
+                        //console.log(monster);
+                        //console.log(reCounter());
+                        console.log(recallArray);
+                        //this.monster = monster;
+                        createMonsterLayout(recallArray[i]);
+                    },
+                    'class': 'prev-button col-xs-2 col-sm-2 col-md-2 col-lg-2',
+                    id: `prev-button${i}`
+                });
+                $('#prev-row').append(window["prevButton" + i]);
+            })()
+            
+        }
+        buttonNum++;
+        
+
+       
+
+        /* console.log(invokedItems);      
+    
+        window["prevButton" + divCounter] = $('<button/>', {
+            text: monster.name,
+            type: 'button',
+            click: () => {
+                
+                console.log(monster);
+                console.log(reCounter());
+                console.log(counter);
+                //this.monster = monster;
+                createMonsterLayout(recallArray[counter]);
+            },
+            'class': 'prev-button col-xs-2 col-sm-2 col-md-2 col-lg-2',
+            id: `prev-button${divCounter}`
+        });
+    
+        $('#prev-row').append(window["prevButton" + divCounter]);
+        
+        divCounter++;
+        reCounter();
+    
+        if (divCounter > 6) {
+            invokedItems.pop();
+            let remDiv = document.getElementById('prev-row');
+            $(remDiv).find('button').first().remove();
+        }      */
+    }
+
+    createRecallButtons();
+
+    const createMonsterLayout = (monster) => {
 
         if (monster != undefined) {
-
-
 
             //clear card first and then create the elements needed.
             $(".card").empty();
@@ -565,7 +637,7 @@ const displaySelection = (selectedResult) => {
         if (searchType == "spells") {
             createSpellLayout();
         } else {
-            createMonsterLayout();
+            createMonsterLayout(monster);
         }
     })()
 }
@@ -625,33 +697,21 @@ const reset = () => {
 let invokedItems = [];
 divCounter = 0;
 
-const invokeItem = () => {    
 
-    console.log(invokedItems);
 
-    let i = 0;
+//const retrievePrev = () => {
 
-    //$('#prev-row').empty();
-    window["prevButton" + divCounter] = $('<button/>', {
-        text: monster.name,
-        type: 'button',
-        'class': 'prev-button col-xs-2 col-sm-2 col-md-2 col-lg-2',
-        id: `prev-button${divCounter}`
-    });
+//displaySelection().createMonsterLayout(monster);
 
-    $('#prev-row').append(window["prevButton" + divCounter]);
+//let prevList
 
-    i++;
-    divCounter++;
-
-    if (divCounter > 6) {
-        invokedItems.pop();
-        let remDiv = document.getElementById('prev-row');
-        console.log(remDiv);
-        $(remDiv).find('button').first().remove();
-    }
-}
-
-//const retievePrev = () => {
-//    getData()
+/*let newArray = [];
+for (let i = 0; i < invokedItems.length; i += 1) {
+    getData(invokedItems[i], (data) => {
+        newArray.push(data);
+        
+        //update the global dataList variable so our array is available to other functions
+        prevList = newArray;
+    })
+}*/
 //}

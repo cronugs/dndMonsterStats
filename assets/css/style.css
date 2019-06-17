@@ -101,13 +101,12 @@ body {
 
 .prev-button {
   width: 90%;
-  float: left;
   overflow: hidden;
   background-color: tan;
   border: 1px black solid;
   height: 35px;
   padding: 0;
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
   border-radius: 15px; }
   .prev-button:hover {
