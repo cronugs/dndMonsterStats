@@ -173,6 +173,8 @@ I'd like to thank Gary Simon for his excellent SASS crash course which helped my
 
 I'd especially like to thank Kyle Simpson whose books 'Scope & Closures' and 'this & Object Prototypes' were hugely helpful in expanding my understanding of JavaScript. His books are free to read on GitHub and I highly recommend them [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS).
 
+### References
+
 There are some snippets of code that I found while searching for answers to problems I was solving.
 
 Thanks to user somethinghere on stackoverflow for a function that capitalises the first letter in every word in a string [found here](https://stackoverflow.com/questions/32589197/capitalize-first-letter-of-each-word-in-a-string-javascript/32589256).
@@ -182,4 +184,6 @@ Thanks to user Fabiano on stackoverflow for this snippet to remove entries in a 
 Thanks to Flavio Copes for a snippet to caps the first letter in a string [found here](https://flaviocopes.com/how-to-uppercase-first-letter-javascript/).
 
 Thanks to w3schools for the loading animation [found here](https://www.w3schools.com/howto/howto_css_loader.asp).
+
+Thanks to user user216441 on stackoverflow for the function to throttle calls to a function. [found here](https://stackoverflow.com/questions/2924330/how-can-i-rate-limit-how-fast-a-javascript-function-allows-itself-to-be-called).
 
