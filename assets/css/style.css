@@ -36,7 +36,7 @@ body {
   margin-bottom: 0;
   background-color: #272727;
   padding: 0 16px 0;
-  margin-bottom: 20px; }
+  margin-bottom: 30px; }
   @media (max-width: 575px) {
     .navbar {
       margin-bottom: 8px; } }
@@ -51,7 +51,13 @@ body {
   margin-left: 0px; }
 
 .section {
-  padding-bottom: 10px; }
+  padding: 0 0 10px; }
+  @media (max-width: 575px) {
+    .section {
+      padding-bottom: 20px; } }
+
+.section-paragraph {
+  line-height: 1.2; }
 
 .section-heading {
   margin-bottom: 50px; }
@@ -111,7 +117,8 @@ body {
   padding: 0;
   font-size: 16px;
   text-align: center;
-  border-radius: 15px; }
+  border-radius: 15px;
+  margin: 15px 0 0; }
   .prev-button:hover {
     background-color: #272727;
     color: #efefef; }
@@ -161,15 +168,6 @@ body {
       width: 90%;
       float: none;
       margin: 0 5%; } }
-
-.section {
-  padding: 0 0 30px; }
-  @media (max-width: 575px) {
-    .section {
-      padding-bottom: 20px; } }
-
-.section-paragraph {
-  line-height: 1.2; }
 
 .search-title {
   margin-bottom: 10px;

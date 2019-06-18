@@ -38,10 +38,12 @@
         </div>
 
         <div class="row">
+          <!-- #monsterName - Text field for user to enter search term -->
           <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 search-row">
             <input type="text" id="monsterName" name="search-box" />
           </div>
 
+          <!-- #category-dropdown - Determines whether to search spells or monsters -->
           <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 search-row">
             <select id="category-dropdown" onchange="categorySelect()">
               <option value="monster">Monsters</option>
@@ -49,38 +51,37 @@
             </select>
           </div>
 
-          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 search-row">
-            <!--Search Button - When clicked, calls the searchMonsterData function and passes it the mosters url by default -->
+          <!-- #search-button - When clicked, calls the searchMonsterData function -->
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 search-row">            
             <input type="submit" id="search-button" name="search-button" value="Search"
               onclick="searchMonsterData()" /><br>
           </div>
-
         </div>
+
         <div class="row">
+          <!-- #selector - Select element to display the matching results from the search -->
           <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 result-dropdown-div">
-            <!-- Category Selector - when changed from monster to spell or vice versa, -->
             <select name="resultSelector" id="selector" onchange="displaySelection(this)"></select>
           </div>
+
+          <!-- #reset-button - Resets the page back to its initial state -->
           <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" id="reset-div">
             <button type="button" id="reset-button" onclick="reset()">Reset</button>
           </div>
+
         </div>
         <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="prev-row">
-            
-              <!--<button type="button" id="prev-button" class="prev-button"></button> -->
-          
-          </div>
-
+          <!-- #prev-row - Div used to append button to recall previous cards -->
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="prev-row"></div>
         </div>
       </div>
     </section>
 
-
     <section class="section">
       <div class="container">
-        <div class="row">
+        <div class="row">          
           <div class="col-xs-12 col-sm-12 text-center card-anchor">
+            <!-- .card - Div for displaying formated data for spells or monsters -->
             <div class="card">
               <div id="welcome">
                 <h2>Welcome to Quick Cards</h2>

@@ -2,6 +2,9 @@
 @import "https://fonts.googleapis.com/css?family=Arbutus+Slab&display=swap";
 @import "https://fonts.googleapis.com/css?family=Cinzel:400,700&display=swap";
 
+
+// Maps for fonts, colours and font-colours
+
 $font: (Roboto: 'Roboto',
     Arbutus: 'Arbutus',
     Heading: 'Cinzel'
@@ -18,6 +21,8 @@ $colors: (primary: #cc0000,
 
 $font-colors: (primary: #efefef,
     dark: #272727);
+
+// Variables and Mixins to set media query breakpoints for desktop, tablet and mobile.
 
 $desktop: 840px;
 
@@ -42,6 +47,8 @@ $mobile: 575px;
         @content;
     }
 }
+
+// Styling for headings, body, and background
 
 h2,
 h3,
@@ -82,13 +89,15 @@ body {
     }
 }
 
+// Styling for the navbar
+
 .navbar {
     background-image: none;
     margin-bottom: 0;
     color: map-get($font-colors, nav);
     background-color: map-get($colors, dark);
     padding: 0 16px 0;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 
     @include mobile {
         margin-bottom: 8px;
@@ -110,13 +119,25 @@ body {
     margin-left: 0px;
 }
 
+// styling for sections
+
 .section {
-    padding-bottom: 10px;
+    padding: 0 0 10px;
+    
+    @include mobile {
+        padding-bottom: 20px;
+    }
+}
+
+.section-paragraph {
+    line-height: 1.2;
 }
 
 .section-heading {
     margin-bottom: 50px;
 }
+
+// Styling for the search and results area
 
 #monsterName {
     width: 100%;
@@ -184,7 +205,7 @@ body {
     font-size: 16px;
     text-align: center;
     border-radius: 15px;
-    //margin: 0 1px 0;
+    margin: 15px 0 0;
     //display: inline-block;
 
     &:hover {
@@ -249,20 +270,6 @@ body {
     }
 }
 
-.section {
-    //border-bottom: 1px solid #e6e6e6;
-    padding: 0 0 30px;
-
-    @include mobile {
-        padding-bottom: 20px;
-    }
-}
-
-.section-paragraph {
-    line-height: 1.2;
-
-}
-
 .search-title {
     margin-bottom: 10px;
     display: inline-block;
@@ -276,6 +283,8 @@ body {
     padding: 0;
     margin: 0;
 }
+
+// Styling for monster and spell cards.
 
 .card-anchor {
 
@@ -309,7 +318,6 @@ body {
             font-size: 20px;
             text-align: center;
             font-family: map-get($font, Heading);
-
         }
 
         // This loader was taken from w3schools see README.md for reference

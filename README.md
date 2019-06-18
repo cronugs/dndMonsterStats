@@ -185,5 +185,5 @@ Thanks to Flavio Copes for a snippet to caps the first letter in a string [found
 
 Thanks to w3schools for the loading animation [found here](https://www.w3schools.com/howto/howto_css_loader.asp).
 
-Thanks to user user216441 on stackoverflow for the function to throttle calls to a function. [found here](https://stackoverflow.com/questions/2924330/how-can-i-rate-limit-how-fast-a-javascript-function-allows-itself-to-be-called).
+Thanks to user user216441 on stackoverflow for the function to throttle calls to a function [found here](https://stackoverflow.com/questions/2924330/how-can-i-rate-limit-how-fast-a-javascript-function-allows-itself-to-be-called).
 
