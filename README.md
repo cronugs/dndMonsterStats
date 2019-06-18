@@ -1,10 +1,10 @@
-# DnD Quick Cards
+# Quick Cards
 
 D&D Quick Cards is a single page application to quickly search and display information listings for monsters and spells in Dungeons and Dragons 5th Edition.
 
 The application is intended to function as both a tool to be used by dungeon masters (DMs) while planning encounters for their groups and an in game quick reference for both DMs and players alike. It provides a clean and intuitive interface that's easy to scan for the information you need. This allows fast search results with no distractions, and minimum interruption to game flow.
 
-The live application can be used by going to [D&D Quick Cards](http://quickcards.ddns.net)
+The live application can be used by going to [Quick Cards](http://quickcards.ddns.net)
 
 ## UX
 
