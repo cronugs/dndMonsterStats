@@ -39,11 +39,13 @@ $(document).ready(() => {
 let searchType;
 url = 'http://www.dnd5eapi.co/api/monsters';
 
-//set the searchType variable and set the url to point to monsters or spells with the select box
+/**
+ * Determine if the user has selected to search monsters or spells.
+ */
 const categorySelect = () => {
     const select = document.getElementById("selector");
-    const category = document.getElementById("category-dropdown").value;
-    if (category == "spell") {
+    const value = document.getElementById("category-dropdown").value;
+    if (value == "spell") {
         url = 'http://www.dnd5eapi.co/api/spells';
         searchType = 'spells';
     } else {
@@ -53,11 +55,13 @@ const categorySelect = () => {
     removeOptions(select);
 }
 
+/**
+ * @desc Called from index.html #search-button.
+ */
 const searchMonsterData = () => {
 
     const loadSpinner = (() => {
 
-        //create a div for the spinner
         const loadingHeader = $('<span/>', {
             'class': 'card-heading'
         });
@@ -74,16 +78,18 @@ const searchMonsterData = () => {
 
     const search = document.getElementById("monsterName").value;
 
-    //Capitalise each word in the seach term, so that it matches the data (see README.md for reference)
+    /**
+     * @desc Capitalise each word in a string.
+     * @param str - The string to operate on.
+     * @return String
+     * @ref see README.md for reference.
+     */
     const titleCase = (str) => {
         const splitStr = str.toLowerCase().split(' ');
         for (let i = 0; i < splitStr.length; i++) {
-            // You do not need to check if i is larger than splitStr length, as your for does that for you
-            // Assign it back to the array
             splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
         }
-        // Directly return the joined string
-        return splitStr.join(' ');
+        return splitStr.join(' '); // Directly return the joined string
     }
 
     const searchTerm = titleCase(search);
@@ -92,34 +98,30 @@ const searchMonsterData = () => {
     let monsterURL;
     const reg = new RegExp(searchTerm.split('').join('\\w*').replace(/\W/, ""), 'i');
 
-    //call the get data function and give it the url 
-    getData(url, (data) => {
+    getData(url, (data) => { //call getData with a url.
 
-        //monster data is an array of key value objects with the name and url for each monster
-        monsterData = data.results;
+        monsterData = data.results; //monster data is an array of key value objects with the name and url for each monster
 
-        //here we use our regex to match the search string to names of monsters and return matching elements
-        result = monsterData.filter((element) => {
+        result = monsterData.filter((element) => { //use a regular expression to match the search string to names of monsters and return matching elements
             if (element.name.match(reg)) {
                 return element;
             }
         });
 
-        //we have found corresponding elements
-        if (result.length > 0) {
-            //create a new variable for our result array. It contains an array of name url key value pairs for monsters that match
-            //our search
-            resultArr = result;
-            //this takes the url of the first result and puts it in the monsterURL variable
-            // *** This is a problem because we actuall want the url for each returned monster ***
+        if (result.length > 0) { //if we have found corresponding elements
+            resultArr = result; // object with name: url key value pairs for search matches.
             monsterURL = resultArr[0].url;
         }
 
-        //we call getData again, this time to return the data for an individual monster
-        // *** this needs to change to take multiple urls and 
-        getData(monsterURL, () => {
 
-            //create an array containing the URLS from resultArr
+
+        getData(monsterURL, () => { //Call getData with the url to an individual result.
+
+            /**
+             * @desc create an array containing the URLS from resultArr.
+             * @param mons an array of objects with name: url pairs.
+             * @return an array of urls 
+             */
             const listOfURLS = (mons) => {
                 let URL_list = [];
                 for (let i = 0; i < mons.length; i += 1) {
@@ -127,43 +129,38 @@ const searchMonsterData = () => {
                 }
                 return URL_list;
             }
-            console.log(listOfURLS(resultArr));
             displayMonster(listOfURLS(resultArr));
         })
     })
 }
 
-//displayMonster() takes an array of urls to individual monsters or spell and puts them in a newArray of objects
+/**
+ * @desc calls getData for each url in an array. 
+ * @param monsterURLList - an array of urls 
+ */
 const displayMonster = (monsterURLList) => {
-    console.log(monsterURLList);
 
     let newArray = [];
     let counter = 0;
-    //for each url in monsterURLList
 
     for (let i = 0; i < monsterURLList.length; i += 1) {
-        //call getData for url and get data back
-        getData(monsterURLList[i], (data) => {
 
-            //add data to newArray 
+        getData(monsterURLList[i], (data) => { //call getData for earch url and add each returned object to a new array.
+
             newArray.push(data);
-            //increment counter each time newArray is pushed
             counter++;
-            //when it has been pushed for each url
             if (counter === monsterURLList.length) {
-                //call build tables and pass it out newArray
-                //buildTables(newArray);
                 populateResults(newArray);
             }
-            //update the global dataList variable so our array is available to other functions
-            dataList = newArray;
+
+            dataList = newArray; //update the global dataList variable so our array is available to other functions.
         })
     }
 }
 
 /**
- * populateResults adds the name and index for each monster or spell that matched the search and adds them to the select element
- * The argument combinedArray is an array of objects containing monster data for each of the monsters that matched the search term.
+ * @desc Adds the name and index for each object to a select element #selector.
+ * @param combinedArray An array of spell or monster objects that matched the search term.
  */
 const populateResults = (combinedArray) => {
 
@@ -179,20 +176,19 @@ const populateResults = (combinedArray) => {
     const resetButton = document.getElementById("reset-button");
     select.style.display = "block";
     resetButton.style.display = "block";
-    //make sure the list is clear first
-    removeOptions(select);
 
-    //append a first defaut option
+    removeOptions(select); //make sure the list is clear first.
 
-    const defaultOption = $('<option/>', {
+
+
+    const defaultOption = $('<option/>', { //append a first defaut option.
         value: '',
         text: 'Select a result'
     });
 
     $(select).append(defaultOption);
 
-    //for each object in combinedArray create a new list item object with index.name and index as args
-    for (index in combinedArray) {
+    for (index in combinedArray) { //for each object in combinedArray create a new object with index.name and index as args
         select.options[select.options.length] = new Option(combinedArray[index].name, index);
     }
 }
@@ -200,8 +196,9 @@ const populateResults = (combinedArray) => {
 let dataList = [];
 
 /**
- * removeOptions interates through the dropdown HTML element and remove the contents of the select element 
- * specified as an argument. (See README.md for reference) 
+ * @desc interates through a select element and remove the contents.
+ * @param selectbox select element to empty
+ * @ref See README.md for reference.
  */
 const removeOptions = (selectbox) => {
 
@@ -212,52 +209,58 @@ const removeOptions = (selectbox) => {
 
 }
 
-//capitalize the fist letter (see README.md for reference)
-const capitalize = (s) => {
-    if (typeof s !== 'string') return ''
-    return s.charAt(0).toUpperCase() + s.slice(1)
+/**
+ * @desc Capitalise the first letter in a string.
+ * @param str - string to operate on.
+ * @ref See README.md for reference.
+ */
+const capitalize = (str) => {
+    if (typeof str !== 'string') return ''
+    return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
 let monster;
 let recallArray = [];
 let buttonNum = 0;
 
-const reCounter = () => {
-    recallCounter = 0;
-    recallCounter++;
-    return recallCounter;
-}
-
 /**
- * 
- * @param {*} selectedResult 
+ * @desc called from #selector in index.html. Takes the selected result and formats and displays in the page
+ * @param selectedResult - The options selected by the user in #selector.
  */
 const displaySelection = (selectedResult) => {
 
     const selectedValue = selectedResult.value;
     monster = dataList[selectedValue];
 
-    //remove defaultOption
-    const resultSelect = document.getElementById("selector");
-    const firstOption = $(resultSelect).find("option:first-child").val();
+    /**
+     * @desc remove the first option from a select element if its value is an empty string.
+     */
+    const removeDefaultOption = (() => {
+        const resultSelect = document.getElementById("selector");
+        const firstOption = $(resultSelect).find("option:first-child").val();
 
-    if (firstOption == '') {
-        resultSelect.remove(0);
-    }
+        if (firstOption == '') {
+            resultSelect.remove(0);
+        }
+    })()
 
     recallArray.push(monster);
-    console.log(recallArray);
+
+    /**
+     * @desc maintain a list of the last six viewed cards and create buttons to quickly return to them.
+     * @param monster the object (spell or monster) to recall.
+     */
     const createRecallButtons = ((monster) => {
 
         $('#prev-row').empty();
 
-        if (recallArray.length > 6) {
+        if (recallArray.length > 6) { //If there are more than six items in the array, shift the first item
             recallArray.shift();
             let remDiv = document.getElementById('prev-row');
             $(remDiv).find('button').first().remove();
         }
 
-        for (let i = 0; i < recallArray.length; i++) {
+        for (let i = 0; i < recallArray.length; i++) { //Create a button for each item in recallArray
 
             const buttons = (() => {
                 window["prevButton" + i] = $('<button/>', {
@@ -282,22 +285,22 @@ const displaySelection = (selectedResult) => {
 
     })(recallArray)
 
-    //createRecallButtons(recallArray);
-
+    /**
+     * @desc Create and append divs to the DOM to make the card layout.
+     * @param monster The object from which to generate the card.
+     */
     const createMonsterLayout = (monster) => {
 
         if (monster != undefined) {
 
-            //clear card first and then create the elements needed.
-            $(".card").empty();
+            $(".card").empty(); //clear card first and then create the elements needed.
 
             const newSpan = $('<span/>', {
                 'class': 'card-heading',
                 id: 'monster-name'
             });
 
-            //replaced four individual code blocks with this for loop
-            for (let i = 0; i <= 4; i++) {
+            for (let i = 0; i <= 4; i++) { //Creates four divs for features.
                 window["featureBlock" + i] = $('<div/>', {
                     'class': 'feature-block col-xs-6 col-sm-6 col-md-6 col-lg-6',
                     id: `feature-block${i}`
@@ -309,7 +312,7 @@ const displaySelection = (selectedResult) => {
                 id: 'cvs-anchor'
             });
 
-            const newCanvas = $('<canvas/>', {
+            const newCanvas = $('<canvas/>', { //create the canvas for the spider graph.
                 'class': 'graphCanvas',
                 id: 'cvs'
             }).prop({
@@ -324,9 +327,8 @@ const displaySelection = (selectedResult) => {
             $('#cvs-anchor').append(newCanvas);
             $('.card').append(featureBlock3);
             $('.card').append(featureBlock4);
-
-            //if the monster has extra actions, create a collapsible.
-            if (monster.actions) {
+            
+            if (monster.actions) { //if the monster has extra actions, create a collapsible.
 
                 const actionCollapse = $('<button/>', {
                     'class': 'collapsible inactive',
@@ -338,23 +340,23 @@ const displaySelection = (selectedResult) => {
                     id: 'action-content'
                 });
 
-                //append elements to .card for the collapsible
                 $('.card').append(actionCollapse);
 
                 $('.card').append(panel1);
 
-                //create collapsible
                 const coll = document.getElementsByClassName('collapsible');
-                let i;
 
-                //expand and contract collapsible
-                for (i = 0; i < coll.length; i++) {
+                let i;
+                
+                for (i = 0; i < coll.length; i++) { //expand and contract collapsible
                     coll[i].addEventListener("click", function () {
 
                         this.classList.toggle("active");
                         this.classList.toggle("inactive");
                         this.classList.toggle("action-extension")
+
                         const content = this.nextElementSibling;
+
                         if (content.style.display === "block") {
                             content.style.display = "none";
                         } else {
@@ -363,30 +365,24 @@ const displaySelection = (selectedResult) => {
                     });
                 }
 
-                //append data for monster actions
                 $('.collapsible').append(`<span><h5>Actions: </h5></span>`);
 
-                //create a new array
                 let actionsArr = [];
-                //fill the actionsArr with the actions available to the monster
-                for (let i = 0; i <= monster.actions.length - 1; i++) {
+                
+                for (let i = 0; i <= monster.actions.length - 1; i++) { //Fill the actionsArr with the actions available to the monster.
                     actionsArr.push(monster.actions[i]);
                 }
+                
+                for (let j = 0; j <= actionsArr.length - 1; j++) { //for each action in actionsArr append name, bonuses and description.
 
-                //for each action in actionsArr
-                for (let j = 0; j <= actionsArr.length - 1; j++) {
-
-                    //append name, bonuses and description
                     $("#action-content").append(`<p><b>${actionsArr[j].name}</b><br />`);
 
-                    //if attack_bonus exists and isn't 0, append it.
                     if (actionsArr[j].attack_bonus) {
                         if (actionsArr[j].attack_bonus != 0) {
                             $("#action-content").append(`<b>Attack bonus: </b>${actionsArr[j].attack_bonus}<br />`);
                         }
                     }
 
-                    //if damage_bonus exists and isn't 0, append it along with damage dice.
                     if (actionsArr[j].damage_bonus) {
                         if (actionsArr[j].damage_bonus != 0) {
                             $("#action-content").append(`<b>Damage bonus: </b>${actionsArr[j].damage_bonus} <br /> 
@@ -398,46 +394,39 @@ const displaySelection = (selectedResult) => {
                 }
             }
 
-            //special abilites can sometimes contain extended text, so these are also a candidate for hiding behind a collapsible element.
-            //if the monster has special abilities, create a div
-            if (monster.special_abilities) {
+            
+            if (monster.special_abilities) { //if the monster has special abilities, create a div
                 const abilitiesDiv = $('<div/>', {
                     'class': 'special-abilities',
                     id: 'ability-div'
                 });
 
-                //append out new ability-div to .card
                 $('.card').append(abilitiesDiv);
-
-                //begin appending data for monster abilities
                 $('#ability-div').append(`<span><h5>Special Abilities: </h5></span>`);
 
-                //create a new array
                 let abilitiesArr = [];
-
-                //push the monsters abilities to abilitiesArr
-                for (let i = 0; i <= monster.special_abilities.length - 1; i++) {
+                
+                for (let i = 0; i <= monster.special_abilities.length - 1; i++) { //push the monsters abilities to abilitiesArr.
                     abilitiesArr.push(monster.special_abilities[i]);
                 }
 
-                //for each ability in abilitiesArr
                 for (let j = 0; j <= abilitiesArr.length - 1; j++) {
 
-                    //if attack_bonus exits and isn't equal to 0, append it.
                     if (abilitiesArr[j].attack_bonus) {
                         if (abilitiesArr[j].attack_bonus != 0) {
                             $("#ability-div").append(`<b>Attack bonus:</b> ${abilitiesArr[j].attack_bonus}<br />`);
                         }
                     }
 
-                    //append ability name and description
                     $("#ability-div").append(`<p><b>${abilitiesArr[j].name}</b><br /> ${abilitiesArr[j].desc}</p>`);
                 }
             }
 
-            const printMonsterCard = () => {
-
-                //Add monster name as card title.           
+            /**
+             * @desc append stats, values and text to the card layout             * 
+             */
+            const printMonsterCard = (() => {
+           
                 $("#monster-name").append(`<h2>${monster.name}</h2>`);
 
                 const blkOne = {
@@ -509,19 +498,16 @@ const displaySelection = (selectedResult) => {
                         $("#feature-block4").append(`<b>${keyString}: </b>` + saves[key] + '<br />');
                     }
                 }
-            }
-
-            printMonsterCard();
+            })()
             statSpiderGraph(monster);
         }
     }
+    
     /**
-     * createSpellLayout creates divs for the spell card layout.
+     * @desc Creates divs for the spell card layout.
+     * @param spell The object from which to generate the card.
      */
-
-    const createSpellLayout = (monster) => {
-
-        const spell = monster;
+    const createSpellLayout = (spell) => {
 
         if (spell != undefined) {
 
@@ -537,7 +523,6 @@ const displaySelection = (selectedResult) => {
                 descriptionList.push(spell.desc[i]);
             };
 
-            //clear card first and then dynamically create the elements needed.
             $(".card").empty();
 
             const statBackground = $('<div/>', {
@@ -578,9 +563,9 @@ const displaySelection = (selectedResult) => {
             $('.card').append(statDiv4);
 
             /**
-             * printSpellCard formats and appends content to the divs in the spell card
+             * @desc Formats and appends content to the divs in the spell card
              */
-            const printSpellCard = () => {
+            const printSpellCard = (() => {
 
                 $("#spell-name").append(`<h2>${spell.name}</h2>`);
 
@@ -611,14 +596,12 @@ const displaySelection = (selectedResult) => {
 
                 $("#class-can-use").append(`<b>Classes:</b> ${usedByClasses.join(", ")}<br />`);
                 $("#spell-description").append(`<b>Description:</b> <p>${descriptionList.join(" ")}</p><br />`);
-            }
-
-            printSpellCard();
+            })()
         }
     }
 
     /**
-     * Determine whether the user has chosen to search for monsters or spells and execute the appropriate function.
+     * @desc Determine whether the user has chosen to search for monsters or spells and execute the appropriate function.
      */
     (() => {
         if (searchType == "spells") {
@@ -630,15 +613,19 @@ const displaySelection = (selectedResult) => {
 }
 
 /**
- * statSpiderGraph uses RGraph.js to draw the spider graph
+ * @desc throttle the statSpiderGraph function so it can only be called ever 200ms.
+ * @param window
  */
-
-
 ((window) => {
     var canCall = true;
     window.statSpiderGraph = function (monster) {
         if (!canCall)
             return;
+
+        /**
+         * @desc use RGraph.js to create a spider graph.
+         * @param monster object containing stats to graph. 
+         */    
         const statSpiderGraph = ((monster) => {
 
             var str = monster.strength;
@@ -676,20 +663,19 @@ const displaySelection = (selectedResult) => {
                     labelsAxesBoxedZero: true,
                     textAccessible: false,
                     textAccessibleOverflow: 'visible'
-
                 }
             }).grow();
         })(monster)
 
         canCall = false;
-        setTimeout(function () {
+        setTimeout(function () {            
             canCall = true;
         }, 200);
     }
 })(window)
 
 /**
- * reset back to our starting point
+ * @desc reset the page to its original state.
  */
 const reset = () => {
     location.reload();
