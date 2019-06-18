@@ -265,7 +265,6 @@ const displaySelection = (selectedResult) => {
                     text: monster[i].name,
                     type: 'button',
                     click: () => {
-                        console.log(recallArray);
                         if (monster[i].casting_time) {
                             createSpellLayout(monster[i]);
                         } else {
