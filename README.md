@@ -24,7 +24,7 @@ Even though the finished project is somewhat different in design to the initial 
 
 ### Screenshot
 
-![Quick Cards Desktop Screenshot](http://quickcards.ddns.net/wireframes/QCCapture.PNG)
+![Quick Cards Desktop Screenshot](http://quickcards.ddns.net/wireframes/QuickCards.png)
 
 ## Features
 
