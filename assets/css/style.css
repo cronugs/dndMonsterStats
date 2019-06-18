@@ -106,19 +106,23 @@ body {
 
 #prev-row {
   margin: 15px 0 15px;
-  padding: 0; }
+  padding: 0;
+  height: 55px;
+  vertical-align: bottom; }
 
 .prev-button {
-  width: 90%;
+  width: 100%;
   overflow: hidden;
+  float: left;
   background-color: tan;
   border: 1px black solid;
-  height: 35px;
-  padding: 0;
+  height: 45px;
+  padding: 0 2px 0;
   font-size: 16px;
   text-align: center;
   border-radius: 15px;
-  margin: 15px 0 0; }
+  margin: 15px 0 0;
+  line-height: 95%; }
   .prev-button:hover {
     background-color: #272727;
     color: #efefef; }

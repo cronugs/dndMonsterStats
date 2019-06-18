@@ -192,21 +192,24 @@ body {
 #prev-row {
     margin: 15px 0 15px;
     padding: 0;
+    height: 55px;
+    vertical-align: bottom;
 }
 
 .prev-button {
-    width: 90%;
-    //float: left;
+    width: 100%;
     overflow: hidden;
+    float: left;
     background-color: map-get($colors, card);
     border: 1px black solid;
-    height: 35px;
-    padding: 0;
+    height: 45px;
+    padding: 0 2px 0;
     font-size: 16px;
     text-align: center;
     border-radius: 15px;
     margin: 15px 0 0;
-    //display: inline-block;
+    line-height: 95%;
+    
 
     &:hover {
         background-color: map-get($colors, dark);

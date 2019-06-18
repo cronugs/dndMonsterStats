@@ -25,7 +25,7 @@ const getData = (url, cb) => {
 
     xhr.open("GET", url);
     xhr.send();
-}
+};
 
 // Trigger the search when enter is pressed (see README.md for reference)
 $(document).ready(() => {
@@ -37,7 +37,7 @@ $(document).ready(() => {
 
 // this variable is used for the displaySelection() function to know which layout to render
 let searchType;
-url = 'http://www.dnd5eapi.co/api/monsters';
+let url = 'http://www.dnd5eapi.co/api/monsters';
 
 /**
  * Determine if the user has selected to search monsters or spells.
@@ -53,7 +53,7 @@ const categorySelect = () => {
         searchType = 'monsters';
     }
     removeOptions(select);
-}
+};
 
 /**
  * @desc Called from index.html #search-button.
@@ -72,7 +72,7 @@ const searchMonsterData = () => {
 
         $('.card').empty();
         $('.card').append(loadingHeader);
-        $('.card-heading').append(`<h3>Loading results</h3>`)
+        $('.card-heading').append(`<h3>Loading results</h3>`);
         $('.card').append(loader);
     })();
 
@@ -90,7 +90,7 @@ const searchMonsterData = () => {
             splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
         }
         return splitStr.join(' '); // Directly return the joined string
-    }
+    };
 
     const searchTerm = titleCase(search);
     let monsterData;
@@ -113,8 +113,6 @@ const searchMonsterData = () => {
             monsterURL = resultArr[0].url;
         }
 
-
-
         getData(monsterURL, () => { //Call getData with the url to an individual result.
 
             /**
@@ -128,11 +126,11 @@ const searchMonsterData = () => {
                     URL_list.push(mons[i].url);
                 }
                 return URL_list;
-            }
+            };
             displayMonster(listOfURLS(resultArr));
-        })
-    })
-}
+        });
+    });
+};
 
 /**
  * @desc calls getData for each url in an array. 
@@ -154,9 +152,9 @@ const displayMonster = (monsterURLList) => {
             }
 
             dataList = newArray; //update the global dataList variable so our array is available to other functions.
-        })
+        });
     }
-}
+};
 
 /**
  * @desc Adds the name and index for each object to a select element #selector.
@@ -188,10 +186,10 @@ const populateResults = (combinedArray) => {
 
     $(select).append(defaultOption);
 
-    for (index in combinedArray) { //for each object in combinedArray create a new object with index.name and index as args
+    for (var index = 0; index <= combinedArray.length -1; index++) { //for each object in combinedArray create a new object with index.name and index as args
         select.options[select.options.length] = new Option(combinedArray[index].name, index);
     }
-}
+};
 
 let dataList = [];
 
@@ -207,7 +205,7 @@ const removeOptions = (selectbox) => {
         selectbox.remove(i);
     }
 
-}
+};
 
 /**
  * @desc Capitalise the first letter in a string.
@@ -215,9 +213,9 @@ const removeOptions = (selectbox) => {
  * @ref See README.md for reference.
  */
 const capitalize = (str) => {
-    if (typeof str !== 'string') return ''
-    return str.charAt(0).toUpperCase() + str.slice(1)
-}
+    if (typeof str !== 'string') return '';
+    return str.charAt(0).toUpperCase() + str.slice(1);
+};
 
 let monster;
 let recallArray = [];
@@ -242,7 +240,7 @@ const displaySelection = (selectedResult) => {
         if (firstOption == '') {
             resultSelect.remove(0);
         }
-    })()
+    })();
 
     recallArray.push(monster);
 
@@ -278,12 +276,12 @@ const displaySelection = (selectedResult) => {
                     id: `prev-button${i}`
                 });
                 $('#prev-row').append(window["prevButton" + i]);
-            })()
+            })();
 
         }
         buttonNum++;
 
-    })(recallArray)
+    })(recallArray);
 
     /**
      * @desc Create and append divs to the DOM to make the card layout.
@@ -353,7 +351,7 @@ const displaySelection = (selectedResult) => {
 
                         this.classList.toggle("active");
                         this.classList.toggle("inactive");
-                        this.classList.toggle("action-extension")
+                        this.classList.toggle("action-extension");
 
                         const content = this.nextElementSibling;
 
@@ -498,10 +496,10 @@ const displaySelection = (selectedResult) => {
                         $("#feature-block4").append(`<b>${keyString}: </b>` + saves[key] + '<br />');
                     }
                 }
-            })()
+            })();
             statSpiderGraph(monster);
         }
-    }
+    };
     
     /**
      * @desc Creates divs for the spell card layout.
@@ -511,17 +509,17 @@ const displaySelection = (selectedResult) => {
 
         if (spell != undefined) {
 
-            usedByClasses = [];
+            let usedByClasses = [];
 
             for (let i = 0; i <= spell.classes.length - 1; i++) {
                 usedByClasses.push(spell.classes[i].name);
-            };
+            }
 
             descriptionList = [];
 
             for (let i = 0; i <= spell.desc.length - 1; i++) {
                 descriptionList.push(spell.desc[i]);
-            };
+            }
 
             $(".card").empty();
 
@@ -596,7 +594,7 @@ const displaySelection = (selectedResult) => {
 
                 $("#class-can-use").append(`<b>Classes:</b> ${usedByClasses.join(", ")}<br />`);
                 $("#spell-description").append(`<b>Description:</b> <p>${descriptionList.join(" ")}</p><br />`);
-            })()
+            })();
         }
     }
 
@@ -609,7 +607,7 @@ const displaySelection = (selectedResult) => {
         } else {
             createMonsterLayout(monster);
         }
-    })()
+    })();
 }
 
 /**
@@ -665,18 +663,18 @@ const displaySelection = (selectedResult) => {
                     textAccessibleOverflow: 'visible'
                 }
             }).grow();
-        })(monster)
+        })(monster);
 
         canCall = false;
         setTimeout(function () {            
             canCall = true;
         }, 200);
-    }
-})(window)
+    };
+})(window);
 
 /**
  * @desc reset the page to its original state.
  */
 const reset = () => {
     location.reload();
-}
+};
