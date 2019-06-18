@@ -106,6 +106,9 @@ The layout has been tested for responsive design across all the platforms and sc
 
 I also had the application tested by two Dungeon Masters and three players. Bugs or unexpected behaviours that were reported were fixed.
 
+### Validation and delinting
+Search.js passed delinting and index.html passed through the W3C HTML validator. Style.css (which is generated from style.scss by SASS) turned up 2 errors, both of which are "unknown vendor extensions". These are generated automatically by SASS. There were also many errors in bootstrap.min.js, most of which are also unknown vendor extensions.
+
 ## Deployment
 
 Since the API used in this project is being hosted on an insecure server, a live version cannot be hosted from GitHub Pages. The live project is therefore hosted on another webserver that has been set up for the task.
